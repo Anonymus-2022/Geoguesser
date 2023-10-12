@@ -1,0 +1,48 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.2'
+        classpath "io.freefair.gradle:android-gradle-plugins:7.2.0-m1"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+plugins {
+    id 'com.android.application' version '8.1.1' apply false
+}
+
+subprojects {
+    apply plugin: 'checkstyle'
+    apply plugin: "io.freefair.android-javadoc"
+
+    checkstyle {
+        toolVersion '8.36.2'
+        configDirectory = file("${project.rootDir}/codecheck")
+    }
+
+    task checkstyle(type: Checkstyle) {
+        source 'src'
+        include '**/*.java'
+        exclude '**/gen/**'
+        exclude '**/test/**'
+        exclude '**/androidTest/**'
+        exclude '**/R.java'
+        exclude '**/BuildConfig.java'
+        classpath = files()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
