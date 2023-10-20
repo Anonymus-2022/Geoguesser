@@ -1,8 +1,9 @@
-package com.gse23.template;
+package com.gse23.fspreng;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
 
 /**
  * Das ist die MainActivity, die zuerst ausgeführt wird, wenn die App gestartet wird.

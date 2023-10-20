@@ -3,16 +3,16 @@ plugins {
 }
 
 android {
-    namespace 'com.gse23.template'
+    namespace 'com.gse23.fspreng'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.gse23.template"
+        applicationId "com.gse23.fspreng"
         minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        archivesBaseName "fspreng"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
