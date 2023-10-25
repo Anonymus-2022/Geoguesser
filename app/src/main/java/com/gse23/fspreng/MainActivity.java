@@ -25,11 +25,6 @@ public class MainActivity extends AppCompatActivity {
                         if (a[j] != null) {
                             Log.i("/albums/" + inAssets[i], "Beinhält: " + a[j]);
                             String[] subfolders = getAssets().list("albums/" + inAssets[i] + "/" + a[j]);
-                            for (int k = 0; k < subfolders.length; k++) {
-                                if (subfolders[k] != null) {
-                                    Log.i("/albums/" + inAssets[i] + "/" + a[j], "Beinhält: " + subfolders[k]);
-                                }
-                            }
                         }
                     }
                 }
