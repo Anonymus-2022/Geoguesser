@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         String answer = "Enthält: ";
         String album = "albums";
         try {
-            String[] inAssets = getAssets().list("albums");
+            String[] inAssets = getAssets().list(album);
             for (int i = 0; i < inAssets.length; i++) {
                 if (inAssets[i] != null) {
                     Log.i("/" + album, answer + inAssets[i]);
