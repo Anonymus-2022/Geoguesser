@@ -15,26 +15,31 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-            try {
-                String[] inAssets;
-                inAssets = getAssets().list("albums");
-                int i = 0;
-                while (true){
-                    while (i < inAssets.length) {
-                        if (inAssets[i] != null) {
-                            Log.i("/albums/...", "Beinhält: " + inAssets[i]);
-                            i++;
+        try {
+            String[] inAssets = getAssets().list("albums");
+            for (int i = 0; i < inAssets.length; i++) {
+                if (inAssets[i] != null) {
+                    Log.i("/albums...", "Beinhält: " + inAssets[i]);
+                    String[] a = getAssets().list("albums/" + inAssets[i]);
+                    for (int j = 0; j < a.length; j++) {
+                        if (a[j] != null) {
+                            Log.i("/albums/" + inAssets[i], "Beinhält: " + a[j]);
+                            String[] subfolders = getAssets().list("albums/" + inAssets[i] + "/" + a[j]);
+                            for (int k = 0; k < subfolders.length; k++) {
+                                if (subfolders[k] != null) {
+                                    Log.i("/albums/" + inAssets[i] + "/" + a[j], "Beinhält: " + subfolders[k]);
+                                }
+                            }
                         }
                     }
-                break;
                 }
-                Log.i("marker", "keine weiteren files / directories");
-            }catch(IOException e) {
-                Log.e("ERROR", "Ordner /assets ist leer");
             }
+        } catch (IOException e) {
+            Log.e("ERROR", "Fehler beim Auflisten von Dateien/Verzeichnissen in /albums: " + e.getMessage());
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
+
 }
