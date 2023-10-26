@@ -52,14 +52,14 @@ class ExifReader {
 
             }
 
-            String ImD = "Image Description";
+            String imD = "Image Description";
             if (imageDescr != null) {
 
-                Log.i(imagePath + "/" + ImD, imageDescr);
+                Log.i(imagePath + "/" + imD, imageDescr);
 
             } else {
 
-                Log.i(imagePath + "/" + ImD, noData);
+                Log.i(imagePath + "/" + imD, noData);
 
             }
 

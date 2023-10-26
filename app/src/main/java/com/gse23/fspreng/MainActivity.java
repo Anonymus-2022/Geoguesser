@@ -16,49 +16,49 @@ public class MainActivity extends AppCompatActivity {
 
         try {
 
-            String[] inAssets = getAssets().list("albums");
+            String alb = "albums";
+            String[] inAssets = getAssets().list(alb);
 
             for (int i = 0; i < inAssets.length; i++) {
 
                 if (inAssets[i] != null) {
 
-                    Log.i("/albums...", "Beinhält: " + inAssets[i]);
+                    String msg = "Enthält: ";
+                    Log.i("/" + alb + "/", msg + inAssets[i]);
 
-                    String[] a = getAssets().list("albums/" + inAssets[i]);
+                    String[] next = getAssets().list(alb + "/" + inAssets[i]);
 
-                    int j = 0;
+                    int jx = 0;
 
-                    for (j = 0; j < a.length; j++) {
+                    for (jx = 0; jx < next.length; jx++) {
 
-                        boolean x = false;
+                        if (next[jx] != null) {
 
-                        if (a[j] != null) {
-
-                            Log.i("/albums/" + inAssets[i], "Beinhält: " + a[j]);
+                            Log.i(alb + "/" + inAssets[i], msg + next[jx]);
 
                         } else {
 
-                            Log.i("albums/" + inAssets[i], "ist Leer");
+                            Log.i(alb + "/" + inAssets[i], "ist Leer");
 
                         }
 
                     }
 
-                    for (j = 0; j < a.length; j++) {
+                    for (jx = 0; jx < next.length; jx++) {
 
-                        String imagePath = "albums/" + inAssets[i] + "/" + a[j];
+                        String imagePath = alb + "/" + inAssets[i] + "/" + next[jx];
 
                         String jpg = ".*\\.jpg$";
 
-                        if (a[j].matches(jpg)) {
+                        if (next[jx].matches(jpg)) {
 
-                            Log.i(a[j], "Die Datei ist eine .jpg-Datei.");
+                            Log.i(next[jx], "Die Datei ist eine .jpg-Datei.");
 
                             new ExifReader().readExif(imagePath, getApplicationContext());
 
                         } else {
 
-                            Log.i(a[j], "Die Datei ist keine .jpg-Datei.");
+                            Log.i(next[jx], "Die Datei ist keine .jpg-Datei.");
 
                         }
 
