@@ -72,4 +72,6 @@ class ExifReader {
 
     }
 
+    protected ExifReader(){}
+
 }
