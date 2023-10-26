@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (IOException e) {
 
-            Log.e("ERROR", "Fehler beim Auflisten von Dateien/Verzeichnissen in /albums: " + e.getMessage());
+            Log.e("ERROR", "Fehler beim Auflisten von " +
+                    "Dateien/Verzeichnissen in /albums: " + e.getMessage());
 
         }
 
