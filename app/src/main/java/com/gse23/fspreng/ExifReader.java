@@ -12,6 +12,9 @@ import java.io.InputStream;
  * näher erklärt.
  */
 class ExifReader {
+
+    protected ExifReader() { }
+
     /**
      * readExif() gibt ausgewählte Metadaten aus Exif-Datei aus. Dazu bekommt er einen relativen
      * Pfad bezüglich dem assets-Ordner übergeben. Es werden die Koordinaten und die
@@ -72,6 +75,5 @@ class ExifReader {
 
     }
 
-    protected ExifReader() { }
 
 }
