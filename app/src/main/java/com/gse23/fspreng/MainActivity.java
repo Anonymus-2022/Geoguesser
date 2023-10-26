@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
                             Log.i("/albums/" + inAssets[i], "Beinhält: " + a[j]);
 
-                        }else{
+                        } else {
 
-                            Log.i("albums/"+inAssets[i], "ist Leer");
+                            Log.i("albums/" + inAssets[i], "ist Leer");
 
                         }
 
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (IOException e) {
 
-            Log.e("ERROR", "Fehler beim Auflisten von " +
-                    "Dateien/Verzeichnissen in /albums: " + e.getMessage());
+            Log.e("ERROR", "Fehler beim Auflisten von "
+                    + "Dateien/Verzeichnissen in /albums: " + e.getMessage());
 
         }
 

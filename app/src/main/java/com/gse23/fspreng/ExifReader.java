@@ -65,8 +65,8 @@ class ExifReader {
 
         } catch (IOException e) {
 
-            Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen " +
-                    "der EXIF-Daten: " + e.getMessage());
+            Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen "
+                    + "der EXIF-Daten: " + e.getMessage());
 
         }
 
