@@ -6,4 +6,8 @@
     <string name="start_ngame">Start\nGame</string>
     <string name="choose_a_set_of_pictures">Choose A Set Of Pictures!</string>
     <string name="welcome_to_geoguesser">Welcome to GEOguesser!</string>
+    <string name="choose_nalbum">Choose\nAlbum</string>
+    <string name="you_choose">You choose...</string>
+    <string name="back">Back</string>
+    <string name="beschreibung_f_r_barrierefreiheit">Beschreibung für Barrierefreiheit</string>
 </resources>

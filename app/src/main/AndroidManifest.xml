@@ -21,8 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumChoice">
+        <activity android:name=".StartBild">
             <!-- Weitere Activity-Konfigurationen, z. B. Absichtsfilter, hier einfügen -->
+        </activity>
+        <activity android:name=".GameView">
+            <!-- Weitere Einstellungen -->
         </activity>
 
     </application>

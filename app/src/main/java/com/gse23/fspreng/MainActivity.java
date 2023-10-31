@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
 import java.io.IOException;
 
 
@@ -78,9 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Intent intent = new Intent(this, AlbumChoice.class);
-        startActivity(intent);
+        View intro = findViewById(R.id.toAlbumChoice);
+        intro.setOnClickListener(v -> {
+            Intent intent = new Intent(this, StartBild.class);
+            Log.i("Status", "going to: change to AlbumChoice");
+            startActivity(intent);
+        });
     }
 
 }

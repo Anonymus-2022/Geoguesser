@@ -1,6 +1,7 @@
 package com.gse23.fspreng;
 
 //import android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AlbumChoice extends AppCompatActivity{
+public class StartBild extends AppCompatActivity{
     public View albCh = null;
     public String albChStr = null;
     boolean albumChoosen = false;
@@ -36,11 +37,8 @@ public class AlbumChoice extends AppCompatActivity{
             albumChoosen = true;
             albChStr = "Urlaub Österreich";
         });
-        startgame.setOnClickListener(v ->{
+        startgame.setOnClickListener(v -> {
             if (albumChoosen) {
-                //Intent intent = new Intent(AlbumChoice.this, Game.class);
-                //startActivity(intent);
-                //Log.i.("Status", "going to: change to Game.class")
                 switch (albChStr) {
                     case "Italien":
                         Log.i("Choosen Album", "albums/Italien");
@@ -56,6 +54,11 @@ public class AlbumChoice extends AppCompatActivity{
                         // ausgewählt wurde
                         throw new IllegalStateException("Unexpected value: " + albChStr);
                 }
+                Log.i("Status", "going to: change to GameView.class");
+                Intent intent = new Intent(StartBild.this, GameView.class);
+                intent.putExtra("ChoosenAlbum", albChStr);
+                Log.i("Choosen Album", "albums/"+albChStr);
+                startActivity(intent);
             }
         });
     }
