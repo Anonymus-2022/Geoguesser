@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AlbumChoice">
+            <!-- Weitere Activity-Konfigurationen, z. B. Absichtsfilter, hier einfügen -->
+        </activity>
+
     </application>
 
 </manifest>

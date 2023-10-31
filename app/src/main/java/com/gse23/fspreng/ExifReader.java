@@ -1,7 +1,7 @@
 package com.gse23.fspreng;
 
 import android.content.Context;
-import android.media.ExifInterface;
+import androidx.exifinterface.media.ExifInterface;
 import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,14 +13,16 @@ import java.io.InputStream;
  */
 class ExifReader {
 
+    /**
+     * Der Konstruktor existiert nur Formal. Da nie ein ExifReader-Objekt erzeugt, sondern nur auf
+     * eine Methode zugegriffen wird hat er keine wirkliche Funktion.
+     */
     protected ExifReader() { }
 
     /**
      * readExif() gibt ausgewählte Metadaten aus Exif-Datei aus. Dazu bekommt er einen relativen
      * Pfad bezüglich dem assets-Ordner übergeben. Es werden die Koordinaten und die
      * Bildunterscgrift ausgegeben.
-     * @param imagePath
-     * @param context
      */
     public static void readExif(String imagePath, Context context) {
 

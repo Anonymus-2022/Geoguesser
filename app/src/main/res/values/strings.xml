@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">fspreng</string>
+    <string name="italien">Italien</string>
+    <string name="ostwestfalen">Ostwestfalen</string>
+    <string name="urlaub_sterreich">Urlaub Österreich</string>
+    <string name="start_ngame">Start\nGame</string>
+    <string name="choose_a_set_of_pictures">Choose A Set Of Pictures!</string>
+    <string name="welcome_to_geoguesser">Welcome to GEOguesser!</string>
 </resources>

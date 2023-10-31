@@ -1,5 +1,7 @@
 package com.gse23.fspreng;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import java.io.IOException;
@@ -18,47 +20,46 @@ public class MainActivity extends AppCompatActivity {
 
             String alb = "albums";
             String[] inAssets = getAssets().list(alb);
+            assert inAssets != null;
+            for (String x: inAssets) {
 
-            for (int i = 0; i < inAssets.length; i++) {
-
-                if (inAssets[i] != null) {
+                if (x != null) {
 
                     String msg = "Enthält: ";
-                    Log.i("/" + alb + "/", msg + inAssets[i]);
+                    Log.i("/" + alb + "/", msg + x);
 
-                    String[] next = getAssets().list(alb + "/" + inAssets[i]);
+                    String[] next = getAssets().list(alb + "/" + x);
 
-                    int jx = 0;
+                    assert next != null;
+                    for (String j: next) {
 
-                    for (jx = 0; jx < next.length; jx++) {
+                        if (j != null) {
 
-                        if (next[jx] != null) {
-
-                            Log.i(alb + "/" + inAssets[i], msg + next[jx]);
+                            Log.i(alb + "/" + x, msg + j);
 
                         } else {
 
-                            Log.i(alb + "/" + inAssets[i], "ist Leer");
+                            Log.i(alb + "/" + x, "ist Leer");
 
                         }
 
                     }
 
-                    for (jx = 0; jx < next.length; jx++) {
+                    for (String j: next ) {
 
-                        String imagePath = alb + "/" + inAssets[i] + "/" + next[jx];
+                        String imagePath = alb + "/" + x + "/" + j;
 
                         String jpg = ".*\\.jpg$";
 
-                        if (next[jx].matches(jpg)) {
+                        if (j.matches(jpg)) {
 
-                            Log.i(next[jx], "Die Datei ist eine .jpg-Datei.");
+                            Log.i(j, "Die Datei ist eine .jpg-Datei.");
 
-                            new ExifReader().readExif(imagePath, getApplicationContext());
+                            ExifReader.readExif(imagePath, getApplicationContext());
 
                         } else {
 
-                            Log.i(next[jx], "Die Datei ist keine .jpg-Datei.");
+                            Log.i(j, "Die Datei ist keine .jpg-Datei.");
 
                         }
 
@@ -76,9 +77,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(this, AlbumChoice.class);
+        startActivity(intent);
     }
 
 }
