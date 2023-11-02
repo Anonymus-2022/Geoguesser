@@ -5,52 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#020202"
-    tools:context=".AlbumChoice">
+    android:backgroundTint="#000000"
+    android:backgroundTintMode="src_atop"
+    tools:context=".StartBild">
 
 
-    <Button
-        android:id="@+id/albumOp1"
+    <Spinner
+        android:id="@+id/album_choice"
         android:layout_width="410dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        android:text="@string/italien"
+        android:layout_height="61dp"
+        android:backgroundTint="#52169C"
+        android:dropDownSelector="@android:drawable/arrow_down_float"
+        android:text="Select an Album!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166"
-        tools:ignore="Hardcoded" />
+        app:layout_constraintVertical_bias="0.228"
+        tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/albumOp2"
-        android:layout_width="410dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        android:text="@string/ostwestfalen"
+    <TextView
+        android:id="@+id/albumUsage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotationX="0"
+        android:text="@string/choose_a_set_of_pictures"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36"
+        app:layout_constraintVertical_bias="0.078"
         tools:ignore="Hardcoded" />
 
-    <Button
-        android:id="@+id/albumOp3"
-        android:layout_width="410dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        android:text="@string/urlaub_sterreich"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566"
-        tools:ignore="Hardcoded" />
+
 
     <Button
         android:id="@+id/StartGame"
@@ -63,20 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.885"
-        tools:ignore="Hardcoded" />
-
-    <TextView
-        android:id="@+id/albumUsage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rotationX="0"
-        android:text="@string/choose_a_set_of_pictures"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056"
         tools:ignore="Hardcoded" />
 
 

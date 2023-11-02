@@ -45,26 +45,26 @@ class ExifReader {
             String noData = "Keine Daten verfügbar";
             if (latitude != null && longitude != null) {
 
-                Log.i(imagePath + "/" + lat, latitude);
+                Log.i(lat, latitude);
 
-                Log.i(imagePath + "/" + lon, longitude);
+                Log.i(lon, longitude);
 
             } else {
 
-                Log.i(imagePath + "/" + lat, noData);
+                Log.i(lat, noData);
 
-                Log.i(imagePath + "/" + lon, noData);
+                Log.i(lon, noData);
 
             }
 
             String imD = "Image Description";
             if (imageDescr != null) {
 
-                Log.i(imagePath + "/" + imD, imageDescr);
+                Log.i(imD, imageDescr);
 
             } else {
 
-                Log.i(imagePath + "/" + imD, noData);
+                Log.i(imD, noData);
 
             }
 

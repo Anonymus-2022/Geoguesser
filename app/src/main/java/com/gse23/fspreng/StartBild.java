@@ -1,14 +1,21 @@
 package com.gse23.fspreng;
 
 //import android.content.Intent;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
+
 
 public class StartBild extends AppCompatActivity{
     public View albCh = null;
@@ -18,48 +25,50 @@ public class StartBild extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_bild);
-        Button albChoice1 = findViewById(R.id.albumOp1);
-        Button albChoice2 = findViewById(R.id.albumOp2);
-        Button albChoice3 = findViewById(R.id.albumOp3);
-        Button startgame = findViewById(R.id.StartGame);
-        albChoice1.setOnClickListener(v ->{
-            albCh = v;
-            albumChoosen = true;
-            albChStr = "Italien";
+        Button start_game = findViewById(R.id.StartGame);
+        Spinner album_choice = findViewById(R.id.album_choice);
+
+        String[] inAssets = new String[0];
+        try {
+            inAssets = getAssets().list("albums");
+        } catch (IOException e) {
+            Log.i("error", "ijdoösh");
+        }
+
+        View albumUsage = findViewById(R.id.albumUsage);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(
+                this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                inAssets
+        );
+        album_choice.setAdapter(adapter);
+
+
+        album_choice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                albumChoosen = true;
+                //CharSequence x = getText(position);
+                //albChStr = view.toString();
+                Log.i("Element gewählt", "dkkdsssssssssssnybsbikkkkkkkkkkkkkkkkkkkkkkkkk");
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i("Kein Element gewählt", "Kein Element wurde ausgewählt");
+            }
         });
-        albChoice2.setOnClickListener(v ->{
-            albCh = v;
-            albumChoosen = true;
-            albChStr = "Ostwestfalen";
-        });
-        albChoice3.setOnClickListener(v ->{
-            albCh = v;
-            albumChoosen = true;
-            albChStr = "Urlaub Österreich";
-        });
-        startgame.setOnClickListener(v -> {
+
+
+        start_game.setOnClickListener(v ->{
             if (albumChoosen) {
-                switch (albChStr) {
-                    case "Italien":
-                        Log.i("Choosen Album", "albums/Italien");
-                        break;
-                    case "Ostwestfalen":
-                        Log.i("Choosen Album", "albums/Ostwestfalen");
-                        break;
-                    case "Urlaub Österreich":
-                        Log.i("Choosen Album", "albums/Urlaub Österreich");
-                        break;
-                    default:
-                        // Eigentlich redundant da if-bedingung nur erfüllt, wenn album
-                        // ausgewählt wurde
-                        throw new IllegalStateException("Unexpected value: " + albChStr);
-                }
-                Log.i("Status", "going to: change to GameView.class");
-                Intent intent = new Intent(StartBild.this, GameView.class);
-                intent.putExtra("ChoosenAlbum", albChStr);
-                Log.i("Choosen Album", "albums/"+albChStr);
+                Intent intent = new Intent(this, GameView.class);
                 startActivity(intent);
             }
         });
+
+
     }
 }

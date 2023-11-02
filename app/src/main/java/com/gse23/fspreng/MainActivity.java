@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import java.io.IOException;
 
 
@@ -17,11 +16,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
-
+        String[] inAssets = null;
         try {
 
             String alb = "albums";
-            String[] inAssets = getAssets().list(alb);
+            inAssets = getAssets().list(alb);
             assert inAssets != null;
             for (String x: inAssets) {
 
@@ -81,8 +80,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         View intro = findViewById(R.id.toAlbumChoice);
+        /*
+        Class<MainActivity> origin = MainActivity.class;
+        Button spiel_anleitung = findViewById(R.id.game_rules);
+        spiel_anleitung.setOnClickListener(v->{
+            Intent intent = new Intent(this , SpielAnleitung.class);
+            intent.putExtra("Origin", origin);
+            startActivity(intent);
+        });
+        */
+        String[] finalInAssets = inAssets;
         intro.setOnClickListener(v -> {
             Intent intent = new Intent(this, StartBild.class);
+            intent.putExtra("existing_albums", finalInAssets);
             Log.i("Status", "going to: change to AlbumChoice");
             startActivity(intent);
         });

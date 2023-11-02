@@ -19,6 +19,15 @@ public class GameView extends AppCompatActivity {
         String alb_Choice = getIntent().getStringExtra("ChoosenAlbum");
         albChoice.setText(alb_Choice);
         Button goBack = findViewById(go_back);
+        Button spiel_anleitung = findViewById(R.id.game_rules);
+        getIntent();
+        TextView x = findViewById(R.id.albChoice);
+        //x.setText();
+
+        spiel_anleitung.setOnClickListener(v->{
+            Intent intent = new Intent(this , SpielAnleitung.class);
+            startActivity(intent);
+        });
         goBack.setOnClickListener(v ->{
             Log.i("Status", "going to: change to AlbumChoice");
             Intent intent = new Intent(GameView.this , StartBild.class);
