@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 /**
  * GameView erzeugt eine noch mehr oder weniger nutzlose Aktivity die Momentan überwiegend als
- * Platzhalter für spätere Aktivitäten
+ * Platzhalter für spätere Aktivitäten.
  */
 public class GameView extends AppCompatActivity {
 

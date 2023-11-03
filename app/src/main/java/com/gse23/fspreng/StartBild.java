@@ -20,7 +20,10 @@ import java.io.IOException;
  * Hier bekommt der Nutzer die Möglichkeit, ein Album von Bildern auszuwählen und danach das Spiel
  * zu starten. Ist kein Album ausgewählt kann das Spiel nicht gestartet werden.
  */
-public class StartBild extends AppCompatActivity{
+public class StartBild extends AppCompatActivity {
+    /**
+     * Hier wird gespeichert, ob ein Album ausgewählt wurde.
+     */
     boolean albumChoosen = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
