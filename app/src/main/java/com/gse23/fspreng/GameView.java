@@ -10,6 +10,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * GameView erzeugt eine noch mehr oder weniger nutzlose Aktivity die Momentan überwiegend als
+ * Platzhalter für spätere Aktivitäten
+ */
 public class GameView extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState){

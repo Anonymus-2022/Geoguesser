@@ -7,6 +7,10 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Ist nur ein Ansatz einer Activity die der Nutzer betreten kann, um sich die Spielanleitung
+ * anzuschauen.
+ */
 public class SpielAnleitung extends AppCompatActivity {
 
     @Override
