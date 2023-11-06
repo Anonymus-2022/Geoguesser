@@ -27,7 +27,9 @@
         <activity android:name=".GameView">
             <!-- Weitere Einstellungen -->
         </activity>
+        <activity android:name=".SpielAnleitung">
 
+        </activity>
     </application>
 
 </manifest>

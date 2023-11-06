@@ -9,6 +9,22 @@
     <string name="choose_nalbum">Choose\nAlbum</string>
     <string name="you_choose">You choose...</string>
     <string name="back">Back</string>
+    <string name="anleitung">GSEoguessr zeigt dem Spieler nacheinander in fünf Runden jeweils ein
+        zufällig ausgewähltes Bild von Orten irgendwo auf der Erde. Der Spieler muss diese Orte
+        erraten. Diese Bilder stehen dem Spieler in Form von Alben zur Verfügung, aus denen dieser
+        vor Spielbeginn eines auswählen muss.Der Spieler muss anhand des Bildes herausfinden, wo er
+        sich befindet. Hierzu dienen landes- bzw. ortstypische Elemente (z.B. Verkehrszeichen,
+        Vegetation, Klima, Straßenpfosten,…). Es ist möglich, in das Bild hineinzuzoomen, um eine
+        detailliertere Untersuchung der Umgebung zu ermöglichen. Auf einer vergrößerbaren
+        OpenStreetMap-Karte platziert der Spieler dann einen Marker an dem Ort, wo seiner Meinung
+        nach das Bild aufgenommen wurde. Sollte der Spieler Probleme dabei haben, den realen Ort zu
+        erraten, kann er gegen Punktabzug auf Tipps zurückgreifen. Die Anzahl an Tipps ist pro Spiel
+        begrenzt. Nach Platzieren des Markers zeigt GSEoguessr den realen Aufnahmeort an und vergibt
+        zwischen 0 und 5000 Punkten, je nachdem wie weit die Schätzung des Spielers vom realen
+        Aufnahmeort des Bildes abweicht und ob Tipps verwendet wurden oder nicht. Danach wird der
+        nächste von insgesamt je fünf Orten angezeigt. Schließlich gibt es eine Gesamtauswertung, in
+        der alle Punkte addiert werden.Um die Schwierigkeit zu steigern, hat der Spieler für das
+        Erraten der Position eines Bildes nur begrenzt Zeit.</string>
     <string name="beschreibung_f_r_barrierefreiheit">Beschreibung für Barrierefreiheit</string>
     <string name="spielanleitung">Spielanleitung</string>
 </resources>

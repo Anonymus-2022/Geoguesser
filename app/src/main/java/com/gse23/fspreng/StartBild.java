@@ -24,27 +24,39 @@ public class StartBild extends AppCompatActivity {
     /**
      * Hier wird gespeichert, ob ein Album ausgewählt wurde.
      */
+
     boolean albumChoosen = false;
+    private String selectedAlbum = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_bild);
-        Button start_game = findViewById(R.id.StartGame);
-        Spinner album_choice = findViewById(R.id.album_choice);
 
-        String[] inAssets = new String[0];
+        Button start_game = findViewById(R.id.StartGame);
+        Button spiel_anleitung = findViewById(R.id.game_rules);
+        Spinner album_choice = findViewById(R.id.album_choice);
+        View albumUsage = findViewById(R.id.albumUsage);
+
+        String[] inAssets = null;
         try {
             inAssets = getAssets().list("albums");
         } catch (IOException e) {
             Log.i("error", "ijdoösh");
         }
 
-        View albumUsage = findViewById(R.id.albumUsage);
+        String[] transfer = new String[inAssets.length+1];
+        transfer[0] = "Choose an Album!";
+        int index = 0;
+        for (String x: inAssets) {
+            index++;
+            transfer[index] = x;
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter(
                 this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-                inAssets
+                transfer
         );
         album_choice.setAdapter(adapter);
 
@@ -53,10 +65,8 @@ public class StartBild extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 albumChoosen = true;
-                //CharSequence x = getText(position);
-                //albChStr = view.toString();
-                Log.i("Element gewählt", "dkkdsssssssssssnybsbikkkkkkkkkkkkkkkkkkkkkkkkk");
-
+                selectedAlbum = album_choice.getSelectedItem().toString();
+                Log.i("Ausgewähltes Album", selectedAlbum);
             }
 
             @Override
@@ -65,13 +75,18 @@ public class StartBild extends AppCompatActivity {
             }
         });
 
+        spiel_anleitung.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SpielAnleitung.class);
+            startActivity(intent);
+        });
 
-        start_game.setOnClickListener(v ->{
-            if (albumChoosen) {
+        start_game.setOnClickListener(v -> {
+            if (albumChoosen && !selectedAlbum.equals(transfer[0])) {
                 Intent intent = new Intent(this, GameView.class);
+                intent.putExtra("AlbumChoice", selectedAlbum); // Beispiel für das Hinzufügen von Daten
                 startActivity(intent);
             }
-        });
+        } );
 
 
     }

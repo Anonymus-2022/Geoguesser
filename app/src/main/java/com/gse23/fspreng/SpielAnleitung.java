@@ -19,8 +19,7 @@ public class SpielAnleitung extends AppCompatActivity {
         setContentView(R.layout.spiel_anleitung);
         Button go_Back = findViewById(R.id.go_back);
         go_Back.setOnClickListener(v->{
-            Intent intent = new Intent(this, GameView.class);
-            startActivity(intent);
+            finish();
         });
     }
 }

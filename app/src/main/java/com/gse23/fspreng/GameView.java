@@ -15,28 +15,29 @@ import android.widget.TextView;
  * Platzhalter für spätere Aktivitäten.
  */
 public class GameView extends AppCompatActivity {
-
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState );
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.game_view);
-        TextView albChoice = findViewById(R.id.albChoice);
-        String alb_Choice = getIntent().getStringExtra("ChoosenAlbum");
-        albChoice.setText(alb_Choice);
-        Button goBack = findViewById(go_back);
-        Button spiel_anleitung = findViewById(R.id.game_rules);
-        getIntent();
-        TextView x = findViewById(R.id.albChoice);
-        //x.setText();
 
-        spiel_anleitung.setOnClickListener(v->{
-            Intent intent = new Intent(this , SpielAnleitung.class);
+        TextView albChoice = findViewById(R.id.albChoice);
+        String alb_Choice = getIntent().getStringExtra("AlbumChoice"); // Verwenden Sie den richtigen Intent-Schlüssel
+        albChoice.setText(alb_Choice);
+
+        Button goBack = findViewById(R.id.go_back);
+        Button spiel_anleitung = findViewById(R.id.game_rules);
+
+        albChoice.setText(alb_Choice);
+
+        spiel_anleitung.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SpielAnleitung.class);
             startActivity(intent);
         });
-        goBack.setOnClickListener(v ->{
+
+        goBack.setOnClickListener(v -> {
             Log.i("Status", "going to: change to AlbumChoice");
-            Intent intent = new Intent(GameView.this , StartBild.class);
+            Intent intent = new Intent(GameView.this, StartBild.class);
             startActivity(intent);
         });
     }
-
 }

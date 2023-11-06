@@ -9,6 +9,19 @@
     android:backgroundTintMode="src_atop"
     tools:context=".StartBild">
 
+    <Button
+        android:id="@+id/game_rules"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/spielanleitung"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.994"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/album_choice"
@@ -24,6 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.228"
         tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/albumUsage"
