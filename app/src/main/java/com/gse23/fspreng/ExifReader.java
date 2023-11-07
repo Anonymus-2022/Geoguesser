@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Der ExifReader enthält nur eine methode, dei Dazu dient, Informationen aus einer Bilddatei zu
+ * Der ExifReader enthält nur eine methode, die Dazu dient, Informationen aus einer Bilddatei zu
  * gewinnen. Um welche Informationen es sich handelt ist festgelegt und an entsprechender Stelle
  * näher erklärt.
  */
