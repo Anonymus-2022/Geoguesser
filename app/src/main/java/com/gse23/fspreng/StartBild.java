@@ -24,7 +24,6 @@ public class StartBild extends AppCompatActivity {
     /**
      * Hier wird gespeichert, ob ein Album ausgewählt wurde.
      */
-
     boolean albumChoosen = false;
     private String selectedAlbum = null;
 
@@ -83,7 +82,7 @@ public class StartBild extends AppCompatActivity {
         start_game.setOnClickListener(v -> {
             if (albumChoosen && !selectedAlbum.equals(transfer[0])) {
                 Intent intent = new Intent(this, GameView.class);
-                intent.putExtra("AlbumChoice", selectedAlbum); // Beispiel für das Hinzufügen von Daten
+                intent.putExtra("AlbumChoice", selectedAlbum);
                 startActivity(intent);
             }
         } );

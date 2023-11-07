@@ -2,6 +2,8 @@ package com.gse23.fspreng;
 
 import android.content.Context;
 import androidx.exifinterface.media.ExifInterface;
+
+import android.graphics.ImageDecoder;
 import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +26,10 @@ class ExifReader {
      * Pfad bezüglich dem assets-Ordner übergeben. Es werden die Koordinaten und die
      * Bildunterscgrift ausgegeben.
      */
-    public static void readExif(String imagePath, Context context) {
+    public static Images.ImagesInfo readExif(String albname, String picname,String imagePath, Context context) {
 
+
+        Images.ImagesInfo pic = null;
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
@@ -67,6 +71,9 @@ class ExifReader {
                 Log.i(imD, noData);
 
             }
+            Log.i("Album", albname);
+            pic = new Images.ImagesInfo(albname, picname, lon, lat, imageDescr, imagePath);
+
 
         } catch (IOException e) {
 
@@ -74,6 +81,8 @@ class ExifReader {
                     + "der EXIF-Daten: " + e.getMessage());
 
         }
+
+        return pic;
 
     }
 
