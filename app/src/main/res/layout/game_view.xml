@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23"
+        app:layout_constraintVertical_bias="0.163"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -45,17 +45,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.264"
+        app:layout_constraintVertical_bias="0.197"
         tools:ignore="Hardcoded" />
 
     <TextView
         android:id="@+id/albContent"
-        android:layout_width="392dp"
-        android:layout_height="502dp"
+        android:layout_width="401dp"
+        android:layout_height="545dp"
         android:gravity="center|center_horizontal|center_vertical"
         android:rotationX="0"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"

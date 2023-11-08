@@ -40,11 +40,13 @@ class ExifReader {
 
             String imageDescr = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_DESCRIPTION);
 
+            if (imageDescr == null) imageDescr = "No description available";
+
             Log.i("Image Path", imagePath);
 
-            String lat = "Latitude";
+            String lat = latitude;
 
-            String lon = "Longitude";
+            String lon = longitude;
 
             String noData = "Keine Daten verfügbar";
             if (latitude != null && longitude != null) {

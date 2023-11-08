@@ -3,6 +3,7 @@ package com.gse23.fspreng;
 import static com.gse23.fspreng.R.id.go_back;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,9 +34,13 @@ public class GameView extends AppCompatActivity {
         // Hier wird darauf verzichtet, zu prüfen ob das Album leer ist, da Solche Alben gar nicht
         // erst erfasst werden
         for (int index = 0; index<pics.length(); index++ ){
-            String alb = pics.pos(index).album;
+            Images.ImagesInfo pic = pics.pos(index);
+            String alb = pic.album;
             if (alb.equals(alb_Choice)){
-                pictures = pictures + pics.pos(index).picname + "\n";
+                pictures = pictures + pics.pos(index).picname + "\n"
+                        + pic.image_description + "\n"
+                        + pic.latitude + "\n"
+                        + pic.longitude + "\n\n";
             }
         }
 
