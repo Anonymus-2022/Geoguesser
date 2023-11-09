@@ -37,7 +37,7 @@ public class GameView extends AppCompatActivity {
         Images pics = GetAssetContents.get(getApplicationContext());
         // Hier wird darauf verzichtet, zu prüfen ob das Album leer ist, da Solche Alben gar nicht
         // erst erfasst werden
-        for (int index = 0; index< pics.length(); index++ ) {
+        for (int index = 0; index < pics.length(); index++) {
             Images.ImageInfo pic = pics.pos(index);
             String alb = pic.album;
             if (alb.equals(albumChoice)){
@@ -52,12 +52,12 @@ public class GameView extends AppCompatActivity {
         spielAnleitung.setOnClickListener(v -> {
             Intent intent = new Intent(this, SpielAnleitung.class);
             startActivity(intent);
-        } );
+        });
 
         goBack.setOnClickListener(v -> {
             Log.i("Status", "going to: change to AlbumChoice");
             Intent intent = new Intent(GameView.this, StartBild.class);
             startActivity(intent);
-        } );
+        });
     }
 }

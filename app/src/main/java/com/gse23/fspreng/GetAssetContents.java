@@ -8,7 +8,7 @@ import java.io.IOException;
  * werden können. Dazu wird die Klasse imagesInfo verwendet, in dessen Objekten jeweils die
  * informationen zu  einem Bild gespeichert werden.
  */
-class GetAssetContents {
+public class GetAssetContents {
 
     /**
      * Die Funktion erzeugt ein Images-Objekt, indem es iterativ die existierenden bilder findet
@@ -43,10 +43,9 @@ class GetAssetContents {
                         String imagePath = alb + "/" + unterordner + "/" + bilder;
 
                         assert bilder != null;
-                        if (bilder.matches(".*\\.jpg$") ||
-                                bilder.matches(".*\\.jpeg$") ||
-                                bilder.matches(".*\\.jpg$") ||
-                                bilder.matches(".*\\.png$")) {
+                        if (bilder.matches(".*\\.jpg$")
+                                || bilder.matches(".*\\.jpeg$")
+                                || bilder.matches(".*\\.png$")) {
                             Log.i(bilder, "Die Datei ist eine .jpg-, .png-, .jpeg-Datei.");
                             Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
                                     context));

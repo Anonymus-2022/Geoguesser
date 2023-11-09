@@ -45,7 +45,9 @@ class ExifReader {
 
                 String imageDescr = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_DESCRIPTION);
 
-                if (imageDescr == null) { imageDescr = "No description available"; }
+                if (imageDescr == null) {
+                    imageDescr = "No description available";
+                }
 
                 Log.i("Image Path", imagePath);
 

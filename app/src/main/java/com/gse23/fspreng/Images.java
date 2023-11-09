@@ -10,6 +10,11 @@ import java.util.ArrayList;
  */
 public class Images {
 
+    /**
+     * Initialisierung der ArrayList, in welcher die ImageInfo-Objekte gespeichert werden.
+     */
+    static ArrayList<ImageInfo> infos;
+
 
     /**
      * ImageInfo ist ein Objekt, welches in einem Images-Objekt gespeichert weden kann. Es enthält
@@ -57,10 +62,6 @@ public class Images {
         Log.i("ImageStack", "ImageStack has been Created");
     }
 
-    /**
-     * Initialisierung der ArrayList, in welcher die ImageInfo-Objekte gespeichert werden.
-     */
-    static ArrayList<ImageInfo> infos;
 
     /**
      * Die methode addImage() fügt ein Bild zu der ArrayList infos hinzu.
