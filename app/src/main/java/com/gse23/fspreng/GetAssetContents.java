@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class GetAssetContents {
 
-    GetAssetContents() { }
+    protected GetAssetContents() { }
 
     /**
      * Die Funktion erzeugt ein Images-Objekt, indem es iterativ die existierenden bilder findet

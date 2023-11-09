@@ -44,7 +44,7 @@ public class StartBild extends AppCompatActivity {
         }
 
         assert inAssets != null;
-        String[] transfer = new String[inAssets.length+1];
+        String[] transfer = new String[inAssets.length + 1];
         transfer[0] = "Choose an Album!";
         int index = 0;
         for (String x: inAssets) {
@@ -84,7 +84,7 @@ public class StartBild extends AppCompatActivity {
                 intent.putExtra("AlbumChoice", selectedAlbum);
                 startActivity(intent);
             }
-        } );
+        });
 
 
     }
