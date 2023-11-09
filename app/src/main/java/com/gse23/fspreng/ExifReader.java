@@ -1,10 +1,11 @@
 package com.gse23.fspreng;
 
 import android.content.Context;
+
 import androidx.exifinterface.media.ExifInterface;
 
-import android.graphics.ImageDecoder;
 import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,72 +20,62 @@ class ExifReader {
      * Der Konstruktor existiert nur Formal. Da nie ein ExifReader-Objekt erzeugt, sondern nur auf
      * eine Methode zugegriffen wird hat er keine wirkliche Funktion.
      */
-    protected ExifReader() { }
+    protected ExifReader() {
+    }
 
     /**
      * readExif() gibt ausgewählte Metadaten aus Exif-Datei aus. Dazu bekommt er einen relativen
      * Pfad bezüglich dem assets-Ordner übergeben. Es werden die Koordinaten und die
      * Bildunterscgrift ausgegeben.
      */
-    public static Images.ImagesInfo readExif(String albname, String picname,String imagePath, Context context) {
+    public static Images.ImagesInfo readExif(String albname, String picname, String imagePath, Context context) throws IOException {
 
 
         Images.ImagesInfo pic = null;
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
+            if (exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE) != null || exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE) != null) {
 
-            String latitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+                String latitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
 
-            String longitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
+                String longitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
 
-            String imageDescr = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_DESCRIPTION);
+                String imageDescr = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_DESCRIPTION);
 
-            Log.i("Image Path", imagePath);
+                if (imageDescr == null) imageDescr = "No description available";
 
-            String lat = "Latitude";
+                Log.i("Image Path", imagePath);
 
-            String lon = "Longitude";
+                String lat = "Latitude";
 
-            String noData = "Keine Daten verfügbar";
-            if (latitude != null && longitude != null) {
+                String lon = "Longitude";
 
-                Log.i(lat, latitude);
+                if (latitude != null && longitude != null) {
 
-                Log.i(lon, longitude);
+                    Log.i(lat, latitude);
 
-            } else {
+                    Log.i(lon, longitude);
 
-                Log.i(lat, noData);
+                }
 
-                Log.i(lon, noData);
-
-            }
-
-            String imD = "Image Description";
-            if (imageDescr != null) {
-
+                String imD = "Image Description";
                 Log.i(imD, imageDescr);
 
-            } else {
-
-                Log.i(imD, noData);
+                Log.i("Album", albname);
+                pic = new Images.ImagesInfo(albname, picname, longitude, latitude, imageDescr, imagePath);
 
             }
-            Log.i("Album", albname);
-            pic = new Images.ImagesInfo(albname, picname, lon, lat, imageDescr, imagePath);
 
+        } catch(IOException e){
 
-        } catch (IOException e) {
+                Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen "
+                        + "der EXIF-Daten: " + e.getMessage());
 
-            Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen "
-                    + "der EXIF-Daten: " + e.getMessage());
+            }
+
+            return pic;
 
         }
-
-        return pic;
-
-    }
-
 
 }

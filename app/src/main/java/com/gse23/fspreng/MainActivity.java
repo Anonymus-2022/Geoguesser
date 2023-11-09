@@ -19,12 +19,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
-
-        Button spiel_anleitung = findViewById(R.id.game_rules);
-
-        Images pics = GetAssetContents.get(getApplicationContext());
-
         View intro = findViewById(R.id.toAlbumChoice);
+        Button spiel_anleitung = findViewById(R.id.game_rules);
 
         intro.setOnClickListener(v -> {
             Intent intent = new Intent(this, StartBild.class);

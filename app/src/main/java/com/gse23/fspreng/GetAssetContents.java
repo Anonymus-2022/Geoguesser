@@ -13,31 +13,28 @@ public class GetAssetContents {
             String[] inAssets = context.getAssets().list(alb);
             assert inAssets != null;
 
-            for (String x : inAssets) {
-                if (x != null) {
+            for (String unterordner : inAssets) {
+                if (unterordner != null) {
                     String msg = "Enthält: ";
-                    Log.i("/" + alb + "/", msg + x);
-                    String[] next = context.getAssets().list(alb + "/" + x);
-                    assert next != null;
+                    Log.i("/" + alb + "/", msg + unterordner);
+                    String[] ordnerMitBildern = context.getAssets().list(alb + "/" + unterordner);
+                    assert ordnerMitBildern != null;
 
-                    for (String j : next) {
-                        if (j != null) {
-                            Log.i(alb + "/" + x, msg + j);
+                    for (String bilder : ordnerMitBildern) {
+                        if (bilder != null) {
+                            Log.i(alb + "/" + unterordner, msg + bilder);
                         } else {
-                            Log.i(alb + "/" + x, "ist Leer");
+                            Log.i(alb + "/" + unterordner, "ist Leer");
                         }
-                    }
-
-                    for (String j : next) {
-                        String imagePath = alb + "/" + x + "/" + j;
+                        String imagePath = alb + "/" + unterordner + "/" + bilder;
                         String jpg = ".*\\.jpg$";
 
-                        if (j.matches(jpg)) {
-                            Log.i(j, "Die Datei ist eine .jpg-Datei.");
-                            Images.addImage(ExifReader.readExif(x, j, imagePath, context));
-                            Log.i(j, "added to Images");
+                        if (bilder.matches(jpg)) {
+                            Log.i(bilder, "Die Datei ist eine .jpg-Datei.");
+                            Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath, context));
+                            Log.i(bilder, "added to Images");
                         } else {
-                            Log.i(j, "Die Datei ist keine .jpg-Datei.");
+                            Log.i(bilder, "Die Datei ist keine .jpg-Datei.");
                         }
                     }
                 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Images {
 
+
     public static class ImagesInfo {
         String picname;
         String album;
@@ -30,17 +31,17 @@ public class Images {
         infos.add(pic);
     }
 
-    public static int length(){
+    public int length(){
         return infos.size();
     }
 
-    public static ImagesInfo pos(int pos){
+    public ImagesInfo pos(int pos){
         return infos.get(pos);
     }
 
 
     Images(){
-        infos = new ArrayList<ImagesInfo>();
+        infos = new ArrayList<>();
         Log.i("ImageStack", "ImageStack has been Created");
     }
 }
