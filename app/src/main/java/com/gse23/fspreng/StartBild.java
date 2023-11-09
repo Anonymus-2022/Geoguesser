@@ -32,10 +32,9 @@ public class StartBild extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_bild);
 
-        Button start_game = findViewById(R.id.StartGame);
-        Button spiel_anleitung = findViewById(R.id.game_rules);
-        Spinner album_choice = findViewById(R.id.album_choice);
-        View albumUsage = findViewById(R.id.albumUsage);
+        Button startGame = findViewById(R.id.StartGame);
+        Button spielAnleitung = findViewById(R.id.game_rules);
+        Spinner albumChoice = findViewById(R.id.album_choice);
 
         String[] inAssets = null;
         try {
@@ -44,6 +43,7 @@ public class StartBild extends AppCompatActivity {
             Log.i("error", "ijdoösh");
         }
 
+        assert inAssets != null;
         String[] transfer = new String[inAssets.length+1];
         transfer[0] = "Choose an Album!";
         int index = 0;
@@ -52,19 +52,18 @@ public class StartBild extends AppCompatActivity {
             transfer[index] = x;
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
                 transfer
         );
-        album_choice.setAdapter(adapter);
+        albumChoice.setAdapter(adapter);
 
-
-        album_choice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        albumChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 albumChoosen = true;
-                selectedAlbum = album_choice.getSelectedItem().toString();
+                selectedAlbum = albumChoice.getSelectedItem().toString();
                 Log.i("Ausgewähltes Album", selectedAlbum);
             }
 
@@ -74,12 +73,12 @@ public class StartBild extends AppCompatActivity {
             }
         });
 
-        spiel_anleitung.setOnClickListener(v -> {
+        spielAnleitung.setOnClickListener(v -> {
             Intent intent = new Intent(this, SpielAnleitung.class);
             startActivity(intent);
         });
 
-        start_game.setOnClickListener(v -> {
+        startGame.setOnClickListener(v -> {
             if (albumChoosen && !selectedAlbum.equals(transfer[0])) {
                 Intent intent = new Intent(this, GameView.class);
                 intent.putExtra("AlbumChoice", selectedAlbum);

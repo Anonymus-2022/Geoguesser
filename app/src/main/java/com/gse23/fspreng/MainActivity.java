@@ -20,17 +20,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
         View intro = findViewById(R.id.toAlbumChoice);
-        Button spiel_anleitung = findViewById(R.id.game_rules);
+        Button spielAnleitung = findViewById(R.id.game_rules);
 
         intro.setOnClickListener(v -> {
             Intent intent = new Intent(this, StartBild.class);
             Log.i("Status", "going to: change to AlbumChoice");
             startActivity(intent);
-        });
+        } );
 
-        spiel_anleitung.setOnClickListener(v -> {
+        spielAnleitung.setOnClickListener(v -> {
             Intent intent = new Intent(this, SpielAnleitung.class);
             startActivity(intent);
-        });
+        } );
     }
 }

@@ -17,46 +17,47 @@ public class GameView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_view);
-        Button spiel_anleitung = findViewById(R.id.game_rules);
+        Button spielAnleitung = findViewById(R.id.game_rules);
         TextView albChoice = findViewById(R.id.albChoice);
         Button goBack = findViewById(R.id.go_back);
         TextView albContent = findViewById(R.id.albContent);
 
-        String alb_Choice = getIntent().getStringExtra("AlbumChoice");
-        albChoice.setText(alb_Choice);
+        String choosenAlbum = "AlbumChoice";
+        String enter = "\n";
+        String albumChoice = getIntent().getStringExtra(choosenAlbum);
+        albChoice.setText(albumChoice);
 
         /*
-        da bilder, die über keine koordinaten verfügen werden gar nicht erst eingespeichert.
+        Da bilder, die über keine koordinaten verfügen werden gar nicht erst eingespeichert.
         daher ist die geforderte fehlerbehandlung redundant
          */
-
-        assert alb_Choice != null;
-        Log.i("AlbumChoice", alb_Choice);
+        assert albumChoice != null;
+        Log.i(choosenAlbum, albumChoice);
         StringBuilder pictures = new StringBuilder();
         Images pics = GetAssetContents.get(getApplicationContext());
         // Hier wird darauf verzichtet, zu prüfen ob das Album leer ist, da Solche Alben gar nicht
         // erst erfasst werden
-        for (int index = 0; index< pics.length(); index++ ){
+        for (int index = 0; index< pics.length(); index++ ) {
             Images.ImageInfo pic = pics.pos(index);
             String alb = pic.album;
-            if (alb.equals(alb_Choice)){
-                pictures.append(pic.picname).append("\n").append(pic.image_description).
-                        append("\n").append(pic.latitude).append("\n").append(pic.longitude).
-                        append("\n\n");
+            if (alb.equals(albumChoice)){
+                pictures.append(pic.picname).append(enter).append(pic.imageDescription).
+                        append(enter).append(pic.latitude).append(enter).append(pic.longitude).
+                        append(enter).append(enter);
             }
         }
 
         albContent.setText(pictures.toString());
 
-        spiel_anleitung.setOnClickListener(v -> {
+        spielAnleitung.setOnClickListener(v -> {
             Intent intent = new Intent(this, SpielAnleitung.class);
             startActivity(intent);
-        });
+        } );
 
         goBack.setOnClickListener(v -> {
             Log.i("Status", "going to: change to AlbumChoice");
             Intent intent = new Intent(GameView.this, StartBild.class);
             startActivity(intent);
-        });
+        } );
     }
 }

@@ -28,14 +28,16 @@ class ExifReader {
      * Pfad bezüglich dem assets-Ordner übergeben. Es werden die Koordinaten und die
      * Bildunterscgrift ausgegeben.
      */
-    public static Images.ImageInfo readExif(String albname, String picname, String imagePath, Context context) throws IOException {
+    public static Images.ImageInfo readExif(String albname, String picname, String imagePath,
+                                            Context context) {
 
 
         Images.ImageInfo pic = null;
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
-            if (exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE) != null || exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE) != null) {
+            if (exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE) != null ||
+                    exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE) != null) {
 
                 String latitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
 
@@ -43,7 +45,7 @@ class ExifReader {
 
                 String imageDescr = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_DESCRIPTION);
 
-                if (imageDescr == null) imageDescr = "No description available";
+                if (imageDescr == null) { imageDescr = "No description available"; }
 
                 Log.i("Image Path", imagePath);
 
@@ -63,11 +65,12 @@ class ExifReader {
                 Log.i(imD, imageDescr);
 
                 Log.i("Album", albname);
-                pic = new Images.ImageInfo(albname, picname, longitude, latitude, imageDescr, imagePath);
+                pic = new Images.ImageInfo(albname, picname, longitude, latitude, imageDescr,
+                        imagePath);
 
             }
 
-        } catch(IOException e){
+        } catch (IOException e) {
 
                 Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen "
                         + "der EXIF-Daten: " + e.getMessage());

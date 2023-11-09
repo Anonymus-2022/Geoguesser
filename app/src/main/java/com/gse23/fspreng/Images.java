@@ -16,11 +16,29 @@ public class Images {
      * Informationen zu einer Bilddatei. u.a. Name, Speicherort und Metadaten.
      */
     public static class ImageInfo {
+        /**
+         * Speichert den NAmen eines Bildes.
+         */
         String picname;
+        /**
+         * Speichert, in welchem Album das Bild sich befindet.
+         */
         String album;
+        /**
+         * Speichert den längengrad des Aufnameortes.
+         */
         String longitude;
+        /**
+         * Speichert den längengrad des Aufnameortes.
+         */
         String latitude;
-        String image_description;
+        /**
+         * Speichert die Bildunterschrift.
+         */
+        String imageDescription;
+        /**
+         * Speichert den Filepath des Bildes.
+         */
         String filepath;
 
 
@@ -29,21 +47,26 @@ public class Images {
             this.picname = picname;
             this.longitude = lon;
             this.latitude = lat;
-            this.image_description = imd;
+            this.imageDescription = imd;
             this.filepath = filpa;
         }
     }
 
+    Images() {
+        infos = new ArrayList<>();
+        Log.i("ImageStack", "ImageStack has been Created");
+    }
+
     /**
-     * Initialisierung der ArrayList, in welcher die ImageInfo-Objekte gespeichert werden
+     * Initialisierung der ArrayList, in welcher die ImageInfo-Objekte gespeichert werden.
      */
-    public static ArrayList<ImageInfo> infos;
+    static ArrayList<ImageInfo> infos;
 
     /**
      * Die methode addImage() fügt ein Bild zu der ArrayList infos hinzu.
      * @param pic übergeben bekommt diese Methode ein ImageInfo-Objekt.
      */
-    public static void addImage(ImageInfo pic){
+    public static void addImage(ImageInfo pic) {
         infos.add(pic);
     }
 
@@ -51,7 +74,7 @@ public class Images {
      * Diese Metode gibt die Größe bzgl. der Menge an Einträgen des Images-Objektes zurück.
      * @return die Ausgabe ist ein Integerwert der die Menge an Elementen in der ArryList darstellt.
      */
-    public int length(){
+    public int length() {
         return infos.size();
     }
 
@@ -61,13 +84,10 @@ public class Images {
      * @param pos Übergeben wird dazu ein Index zwischen 0 und infos.length()-1
      * @return zurückgegeben wird hier ein ImageInfo-Objekt.
      */
-    public ImageInfo pos(int pos){
+    public ImageInfo pos(int pos) {
         return infos.get(pos);
     }
 
 
-    Images(){
-        infos = new ArrayList<>();
-        Log.i("ImageStack", "ImageStack has been Created");
-    }
+
 }

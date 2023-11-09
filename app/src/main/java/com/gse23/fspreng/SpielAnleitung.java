@@ -1,9 +1,7 @@
 package com.gse23.fspreng;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +15,7 @@ public class SpielAnleitung extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spiel_anleitung);
-        Button go_Back = findViewById(R.id.go_back);
-        go_Back.setOnClickListener(v->{
-            finish();
-        });
+        Button goBack = findViewById(R.id.go_back);
+        goBack.setOnClickListener( v-> finish() );
     }
 }
