@@ -28,10 +28,10 @@ class ExifReader {
      * Pfad bezüglich dem assets-Ordner übergeben. Es werden die Koordinaten und die
      * Bildunterscgrift ausgegeben.
      */
-    public static Images.ImagesInfo readExif(String albname, String picname, String imagePath, Context context) throws IOException {
+    public static Images.ImageInfo readExif(String albname, String picname, String imagePath, Context context) throws IOException {
 
 
-        Images.ImagesInfo pic = null;
+        Images.ImageInfo pic = null;
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
@@ -63,7 +63,7 @@ class ExifReader {
                 Log.i(imD, imageDescr);
 
                 Log.i("Album", albname);
-                pic = new Images.ImagesInfo(albname, picname, longitude, latitude, imageDescr, imagePath);
+                pic = new Images.ImageInfo(albname, picname, longitude, latitude, imageDescr, imagePath);
 
             }
 

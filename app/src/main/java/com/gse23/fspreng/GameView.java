@@ -37,7 +37,7 @@ public class GameView extends AppCompatActivity {
         // Hier wird darauf verzichtet, zu prüfen ob das Album leer ist, da Solche Alben gar nicht
         // erst erfasst werden
         for (int index = 0; index< pics.length(); index++ ){
-            Images.ImagesInfo pic = pics.pos(index);
+            Images.ImageInfo pic = pics.pos(index);
             String alb = pic.album;
             if (alb.equals(alb_Choice)){
                 pictures.append(pic.picname).append("\n").append(pic.image_description).
