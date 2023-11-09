@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, StartBild.class);
             Log.i("Status", "going to: change to AlbumChoice");
             startActivity(intent);
-        } );
+        });
 
         spielAnleitung.setOnClickListener(v -> {
             Intent intent = new Intent(this, SpielAnleitung.class);
             startActivity(intent);
-        } );
+        });
     }
 }

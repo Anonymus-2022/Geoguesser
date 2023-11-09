@@ -16,6 +16,6 @@ public class SpielAnleitung extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spiel_anleitung);
         Button goBack = findViewById(R.id.go_back);
-        goBack.setOnClickListener( v-> finish() );
+        goBack.setOnClickListener(v-> finish());
     }
 }

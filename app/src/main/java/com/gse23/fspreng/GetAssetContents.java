@@ -10,6 +10,8 @@ import java.io.IOException;
  */
 public class GetAssetContents {
 
+    GetAssetContents() { }
+
     /**
      * Die Funktion erzeugt ein Images-Objekt, indem es iterativ die existierenden bilder findet
      * und mit dem ExifReader ein ImagesInfo-Objekt erzeugt, welches dann zu Images geaddet werden
@@ -30,8 +32,8 @@ public class GetAssetContents {
                 if (unterordner != null) {
                     String msg = "Enthält: ";
                     Log.i("/" + alb + "/", msg + unterordner);
-                    String[] ordnerMitBildern = context.getAssets().list(alb + "/" +
-                            unterordner);
+                    String[] ordnerMitBildern = context.getAssets().list(alb + "/"
+                            + unterordner);
 
                     assert ordnerMitBildern != null;
                     for (String bilder : ordnerMitBildern) {

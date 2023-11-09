@@ -40,7 +40,7 @@ public class GameView extends AppCompatActivity {
         for (int index = 0; index < pics.length(); index++) {
             Images.ImageInfo pic = pics.pos(index);
             String alb = pic.album;
-            if (alb.equals(albumChoice)){
+            if (alb.equals(albumChoice)) {
                 pictures.append(pic.picname).append(enter).append(pic.imageDescription).
                         append(enter).append(pic.latitude).append(enter).append(pic.longitude).
                         append(enter).append(enter);

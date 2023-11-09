@@ -36,8 +36,8 @@ class ExifReader {
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
-            if (exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE) != null ||
-                    exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE) != null) {
+            if (exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE) != null
+                    || exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE) != null) {
 
                 String latitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
 
