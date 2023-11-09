@@ -1,12 +1,9 @@
 package com.gse23.fspreng;
 
-import static com.gse23.fspreng.R.id.go_back;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,23 +25,28 @@ public class GameView extends AppCompatActivity {
         String alb_Choice = getIntent().getStringExtra("AlbumChoice");
         albChoice.setText(alb_Choice);
 
+        /*
+        da bilder, die über keine koordinaten verfügen werden gar nicht erst eingespeichert.
+        daher ist die geforderte fehlerbehandlung redundant
+         */
+
+        assert alb_Choice != null;
         Log.i("AlbumChoice", alb_Choice);
-        String pictures = "";
+        StringBuilder pictures = new StringBuilder();
         Images pics = GetAssetContents.get(getApplicationContext());
         // Hier wird darauf verzichtet, zu prüfen ob das Album leer ist, da Solche Alben gar nicht
         // erst erfasst werden
-        for (int index = 0; index<pics.length(); index++ ){
+        for (int index = 0; index< pics.length(); index++ ){
             Images.ImagesInfo pic = pics.pos(index);
             String alb = pic.album;
             if (alb.equals(alb_Choice)){
-                pictures = pictures + pics.pos(index).picname + "\n"
-                        + pic.image_description + "\n"
-                        + pic.latitude + "\n"
-                        + pic.longitude + "\n\n";
+                pictures.append(pic.picname).append("\n").append(pic.image_description).
+                        append("\n").append(pic.latitude).append("\n").append(pic.longitude).
+                        append("\n\n");
             }
         }
 
-        albContent.setText(pictures);
+        albContent.setText(pictures.toString());
 
         spiel_anleitung.setOnClickListener(v -> {
             Intent intent = new Intent(this, SpielAnleitung.class);
