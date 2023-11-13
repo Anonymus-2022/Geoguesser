@@ -79,6 +79,27 @@ public class Images {
         return infos.size();
     }
 
+
+
+    public void deleteImage(String picname) {
+        int index;
+        for (index = 0; index< infos.size(); index++) {
+            if (infos.get(index).picname == picname ) {
+                infos.remove(index);
+            }
+        }
+    }
+
+    public boolean emptyAlbum(String alb) {
+        boolean isEmpty = true;
+        for (ImageInfo x: infos) {
+            if (x.album.equals(alb)) {
+                isEmpty = false;
+            }
+        }
+        return isEmpty;
+    }
+
     /**
      * Diese Methode erlaubt es, sich ein ImageInfo-Objekt an einer ganz bestimmten Stelle in Images
      * ausgeben  zu lassen.

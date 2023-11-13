@@ -7,6 +7,18 @@
     android:background="#020202"
     tools:context=".GameView">
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="362dp"
+        android:layout_height="429dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.672"
+        tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:layout_width="89dp"
@@ -18,6 +30,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.163"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/newPic"
+        android:layout_width="229dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="3dp"
+        android:text="Shuffle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/guess"
+        android:layout_width="227dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="3dp"
+        android:text="Set Tip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -47,7 +89,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.197"
         tools:ignore="Hardcoded" />
-
+<!--
     <TextView
         android:id="@+id/albContent"
         android:layout_width="401dp"
@@ -63,7 +105,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
         tools:ignore="Hardcoded" />
-
+-->
     <Button
         android:id="@+id/game_rules"
         android:layout_width="150dp"

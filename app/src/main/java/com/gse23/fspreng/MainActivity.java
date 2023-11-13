@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         View intro = findViewById(R.id.toAlbumChoice);
         Button spielAnleitung = findViewById(R.id.game_rules);
 
+        GetAssetContents.get(getApplicationContext());
+
         intro.setOnClickListener(v -> {
             Intent intent = new Intent(this, StartBild.class);
             Log.i("Status", "going to: change to AlbumChoice");

@@ -28,6 +28,8 @@
             <!-- Weitere Einstellungen -->
         </activity>
         <activity android:name=".SpielAnleitung">
+        </activity>
+        <activity android:name=".SetTip">
 
         </activity>
     </application>

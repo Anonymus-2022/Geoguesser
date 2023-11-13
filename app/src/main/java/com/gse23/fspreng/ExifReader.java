@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.exifinterface.media.ExifInterface;
 
 import android.util.Log;
-
+import com.gse23.fspreng.exception.*;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -29,7 +29,7 @@ class ExifReader {
      * Bildunterscgrift ausgegeben.
      */
     public static Images.ImageInfo readExif(String albname, String picname, String imagePath,
-                                            Context context) {
+                                            Context context) throws CorruptedDataException {
 
 
         Images.ImageInfo pic = null;
@@ -55,11 +55,13 @@ class ExifReader {
 
                 String lon = "Longitude";
 
-                if (latitude != null && longitude != null) {
+                if (latitude != null || longitude != null) {
 
                     Log.i(lat, latitude);
 
                     Log.i(lon, longitude);
+
+                    throw new CorruptedDataException();
 
                 }
 

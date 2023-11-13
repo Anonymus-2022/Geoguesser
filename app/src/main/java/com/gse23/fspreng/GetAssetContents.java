@@ -2,6 +2,10 @@ package com.gse23.fspreng;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.gse23.fspreng.exception.CorruptedDataException;
+import com.gse23.fspreng.exception.EmpyAlbumException;
+
 import java.io.IOException;
 /**
  * Diese Klasse liefert ein Images-Objekt, in dem sämtliche verfügbaren Bilder gespeichert
@@ -61,6 +65,57 @@ public class GetAssetContents {
         } catch (IOException e) {
             Log.e("ERROR", "Fehler beim Auflisten von "
                     + "Dateien/Verzeichnissen in /albums: " + e.getMessage());
+        } catch (CorruptedDataException e) {
+            throw new RuntimeException(e);
+        }
+        return pictures;
+    }
+
+    public static Images get(Context context, String albumWish) throws EmpyAlbumException {
+        Images pictures = new Images();
+        try {
+            String alb = "albums";
+            String[] inAssets = context.getAssets().list(alb);
+
+            assert inAssets != null;
+            for (String unterordner : inAssets) {
+                if (unterordner != null && unterordner.equals(albumWish)) {
+                    String msg = "Enthält: ";
+                    Log.i("/" + alb + "/", msg + unterordner);
+                    String[] ordnerMitBildern = context.getAssets().list(alb + "/"
+                            + unterordner);
+
+                    assert ordnerMitBildern != null;
+                    for (String bilder : ordnerMitBildern) {
+                        if (bilder != null) {
+                            Log.i(alb + "/" + unterordner, msg + bilder);
+                        } else {
+                            Log.i(alb + "/" + unterordner, "ist Leer");
+                        }
+                        String imagePath = alb + "/" + unterordner + "/" + bilder;
+
+                        assert bilder != null;
+                        if (bilder.matches(".*\\.jpg$")
+                                || bilder.matches(".*\\.jpeg$")
+                                || bilder.matches(".*\\.png$")) {
+                            Log.i(bilder, "Die Datei ist eine .jpg-, .png-, .jpeg-Datei.");
+                            Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
+                                    context));
+                            Log.i(bilder, "added to Images");
+                        } else {
+                            Log.i(bilder, "Die Datei ist keine .jpg-Datei.");
+                        }
+                    }
+                } else {
+                    if (unterordner == null && unterordner.equals(albumWish)) {
+                        throw new EmpyAlbumException();
+                    }
+                }
+            }
+        } catch (CorruptedDataException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return pictures;
     }
