@@ -7,18 +7,19 @@
     android:background="#020202"
     tools:context=".GameView">
 
+
     <ImageView
         android:id="@+id/image"
-        android:layout_width="362dp"
-        android:layout_height="429dp"
+        android:layout_width="352dp"
+        android:layout_height="343dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.672"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintVertical_bias="0.567"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:layout_width="89dp"
@@ -34,8 +35,8 @@
 
     <Button
         android:id="@+id/newPic"
-        android:layout_width="229dp"
-        android:layout_height="103dp"
+        android:layout_width="214dp"
+        android:layout_height="96dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="3dp"
         android:text="Shuffle"
@@ -49,11 +50,11 @@
 
     <Button
         android:id="@+id/guess"
-        android:layout_width="227dp"
-        android:layout_height="101dp"
+        android:layout_width="197dp"
+        android:layout_height="97dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="3dp"
-        android:text="Set Tip"
+        android:text="@string/make_a_guess"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

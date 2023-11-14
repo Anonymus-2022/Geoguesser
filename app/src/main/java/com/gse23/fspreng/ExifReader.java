@@ -55,14 +55,14 @@ class ExifReader {
 
                 String lon = "Longitude";
 
-                if (latitude != null || longitude != null) {
+                if (latitude != null && longitude != null) {
 
                     Log.i(lat, latitude);
 
                     Log.i(lon, longitude);
 
+                } else {
                     throw new CorruptedDataException();
-
                 }
 
                 String imD = "Image Description";

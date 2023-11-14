@@ -71,9 +71,8 @@ public class GetAssetContents {
         return pictures;
     }
 
-    public static Images get(Context context, String albumWish) throws EmpyAlbumException {
+    public static Images get(Context context, String albumWish) throws EmpyAlbumException, IOException {
         Images pictures = new Images();
-        try {
             String alb = "albums";
             String[] inAssets = context.getAssets().list(alb);
 
@@ -99,8 +98,12 @@ public class GetAssetContents {
                                 || bilder.matches(".*\\.jpeg$")
                                 || bilder.matches(".*\\.png$")) {
                             Log.i(bilder, "Die Datei ist eine .jpg-, .png-, .jpeg-Datei.");
-                            Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
-                                    context));
+                            try {
+                                Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
+                                        context));
+                            } catch (CorruptedDataException e){
+                                Log.e(String.valueOf(e), "GetAssetContent, line 106");
+                            }
                             Log.i(bilder, "added to Images");
                         } else {
                             Log.i(bilder, "Die Datei ist keine .jpg-Datei.");
@@ -112,11 +115,7 @@ public class GetAssetContents {
                     }
                 }
             }
-        } catch (CorruptedDataException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
         return pictures;
     }
 }
