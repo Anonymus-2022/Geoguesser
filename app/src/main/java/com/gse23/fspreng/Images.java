@@ -87,8 +87,8 @@ public class Images {
      */
     public void deleteImage(String picname) {
         int index;
-        for (index = 0; index< infos.size(); index++) {
-            if (infos.get(index).picname == picname ) {
+        for (index = 0; index < infos.size(); index++) {
+            if (infos.get(index).picname == picname) {
                 infos.remove(index);
             }
         }

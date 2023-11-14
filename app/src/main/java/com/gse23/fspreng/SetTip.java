@@ -16,6 +16,6 @@ public class SetTip extends AppCompatActivity {
         setContentView(R.layout.set_tip);
         Button back = findViewById(R.id.button);
 
-        back.setOnClickListener(v-> finish());
+        back.setOnClickListener(v -> finish());
     }
 }
