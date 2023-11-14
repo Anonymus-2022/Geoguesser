@@ -23,8 +23,17 @@ import java.util.Random;
  */
 public class GameView extends AppCompatActivity {
 
+    /**
+     * Message für Logs. Gibt an, aus welcher Classe die Message kommt
+     */
     public static final String GAME_VIEW = "GameView";
+    /**
+     * Zeigt an, was hier ausgegeben wird.
+     */
     public static final String PRINT_LONGITUDE = "Print Longitude: ";
+    /**
+     * Zeigt an, was hier ausgegeben wird.
+     */
     public static final String PRINT_LATITUDE = "Print Latitude: ";
     private final ArrayList<String> alreadyShown = new ArrayList<>();
     private Images pics;

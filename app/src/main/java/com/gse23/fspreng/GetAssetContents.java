@@ -14,14 +14,38 @@ import java.io.IOException;
  */
 public class GetAssetContents {
 
+    /**
+     * Log msg.
+     */
     public static final String ALBUMS = "albums";
+    /**
+     * Log msg.
+     */
     public static final String ENTHÄLT = "Enthält: ";
+    /**
+     * Log msg.
+     */
     public static final String IST_LEER = "ist Leer";
+    /**
+     * Regex für die Beurteilung der validität der Dateien.
+     */
     public static final String JPG_$ = ".*\\.jpg$";
+    /**
+     * Regex für die Beurteilung der validität der Dateien.
+     */
     public static final String JPEG_$ = ".*\\.jpeg$";
+    /**
+     * Regex für die Beurteilung der validität der Dateien.
+     */
     public static final String PNG_$ = ".*\\.png$";
+    /**
+     * Bestätigung, dass die Datei valide ist.
+     */
     public static final String DIE_DATEI_IST_EINE_JPG_PNG_JPEG_DATEI = "Die Datei ist eine .jpg-" +
             ", .png-, .jpeg-Datei.";
+    /**
+     * Feststellung, dass die Datei nicht valide ist.
+     */
     public static final String DIE_DATEI_IST_KEINE_JPG_DATEI = "Die Datei ist keine .jpg-Datei.";
 
     /**
@@ -39,7 +63,6 @@ public class GetAssetContents {
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
      *         (sofern vorhanden) unterhalb des Asset-Ordners Speichert
      * @throws EmpyAlbumException Das bedeutet wohl etwas.
-     * @throws CorruptedDataException Das sollte wohl ebenfalls etwas bedeuten
      */
     public static Images get(Context context) throws EmpyAlbumException{
         Images pictures = new Images();
