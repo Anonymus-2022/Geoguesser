@@ -14,6 +14,16 @@ import java.io.IOException;
  */
 public class GetAssetContents {
 
+    public static final String ALBUMS = "albums";
+    public static final String ENTHÄLT = "Enthält: ";
+    public static final String IST_LEER = "ist Leer";
+    public static final String JPG_$ = ".*\\.jpg$";
+    public static final String JPEG_$ = ".*\\.jpeg$";
+    public static final String PNG_$ = ".*\\.png$";
+    public static final String DIE_DATEI_IST_EINE_JPG_PNG_JPEG_DATEI = "Die Datei ist eine .jpg-" +
+            ", .png-, .jpeg-Datei.";
+    public static final String DIE_DATEI_IST_KEINE_JPG_DATEI = "Die Datei ist keine .jpg-Datei.";
+
     /**
      * Existiert nur der vollständigkeit halber. Da nie ein GetAssetContent-Objekt erzeugt wird, ist
      * auch kein Konstruktor nötig.
@@ -28,17 +38,18 @@ public class GetAssetContents {
      *                in der Form get(getApplicationContext())
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
      *         (sofern vorhanden) unterhalb des Asset-Ordners Speichert
+     * @throws EmpyAlbumException
      */
     public static Images get(Context context) {
         Images pictures = new Images();
         try {
-            String alb = "albums";
+            String alb = ALBUMS;
             String[] inAssets = context.getAssets().list(alb);
 
             assert inAssets != null;
             for (String unterordner : inAssets) {
                 if (unterordner != null) {
-                    String msg = "Enthält: ";
+                    String msg = ENTHÄLT;
                     Log.i("/" + alb + "/", msg + unterordner);
                     String[] ordnerMitBildern = context.getAssets().list(alb + "/"
                             + unterordner);
@@ -48,20 +59,20 @@ public class GetAssetContents {
                         if (bilder != null) {
                             Log.i(alb + "/" + unterordner, msg + bilder);
                         } else {
-                            Log.i(alb + "/" + unterordner, "ist Leer");
+                            Log.i(alb + "/" + unterordner, IST_LEER);
                         }
                         String imagePath = alb + "/" + unterordner + "/" + bilder;
 
                         assert bilder != null;
-                        if (bilder.matches(".*\\.jpg$")
-                                || bilder.matches(".*\\.jpeg$")
-                                || bilder.matches(".*\\.png$")) {
-                            Log.i(bilder, "Die Datei ist eine .jpg-, .png-, .jpeg-Datei.");
+                        if (bilder.matches(JPG_$)
+                                || bilder.matches(JPEG_$)
+                                || bilder.matches(PNG_$)) {
+                            Log.i(bilder, DIE_DATEI_IST_EINE_JPG_PNG_JPEG_DATEI);
                             Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
                                     context));
                             Log.i(bilder, "added to Images");
                         } else {
-                            Log.i(bilder, "Die Datei ist keine .jpg-Datei.");
+                            Log.i(bilder, DIE_DATEI_IST_KEINE_JPG_DATEI);
                         }
                     }
                 }
@@ -85,16 +96,17 @@ public class GetAssetContents {
      * @param albumWish  gibt an, aus welchem Ordner die Bilder ausgelesen werden sollen
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
      *        (sofern vorhanden) des angegebenen Ordners Speichert
+     * @throws IOException
      */
     public static Images get(Context context, String albumWish) throws EmpyAlbumException, IOException {
         Images pictures = new Images();
-            String alb = "albums";
+            String alb = ALBUMS;
             String[] inAssets = context.getAssets().list(alb);
 
             assert inAssets != null;
             for (String unterordner : inAssets) {
                 if (unterordner != null && unterordner.equals(albumWish)) {
-                    String msg = "Enthält: ";
+                    String msg = ENTHÄLT;
                     Log.i("/" + alb + "/", msg + unterordner);
                     String[] ordnerMitBildern = context.getAssets().list(alb + "/"
                             + unterordner);
@@ -104,15 +116,15 @@ public class GetAssetContents {
                         if (bilder != null) {
                             Log.i(alb + "/" + unterordner, msg + bilder);
                         } else {
-                            Log.i(alb + "/" + unterordner, "ist Leer");
+                            Log.i(alb + "/" + unterordner, IST_LEER);
                         }
                         String imagePath = alb + "/" + unterordner + "/" + bilder;
 
                         assert bilder != null;
-                        if (bilder.matches(".*\\.jpg$")
-                                || bilder.matches(".*\\.jpeg$")
-                                || bilder.matches(".*\\.png$")) {
-                            Log.i(bilder, "Die Datei ist eine .jpg-, .png-, .jpeg-Datei.");
+                        if (bilder.matches(JPG_$)
+                                || bilder.matches(JPEG_$)
+                                || bilder.matches(PNG_$)) {
+                            Log.i(bilder, DIE_DATEI_IST_EINE_JPG_PNG_JPEG_DATEI);
                             try {
                                 Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
                                         context));
@@ -121,7 +133,7 @@ public class GetAssetContents {
                             }
                             Log.i(bilder, "added to Images");
                         } else {
-                            Log.i(bilder, "Die Datei ist keine .jpg-Datei.");
+                            Log.i(bilder, DIE_DATEI_IST_KEINE_JPG_DATEI);
                         }
                     }
                 } else {
