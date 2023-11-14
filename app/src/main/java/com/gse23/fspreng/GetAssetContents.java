@@ -21,7 +21,7 @@ public class GetAssetContents {
     /**
      * Log msg.
      */
-    public static final String ENTHÄLT = "Enthält: ";
+    public static final String ENTHAELT = "Enthält: ";
     /**
      * Log msg.
      */
@@ -77,7 +77,7 @@ public class GetAssetContents {
             assert inAssets != null;
             for (String unterordner : inAssets) {
                 if (unterordner != null) {
-                    String msg = ENTHÄLT;
+                    String msg = ENTHAELT;
                     Log.i("/" + alb + "/", msg + unterordner);
                     String[] ordnerMitBildern = context.getAssets().list(alb + "/"
                             + unterordner);
@@ -136,7 +136,7 @@ public class GetAssetContents {
             assert inAssets != null;
             for (String unterordner : inAssets) {
                 if (unterordner != null && unterordner.equals(albumWish)) {
-                    String msg = ENTHÄLT;
+                    String msg = ENTHAELT;
                     Log.i("/" + alb + "/", msg + unterordner);
                     String[] ordnerMitBildern = context.getAssets().list(alb + "/"
                             + unterordner);
