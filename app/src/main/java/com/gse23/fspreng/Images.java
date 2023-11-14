@@ -80,7 +80,11 @@ public class Images {
     }
 
 
-
+    /**
+     * löscht ein ImageInfo-Objekt element aus dem referenzierten Images-Objekt.
+     * @param picname ist der name des Bildes, das gelöscht werden soll. Da durch werden auch
+     *               doppelte b.z.w. mehrfach forkommende Bilder entfernt
+     */
     public void deleteImage(String picname) {
         int index;
         for (index = 0; index< infos.size(); index++) {
@@ -90,11 +94,17 @@ public class Images {
         }
     }
 
+    /**
+     * Die Methode prüft, ob das angegebene Album Bilder enthölt.
+     * @param alb ist der Name des Albums, welches auf Leerheit geprüft werden soll
+     * @return falls das Album leer ist wird true zurückgegeben, ansonsten false
+     */
     public boolean emptyAlbum(String alb) {
         boolean isEmpty = true;
         for (ImageInfo x: infos) {
             if (x.album.equals(alb)) {
                 isEmpty = false;
+                break;
             }
         }
         return isEmpty;

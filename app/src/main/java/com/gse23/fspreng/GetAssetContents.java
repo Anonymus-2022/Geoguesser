@@ -14,6 +14,10 @@ import java.io.IOException;
  */
 public class GetAssetContents {
 
+    /**
+     * Existiert nur der vollständigkeit halber. Da nie ein GetAssetContent-Objekt erzeugt wird, ist
+     * auch kein Konstruktor nötig.
+     */
     protected GetAssetContents() { }
 
     /**
@@ -71,6 +75,17 @@ public class GetAssetContents {
         return pictures;
     }
 
+
+    /**
+     * Die Funktion erzeugt ein Images-Objekt, indem es iterativ die existierenden bilder findet
+     * und mit dem ExifReader ein ImagesInfo-Objekt erzeugt, welches dann zu Images geaddet werden
+     * kann.
+     * @param context es handelt sich hier um den context der aufrufenden Activity, meist übergeben
+     *                in der Form get(getApplicationContext())
+     * @param albumWish  gibt an, aus welchem Ordner die Bilder ausgelesen werden sollen
+     * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
+     *        (sofern vorhanden) des angegebenen Ordners Speichert
+     */
     public static Images get(Context context, String albumWish) throws EmpyAlbumException, IOException {
         Images pictures = new Images();
             String alb = "albums";

@@ -15,6 +15,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+ * Hier wird dem Spieler ein zufälliges Bild aus dem gewählten Album präsentiert. Falls ihm das Bild
+ * nicht gefällt, hat er die Möglichkeit, es zu skippen. Hat er alle Bilder geskipped, so bekommt er
+ * das angezeigt und wird zur Albenwahlzurückgeführt.
+ */
 public class GameView extends AppCompatActivity {
 
     private final ArrayList<String> alreadyShown = new ArrayList<>();

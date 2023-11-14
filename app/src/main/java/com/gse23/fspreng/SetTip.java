@@ -5,6 +5,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Hier wird dem Spieler ermöglicht, die Position des gesehehenen Bildes zu schätzen.
+ */
 public class SetTip extends AppCompatActivity {
 
     protected void onCreate(Bundle savedBundleInstances) {
