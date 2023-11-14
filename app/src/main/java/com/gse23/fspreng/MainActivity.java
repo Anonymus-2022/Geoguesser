@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.gse23.fspreng.exception.EmpyAlbumException;
 
 
 /**
@@ -22,7 +23,11 @@ public class MainActivity extends AppCompatActivity {
         View intro = findViewById(R.id.toAlbumChoice);
         Button spielAnleitung = findViewById(R.id.game_rules);
 
-        GetAssetContents.get(getApplicationContext());
+        try {
+            GetAssetContents.get(getApplicationContext());
+        } catch (EmpyAlbumException ignored) {
+            Log.e("EmptyAlbumException", "MainActivity, line 29");
+        }
 
         intro.setOnClickListener(v -> {
             Intent intent = new Intent(this, StartBild.class);

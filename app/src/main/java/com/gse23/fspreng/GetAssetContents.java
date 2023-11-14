@@ -38,9 +38,10 @@ public class GetAssetContents {
      *                in der Form get(getApplicationContext())
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
      *         (sofern vorhanden) unterhalb des Asset-Ordners Speichert
-     * @throws EmpyAlbumException
+     * @throws EmpyAlbumException Das bedeutet wohl etwas.
+     * @throws CorruptedDataException Das sollte wohl ebenfalls etwas bedeuten
      */
-    public static Images get(Context context) {
+    public static Images get(Context context) throws EmpyAlbumException{
         Images pictures = new Images();
         try {
             String alb = ALBUMS;
@@ -75,13 +76,13 @@ public class GetAssetContents {
                             Log.i(bilder, DIE_DATEI_IST_KEINE_JPG_DATEI);
                         }
                     }
+                } else {
+                    throw new EmpyAlbumException();
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | EmpyAlbumException | CorruptedDataException e) {
             Log.e("ERROR", "Fehler beim Auflisten von "
                     + "Dateien/Verzeichnissen in /albums: " + e.getMessage());
-        } catch (CorruptedDataException e) {
-            throw new RuntimeException(e);
         }
         return pictures;
     }
@@ -96,7 +97,7 @@ public class GetAssetContents {
      * @param albumWish  gibt an, aus welchem Ordner die Bilder ausgelesen werden sollen
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
      *        (sofern vorhanden) des angegebenen Ordners Speichert
-     * @throws IOException
+     * @throws IOException das sollte wohl etwas bedeuten
      */
     public static Images get(Context context, String albumWish) throws EmpyAlbumException, IOException {
         Images pictures = new Images();
