@@ -7,9 +7,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Hier wird dem Spieler ermöglicht, die Position des gesehenen Bildes zu schätzen.
@@ -45,6 +48,7 @@ public class SetTip extends AppCompatActivity {
         });
 
 
+
         longitudeIn.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -64,6 +68,7 @@ public class SetTip extends AppCompatActivity {
             }
         });
 
+
         confirm.setOnClickListener(v -> {
             String latitudeStr = latitudeIn.getText().toString();
             String longitudeStr = longitudeIn.getText().toString();
@@ -73,7 +78,10 @@ public class SetTip extends AppCompatActivity {
                     && Double.parseDouble(longitudeStr) > -180) {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
+                String posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_foot"
+                        + "&route=" + longitudeStr + "," + latitudeStr;
                 Intent intent = new Intent(this, ResultView.class);
+                intent.putExtra("posLink", posLink);
                 startActivity(intent);
             } else {
                 Log.d("SetTip", "Invalid input");
