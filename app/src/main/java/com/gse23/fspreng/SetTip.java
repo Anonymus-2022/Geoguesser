@@ -1,5 +1,6 @@
 package com.gse23.fspreng;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -25,14 +27,15 @@ public class SetTip extends AppCompatActivity {
         Button confirm = findViewById(R.id.confirm);
 
 
-        // Event Handling für die Breiten-EditText
         latitudeIn.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence charSequence, int start, int count,
+                                          int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) { }
+            public void onTextChanged(CharSequence charSequence, int start, int before,
+                                      int count) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -41,15 +44,18 @@ public class SetTip extends AppCompatActivity {
             }
         });
 
+
         longitudeIn.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence charSequence, int start, int count,
+                                          int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) { }
+            public void onTextChanged(CharSequence charSequence, int start, int before,
+                                      int count) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -59,13 +65,29 @@ public class SetTip extends AppCompatActivity {
         });
 
         confirm.setOnClickListener(v -> {
-            // Hier kannst du den eingegebenen Breiten- und Längengrad verarbeiten
             String latitudeStr = latitudeIn.getText().toString();
             String longitudeStr = longitudeIn.getText().toString();
-            Log.i("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: " + longitudeStr);
+            if (Double.parseDouble(latitudeStr) < 90
+                    && Double.parseDouble(latitudeStr) > -90
+                    && Double.parseDouble(longitudeStr) < 180
+                    && Double.parseDouble(longitudeStr) > -180) {
+                Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
+                        + longitudeStr);
+                Intent intent = new Intent(this, ResultView.class);
+                startActivity(intent);
+            } else {
+                Log.d("SetTip", "Invalid input");
+                AlertDialog.Builder invalidInput = new AlertDialog.Builder(this);
+                invalidInput.setTitle("The input has the wrong format!");
+                invalidInput.setPositiveButton("OK", (dialog, id) -> dialog.dismiss());
+                invalidInput.show();
+            }
+
         });
 
-        back.setOnClickListener(v -> finish());
+        back.setOnClickListener(v ->
+            finish()
+        );
 
     }
 }

@@ -63,7 +63,7 @@ public class GameView extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        Drawable bild = null;
+        Drawable bild;
         int index = 0;
 
         final Images.ImageInfo[] pic = new Images.ImageInfo[1];
@@ -92,8 +92,6 @@ public class GameView extends AppCompatActivity {
                         break;
                     }
                 }
-
-                // Schleifenindex aktualisieren
                 if (index == pics.length() - 1) {
                     index = 0;
                 } else {
@@ -115,7 +113,7 @@ public class GameView extends AppCompatActivity {
         newPic.setOnClickListener(v -> {
             Drawable bildOne = null;
             int indexOne = 0;
-            int randomNumOne = 0;
+            int randomNumOne;
 
             while (true) {
                 String alb = null;

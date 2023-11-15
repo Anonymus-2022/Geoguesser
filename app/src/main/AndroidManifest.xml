@@ -32,6 +32,9 @@
         <activity android:name=".SetTip">
 
         </activity>
+        <activity android:name=".ResultView">
+
+        </activity>
     </application>
 
 </manifest>
