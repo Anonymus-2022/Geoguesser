@@ -95,7 +95,7 @@ public class ResultView extends AppCompatActivity {
         Log.i("Distanz", distance * 1000 + " m");
         distance = round(distance, 0.01);
         showDistacne.setText("Distance between your guess an reallity:\n\n"
-        + distance + " km");
+        + distance + " km\n\nYour score:\n" + get.get("score") + "/5000");
 
         TextView show_Link = findViewById(R.id.showLink);
         String showLink = (String) get.get("posLink");

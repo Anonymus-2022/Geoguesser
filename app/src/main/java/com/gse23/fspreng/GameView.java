@@ -1,5 +1,9 @@
 package com.gse23.fspreng;
 
+import static java.lang.Math.ceil;
+import static java.lang.Math.floor;
+import static java.lang.Math.log;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -45,6 +49,29 @@ public class GameView extends AppCompatActivity {
     private final ArrayList<String> alreadyShown = new ArrayList<>();
     private Images pics;
     private String albumChoice;
+    Boolean lonChoosen = false;
+    Boolean latChoosen = false;
+
+    public static int getScore(double distance){
+        int result = 0;
+        if (distance <10000 && distance> 10){
+            final int max_points = 5000;
+            final double max_distance = 10000;
+            final double min_distance = 10;
+            double part1 = log(max_distance/min_distance);
+            double part2 = log(max_distance/distance);
+            double part3 = max_points/part1;
+            result = (int) ceil(part2 + part1);
+        }else {
+            if (distance > 10000) {
+                result = 0;
+            } else {
+                result = 5000;
+            }
+
+        }
+        return result;
+    }
 
     private static double convertToDecimal(String coordinate) throws CorruptedDataException {
         String[] parts = coordinate.split(",");
@@ -134,11 +161,58 @@ public class GameView extends AppCompatActivity {
             startActivity(intent);
         });
 
+
+
+        goBack.setOnClickListener(v -> {
+            Log.i("Status", "going to: change to AlbumChoice");
+            finish();
+        });
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
+        get = getIntent().getExtras();
+        latitudeIn = findViewById(R.id.latitude);
+        longitudeIn = findViewById(R.id.longitude);
+
+
+        latitudeIn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before,
+                                      int count) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String latitudeStr = editable.toString();
+                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
+            }
+        });
+
+        longitudeIn.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count,
+                                          int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before,
+                                      int count) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String latitudeStr = editable.toString();
+                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
+            }
+        });
+
         newPic.setOnClickListener(v -> {
             Drawable bildOne = null;
             int indexOne = 0;
             int randomNumOne;
-
 
             while (true) {
                 String alb = null;
@@ -193,56 +267,10 @@ public class GameView extends AppCompatActivity {
 
             image.setImageDrawable(bildOne);
             image.setContentDescription(pic[0].imageDescription);
+
+            latitudeIn.setText("");
+            longitudeIn.setText("");
         });
-
-        goBack.setOnClickListener(v -> {
-            Log.i("Status", "going to: change to AlbumChoice");
-            finish();
-        });
-
-        ///////////////////////////////////////////////////////////////////////////////////////////
-
-        get = getIntent().getExtras();
-        latitudeIn = findViewById(R.id.latitude);
-        longitudeIn = findViewById(R.id.longitude);
-
-
-        latitudeIn.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count,
-                                          int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before,
-                                      int count) { }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String latitudeStr = editable.toString();
-                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
-            }
-        });
-
-        longitudeIn.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count,
-                                          int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before,
-                                      int count) { }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String latitudeStr = editable.toString();
-                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
-            }
-        });
-
 
         EditText finalLatitudeIn = latitudeIn;
         EditText finalLongitudeIn = longitudeIn;
@@ -257,7 +285,7 @@ public class GameView extends AppCompatActivity {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
                 assert finalGet != null;
-                String posLink = null;
+                String posLink;
                 try {
                     posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
                             + "foot&route=" + longitudeStr + "," + latitudeStr + ";"
@@ -277,6 +305,8 @@ public class GameView extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 intent.putExtra("posLink", posLink);
+                int score = getScore(distance*1000);
+                intent.putExtra("score", score);
                 intent.putExtra("distance", distance);
                 startActivity(intent);
             } else {
