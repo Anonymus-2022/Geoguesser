@@ -34,4 +34,5 @@
     <string name="l_ngengrad">Längengrad</string>
     <string name="select_an_album">Select an Album!</string>
     <string name="shuffle">Shuffle</string>
+    <string name="cancel">cancel</string>
 </resources>

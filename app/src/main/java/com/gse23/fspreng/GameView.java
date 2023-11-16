@@ -64,12 +64,16 @@ public class GameView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_view);
 
+        Bundle get;
+        EditText latitudeIn;
+        EditText longitudeIn;
         Button spielAnleitung = findViewById(R.id.game_rules);
         TextView albChoice = findViewById(R.id.albChoice);
         Button goBack = findViewById(R.id.go_back);
         ImageView image = findViewById(R.id.image);
         Button newPic = findViewById(R.id.newPic);
         Button confirm = findViewById(R.id.confirm);
+        Button cancel =  findViewById(R.id.cancel);
 
         String choosenAlbum = "AlbumChoice";
         albumChoice = getIntent().getStringExtra(choosenAlbum);
@@ -135,6 +139,7 @@ public class GameView extends AppCompatActivity {
             int indexOne = 0;
             int randomNumOne;
 
+
             while (true) {
                 String alb = null;
 
@@ -192,15 +197,14 @@ public class GameView extends AppCompatActivity {
 
         goBack.setOnClickListener(v -> {
             Log.i("Status", "going to: change to AlbumChoice");
-            Intent intent = new Intent(GameView.this, StartBild.class);
-            startActivity(intent);
+            finish();
         });
 
-        /////////////////////////////////////////////////////////////////////////////////////777
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
-        Bundle get = getIntent().getExtras();
-        EditText latitudeIn = findViewById(R.id.latitude);
-        EditText longitudeIn = findViewById(R.id.longitude);
+        get = getIntent().getExtras();
+        latitudeIn = findViewById(R.id.latitude);
+        longitudeIn = findViewById(R.id.longitude);
 
 
         latitudeIn.addTextChangedListener(new TextWatcher() {
@@ -240,17 +244,19 @@ public class GameView extends AppCompatActivity {
         });
 
 
-
+        EditText finalLatitudeIn = latitudeIn;
+        EditText finalLongitudeIn = longitudeIn;
+        Bundle finalGet = get;
         confirm.setOnClickListener(v -> {
-            String latitudeStr = latitudeIn.getText().toString();
-            String longitudeStr = longitudeIn.getText().toString();
+            String latitudeStr = finalLatitudeIn.getText().toString();
+            String longitudeStr = finalLongitudeIn.getText().toString();
             if (Double.parseDouble(latitudeStr) < 90
                     && Double.parseDouble(latitudeStr) > -90
                     && Double.parseDouble(longitudeStr) < 180
                     && Double.parseDouble(longitudeStr) > -180) {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
-                assert get != null;
+                assert finalGet != null;
                 String posLink = null;
                 try {
                     posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
@@ -281,6 +287,17 @@ public class GameView extends AppCompatActivity {
                 invalidInput.show();
             }
 
+        });
+
+        cancel.setOnClickListener(v->{
+            AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
+            shutdown.setTitle("Do you really want to shutdown the game?");
+            shutdown.setNegativeButton("YES",(dialog,id) -> {
+                dialog.dismiss();
+                finish();
+            });
+            shutdown.setPositiveButton("NO", (dialog,id) -> dialog.dismiss());
+            shutdown.show();
         });
     }
 }
