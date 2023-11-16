@@ -128,10 +128,5 @@ public class SetTip extends AppCompatActivity {
             }
 
         });
-
-        back.setOnClickListener(v ->
-            finish()
-        );
-
     }
 }

@@ -5,14 +5,21 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.gse23.fspreng.exception.CorruptedDataException;
 import com.gse23.fspreng.exception.EmpyAlbumException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -39,6 +46,19 @@ public class GameView extends AppCompatActivity {
     private Images pics;
     private String albumChoice;
 
+    private static double convertToDecimal(String coordinate) throws CorruptedDataException {
+        String[] parts = coordinate.split(",");
+
+        if (parts.length >= 3) {
+            double degrees = Double.parseDouble(parts[0].split("/")[0]);
+            double minutes = Double.parseDouble(parts[1].split("/")[0]);
+            double seconds = Double.parseDouble(parts[2].split("/")[0]);
+
+            return degrees + (minutes / 60) + (seconds / 3600);
+        } else {
+            throw new CorruptedDataException();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +69,7 @@ public class GameView extends AppCompatActivity {
         Button goBack = findViewById(R.id.go_back);
         ImageView image = findViewById(R.id.image);
         Button newPic = findViewById(R.id.newPic);
-        Button guess = findViewById(R.id.guess);
+        Button confirm = findViewById(R.id.confirm);
 
         String choosenAlbum = "AlbumChoice";
         albumChoice = getIntent().getStringExtra(choosenAlbum);
@@ -176,11 +196,91 @@ public class GameView extends AppCompatActivity {
             startActivity(intent);
         });
 
-        guess.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SetTip.class);
-            intent.putExtra("choosenPicLon", (CharSequence) pic[0].longitude);
-            intent.putExtra("choosenPicLat", (CharSequence) pic[0].latitude);
-            startActivity(intent);
+        /////////////////////////////////////////////////////////////////////////////////////777
+
+        Bundle get = getIntent().getExtras();
+        EditText latitudeIn = findViewById(R.id.latitude);
+        EditText longitudeIn = findViewById(R.id.longitude);
+
+
+        latitudeIn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before,
+                                      int count) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String latitudeStr = editable.toString();
+                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
+            }
+        });
+
+        longitudeIn.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count,
+                                          int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before,
+                                      int count) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String latitudeStr = editable.toString();
+                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
+            }
+        });
+
+
+
+        confirm.setOnClickListener(v -> {
+            String latitudeStr = latitudeIn.getText().toString();
+            String longitudeStr = longitudeIn.getText().toString();
+            if (Double.parseDouble(latitudeStr) < 90
+                    && Double.parseDouble(latitudeStr) > -90
+                    && Double.parseDouble(longitudeStr) < 180
+                    && Double.parseDouble(longitudeStr) > -180) {
+                Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
+                        + longitudeStr);
+                assert get != null;
+                String posLink = null;
+                try {
+                    posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
+                            + "foot&route=" + longitudeStr + "," + latitudeStr + ";"
+                            + convertToDecimal(pic[0].longitude) + ","
+                            + convertToDecimal(pic[0].latitude);
+                } catch (CorruptedDataException e) {
+                    throw new RuntimeException(e);
+                }
+                Intent intent = new Intent(this, ResultView.class);
+                double distance = 0;
+                try {
+                    distance = Haversine.distance(Double.parseDouble(latitudeStr),
+                            Double.parseDouble(longitudeStr),(convertToDecimal(pic[0].longitude)),
+                            convertToDecimal((String) Objects.requireNonNull(
+                                    pic[0].latitude)));
+                } catch (CorruptedDataException e) {
+                    throw new RuntimeException(e);
+                }
+                intent.putExtra("posLink", posLink);
+                intent.putExtra("distance", distance);
+                startActivity(intent);
+            } else {
+                Log.d("SetTip", "Invalid input");
+                AlertDialog.Builder invalidInput = new AlertDialog.Builder(this);
+                invalidInput.setTitle("The input has the wrong format!");
+                invalidInput.setPositiveButton("OK", (dialog, id) -> dialog.dismiss());
+                invalidInput.show();
+            }
+
         });
     }
 }

@@ -12,14 +12,14 @@
         android:id="@+id/image"
         android:layout_width="352dp"
         android:layout_height="343dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.567"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="@string/todo" />
+        app:layout_constraintVertical_bias="0.378"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:layout_width="89dp"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163"
+        app:layout_constraintVertical_bias="0.063"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -50,7 +50,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/guess"
+        android:id="@+id/confirm"
         android:textColor="#FFFFFF"
         android:layout_width="197dp"
         android:layout_height="97dp"
@@ -91,25 +91,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197"
+        app:layout_constraintVertical_bias="0.094"
         tools:ignore="Hardcoded" />
-<!--
-    <TextView
-        android:id="@+id/albContent"
-        android:layout_width="401dp"
-        android:layout_height="545dp"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:rotationX="0"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96"
-        tools:ignore="Hardcoded" />
--->
+
     <Button
         android:id="@+id/game_rules"
         android:layout_width="150dp"
@@ -124,5 +108,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/breitengrad"
+        android:inputType="numberDecimal"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/longitude"
+        android:layout_width="198dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="@string/l_ngengrad"
+        android:inputType="numberDecimal"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
