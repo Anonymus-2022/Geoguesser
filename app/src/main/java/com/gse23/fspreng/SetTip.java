@@ -7,23 +7,35 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Objects;
 
 /**
  * Hier wird dem Spieler ermöglicht, die Position des gesehenen Bildes zu schätzen.
  */
 public class SetTip extends AppCompatActivity {
+    private static double convertToDecimal(String coordinate) {
+        String[] parts = coordinate.split(",");
+
+        if (parts.length >= 3) {
+            double degrees = Double.parseDouble(parts[0].split("/")[0]);
+            double minutes = Double.parseDouble(parts[1].split("/")[0]);
+            double seconds = Double.parseDouble(parts[2].split("/")[0]);
+
+            return degrees + (minutes / 60) + (seconds / 3600);
+        } else {
+            return 0.0;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_tip);
-
+        Bundle get = getIntent().getExtras();
         Button back = findViewById(R.id.button);
         EditText latitudeIn = findViewById(R.id.latitude);
         EditText longitudeIn = findViewById(R.id.longitude);
@@ -69,6 +81,7 @@ public class SetTip extends AppCompatActivity {
         });
 
 
+
         confirm.setOnClickListener(v -> {
             String latitudeStr = latitudeIn.getText().toString();
             String longitudeStr = longitudeIn.getText().toString();
@@ -78,8 +91,13 @@ public class SetTip extends AppCompatActivity {
                     && Double.parseDouble(longitudeStr) > -180) {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
-                String posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_foot"
-                        + "&route=" + longitudeStr + "," + latitudeStr;
+                assert get != null;
+                String posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
+                        + "foot&route=" + longitudeStr + "," + latitudeStr + ";"
+                        + convertToDecimal((String) Objects.requireNonNull(
+                                get.get("choosenPicLon"))) + ","
+                        + convertToDecimal((String) Objects.requireNonNull(
+                                get.get("choosenPicLat")));
                 Intent intent = new Intent(this, ResultView.class);
                 intent.putExtra("posLink", posLink);
                 startActivity(intent);

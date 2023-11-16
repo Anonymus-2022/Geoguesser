@@ -178,6 +178,8 @@ public class GameView extends AppCompatActivity {
 
         guess.setOnClickListener(v -> {
             Intent intent = new Intent(this, SetTip.class);
+            intent.putExtra("choosenPicLon", (CharSequence) pic[0].longitude);
+            intent.putExtra("choosenPicLat", (CharSequence) pic[0].latitude);
             startActivity(intent);
         });
     }
