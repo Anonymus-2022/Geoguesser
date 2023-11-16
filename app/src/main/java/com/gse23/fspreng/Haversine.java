@@ -2,7 +2,7 @@ package com.gse23.fspreng;
 
 /**
  * Übernommen aus GitHub:
- * <a href="https://github.com/jasonwinn/haversine/blob/master/Haversine.java">...</a>
+ * https://github.com/jasonwinn/haversine/blob/master/Haversine.java
  *
  * Jason Winn
  * http://jasonwinn.org
