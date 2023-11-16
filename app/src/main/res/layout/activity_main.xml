@@ -11,6 +11,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
+        android:textColor="#FFFFFF"
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_geoguesser"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,6 +25,7 @@
         android:id="@+id/toAlbumChoice"
         android:layout_width="210dp"
         android:layout_height="195dp"
+        android:textColor="#FFFFFF"
         android:layout_marginStart="100dp"
         android:layout_marginTop="154dp"
         android:layout_marginEnd="101dp"
@@ -39,6 +41,7 @@
         android:id="@+id/game_rules"
         android:layout_width="150dp"
         android:layout_height="45dp"
+        android:textColor="#FFFFFF"
         android:layout_marginStart="100dp"
         android:layout_marginBottom="100dp"
         android:text="@string/spielanleitung"

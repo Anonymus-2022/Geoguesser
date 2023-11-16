@@ -32,4 +32,6 @@
     <string name="guess_where_the_scene_could_be">Guess, where the scene could be!</string>
     <string name="breitengrad">Breitengrad</string>
     <string name="l_ngengrad">Längengrad</string>
+    <string name="select_an_album">Select an Album!</string>
+    <string name="shuffle">Shuffle</string>
 </resources>

@@ -10,13 +10,15 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gse23.fspreng.exception.CorruptedDataException;
+
 import java.util.Objects;
 
 /**
  * Hier wird dem Spieler ermöglicht, die Position des gesehenen Bildes zu schätzen.
  */
 public class SetTip extends AppCompatActivity {
-    private static double convertToDecimal(String coordinate) {
+    private static double convertToDecimal(String coordinate) throws CorruptedDataException {
         String[] parts = coordinate.split(",");
 
         if (parts.length >= 3) {
@@ -26,7 +28,7 @@ public class SetTip extends AppCompatActivity {
 
             return degrees + (minutes / 60) + (seconds / 3600);
         } else {
-            return 0.0;
+            throw new CorruptedDataException();
         }
     }
 
@@ -92,14 +94,30 @@ public class SetTip extends AppCompatActivity {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
                 assert get != null;
-                String posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
-                        + "foot&route=" + longitudeStr + "," + latitudeStr + ";"
-                        + convertToDecimal((String) Objects.requireNonNull(
-                                get.get("choosenPicLon"))) + ","
-                        + convertToDecimal((String) Objects.requireNonNull(
-                                get.get("choosenPicLat")));
+                String posLink = null;
+                try {
+                    posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
+                            + "foot&route=" + longitudeStr + "," + latitudeStr + ";"
+                            + convertToDecimal((String) Objects.requireNonNull(
+                                    get.get("choosenPicLon"))) + ","
+                            + convertToDecimal((String) Objects.requireNonNull(
+                                    get.get("choosenPicLat")));
+                } catch (CorruptedDataException e) {
+                    throw new RuntimeException(e);
+                }
                 Intent intent = new Intent(this, ResultView.class);
+                double distance = 0;
+                try {
+                    distance = Haversine.distance(Double.parseDouble(latitudeStr),
+                            Double.parseDouble(longitudeStr),(convertToDecimal((String) Objects.requireNonNull(
+                                    get.get("choosenPicLon")))),
+                            convertToDecimal((String) Objects.requireNonNull(
+                                    get.get("choosenPicLat"))));
+                } catch (CorruptedDataException e) {
+                    throw new RuntimeException(e);
+                }
                 intent.putExtra("posLink", posLink);
+                intent.putExtra("distance", distance);
                 startActivity(intent);
             } else {
                 Log.d("SetTip", "Invalid input");

@@ -37,9 +37,10 @@
         android:id="@+id/newPic"
         android:layout_width="214dp"
         android:layout_height="96dp"
+        android:textColor="#FFFFFF"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="3dp"
-        android:text="Shuffle"
+        android:text="@string/shuffle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -50,6 +51,7 @@
 
     <Button
         android:id="@+id/guess"
+        android:textColor="#FFFFFF"
         android:layout_width="197dp"
         android:layout_height="97dp"
         android:layout_marginTop="48dp"
@@ -66,6 +68,7 @@
     <Button
         android:id="@+id/go_back"
         android:layout_width="122dp"
+        android:textColor="#FFFFFF"
         android:layout_height="43dp"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,6 +114,7 @@
         android:id="@+id/game_rules"
         android:layout_width="150dp"
         android:layout_height="45dp"
+        android:textColor="#FFFFFF"
         android:layout_marginStart="100dp"
         android:layout_marginBottom="100dp"
         android:text="@string/spielanleitung"

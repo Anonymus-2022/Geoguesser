@@ -14,6 +14,7 @@
         android:layout_height="45dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="100dp"
+        android:textColor="#FFFFFF"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +26,7 @@
     <TextView
         android:layout_width="373dp"
         android:layout_height="616dp"
+        android:textColor="#FFFFFF"
         android:layout_marginTop="40dp"
         android:text="@string/anleitung"
         app:layout_constraintBottom_toBottomOf="parent"

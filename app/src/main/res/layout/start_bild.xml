@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#020202"
-    android:backgroundTint="#000000"
     android:backgroundTintMode="src_atop"
     tools:context=".StartBild">
 
@@ -29,7 +28,8 @@
         android:layout_height="61dp"
         android:backgroundTint="#52169C"
         android:dropDownSelector="@android:drawable/arrow_down_float"
-        android:text="Select an Album!"
+        android:hint="@string/select_an_album"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,6 +39,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:textColor="#FFFFFF"
         android:id="@+id/albumUsage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
