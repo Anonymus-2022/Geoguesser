@@ -1,8 +1,7 @@
 package com.gse23.fspreng;
 
-import static java.lang.Math.ceil;
-import static java.lang.Math.floor;
-import static java.lang.Math.log;
+import static com.gse23.fspreng.CalcStuff.convertToDecimal;
+import static com.gse23.fspreng.CalcStuff.getScore;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -22,70 +21,31 @@ import com.gse23.fspreng.exception.CorruptedDataException;
 import com.gse23.fspreng.exception.EmpyAlbumException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-
 /**
- * Hier wird dem Spieler ein zufälliges Bild aus dem gewählten Album präsentiert. Falls ihm das Bild
- * nicht gefällt, hat er die Möglichkeit, es zu skippen. Hat er alle Bilder geskipped, so bekommt er
- * das angezeigt und wird zur Albenwahlzurückgeführt.
+ * Die Klasse GameView repräsentiert die Ansicht des Spiels, in dem dem Spieler
+ * zufällige Bilder aus einem ausgewählten Album präsentiert werden. Der Spieler
+ * kann die Bilder überspringen oder die Koordinaten eingeben und Punkte sammeln.
  */
 public class GameView extends AppCompatActivity {
 
     /**
-     * Message für Logs. Gibt an, aus welcher Classe die Message kommt
+     * Der Tag für Log-Nachrichten, der anzeigt, aus welcher Klasse die Nachricht kommt.
      */
     public static final String GAME_VIEW = "GameView";
     /**
-     * Zeigt an, was hier ausgegeben wird.
+     * Die Konstante für die Ausgabe der Längen-Koordinate.
      */
     public static final String PRINT_LONGITUDE = "Print Longitude: ";
     /**
-     * Zeigt an, was hier ausgegeben wird.
+     * Die Konstante für die Ausgabe der Breiten-Koordinate.
      */
     public static final String PRINT_LATITUDE = "Print Latitude: ";
-    private final ArrayList<String> alreadyShown = new ArrayList<>();
     private Images pics;
     private String albumChoice;
-    Boolean lonChoosen = false;
-    Boolean latChoosen = false;
 
-    public static int getScore(double distance){
-        int result = 0;
-        if (distance <10000 && distance> 10){
-            final int max_points = 5000;
-            final double max_distance = 10000;
-            final double min_distance = 10;
-            double part1 = log(max_distance/min_distance);
-            double part2 = log(max_distance/distance);
-            double part3 = max_points/part1;
-            result = (int) ceil(part2 + part1);
-        }else {
-            if (distance > 10000) {
-                result = 0;
-            } else {
-                result = 5000;
-            }
-
-        }
-        return result;
-    }
-
-    private static double convertToDecimal(String coordinate) throws CorruptedDataException {
-        String[] parts = coordinate.split(",");
-
-        if (parts.length >= 3) {
-            double degrees = Double.parseDouble(parts[0].split("/")[0]);
-            double minutes = Double.parseDouble(parts[1].split("/")[0]);
-            double seconds = Double.parseDouble(parts[2].split("/")[0]);
-
-            return degrees + (minutes / 60) + (seconds / 3600);
-        } else {
-            throw new CorruptedDataException();
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,13 +60,15 @@ public class GameView extends AppCompatActivity {
         ImageView image = findViewById(R.id.image);
         Button newPic = findViewById(R.id.newPic);
         Button confirm = findViewById(R.id.confirm);
-        Button cancel =  findViewById(R.id.cancel);
+        Button cancel = findViewById(R.id.cancel);
 
+        // Extrahiere das ausgewählte Album aus den Intent-Extras
         String choosenAlbum = "AlbumChoice";
         albumChoice = getIntent().getStringExtra(choosenAlbum);
         albChoice.setText(albumChoice);
 
         try {
+            // Lade die Bilder aus dem ausgewählten Album
             pics = GetAssetContents.get(getApplicationContext(), albumChoice);
         } catch (EmpyAlbumException ignored) {
             finish();
@@ -120,18 +82,19 @@ public class GameView extends AppCompatActivity {
         final Images.ImageInfo[] pic = new Images.ImageInfo[1];
         while (true) {
             try {
+                // Holen Sie sich das Bild an der aktuellen Indexposition
                 pic[0] = pics.pos(index);
 
                 if (!pics.emptyAlbum(albumChoice)) {
+                    // Generiere eine zufällige Zahl und vergleiche sie mit dem Index
                     Random random = new Random();
                     int randomNum = random.nextInt(pics.length());
 
                     if (randomNum == index) {
-                        alreadyShown.add(pic[0].picname);
+                        // Lösche das Bild aus der Liste, da es angezeigt wird
                         pics.deleteImage(pic[0].picname);
-                        Log.i("already shown", String.valueOf(alreadyShown));
 
-                        // Bild laden
+                        // Lade das Bild
                         try (InputStream bildstream = getAssets().open(pic[0].filepath)) {
                             bild = Drawable.createFromStream(bildstream, pic[0].picname);
                             Log.i("PrintedAlbum", pic[0].picname);
@@ -143,6 +106,7 @@ public class GameView extends AppCompatActivity {
                         break;
                     }
                 }
+                // Aktualisiere den Index für das nächste Bild
                 if (index == pics.length() - 1) {
                     index = 0;
                 } else {
@@ -153,27 +117,26 @@ public class GameView extends AppCompatActivity {
             }
         }
 
+        // Setze das geladene Bild in die ImageView
         image.setImageDrawable(bild);
         image.setContentDescription(pic[0].imageDescription);
 
+        // Klick-Listener für die Schaltfläche, die die Spielanleitung öffnet
         spielAnleitung.setOnClickListener(v -> {
             Intent intent = new Intent(this, SpielAnleitung.class);
             startActivity(intent);
         });
 
-
-
+        // Klick-Listener für die Schaltfläche, die zur Albumauswahl zurückführt
         goBack.setOnClickListener(v -> {
             Log.i("Status", "going to: change to AlbumChoice");
             finish();
         });
 
-        ///////////////////////////////////////////////////////////////////////////////////////////
-
+        // Initialisierung von UI-Elementen und Text Watchern für die Koordinateneingabe
         get = getIntent().getExtras();
         latitudeIn = findViewById(R.id.latitude);
         longitudeIn = findViewById(R.id.longitude);
-
 
         latitudeIn.addTextChangedListener(new TextWatcher() {
             @Override
@@ -183,7 +146,8 @@ public class GameView extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before,
-                                      int count) { }
+                                      int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -193,22 +157,24 @@ public class GameView extends AppCompatActivity {
         });
 
         longitudeIn.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count,
-                                          int after) { }
+                                          int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before,
-                                      int count) { }
+                                      int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String latitudeStr = editable.toString();
-                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
+                String longitudeStr = editable.toString();
+                Log.i("Input Coordinate", "Longitude: " + longitudeStr);
             }
         });
 
+        // Klick-Listener für die Schaltfläche, um ein neues Bild anzuzeigen
         newPic.setOnClickListener(v -> {
             Drawable bildOne = null;
             int indexOne = 0;
@@ -218,17 +184,22 @@ public class GameView extends AppCompatActivity {
                 String alb = null;
 
                 if (pics.length() != 0) {
+                    // Hole das Bild an der aktuellen Indexposition
                     pic[0] = pics.pos(indexOne);
                     alb = pic[0].album;
                 }
 
                 if (pics.length() != 0) {
                     assert alb != null;
+                    // Vergleiche das Album des Bildes mit dem ausgewählten Album
                     if (alb.equals(albumChoice)) {
+                        // Generiere eine zufällige Zahl und vergleiche sie
+                        // Generiere eine zufällige Zahl und vergleiche sie mit dem Index
                         Random random = new Random();
                         randomNumOne = random.nextInt(pics.length());
                         if (randomNumOne == indexOne) {
                             try {
+                                // Lade das neue Bild
                                 try (InputStream bildstream = getAssets().open(pic[0].filepath)) {
                                     bildOne = Drawable.createFromStream(bildstream, pic[0].picname);
                                     Log.i(GAME_VIEW, "Printed Album: " + pic[0].picname);
@@ -237,6 +208,7 @@ public class GameView extends AppCompatActivity {
                                     Log.i(GAME_VIEW, PRINT_LATITUDE + pic[0].latitude);
                                 }
 
+                                // Lösche das angezeigte Bild aus der Liste
                                 pics.deleteImage(pic[0].picname);
                                 Log.i(GAME_VIEW, "Already shown images count: " + pics.length());
                                 break;
@@ -253,6 +225,7 @@ public class GameView extends AppCompatActivity {
                         indexOne++;
                     }
                 } else {
+                    // Keine Bilder mehr zu zeigen
                     Log.i(GAME_VIEW, "No images left to show.");
                     AlertDialog.Builder allImagesSeen = new AlertDialog.Builder(this);
                     allImagesSeen.setTitle("There are no images left to show!");
@@ -265,25 +238,35 @@ public class GameView extends AppCompatActivity {
                 }
             }
 
+            // Setze das neue Bild in die ImageView
             image.setImageDrawable(bildOne);
             image.setContentDescription(pic[0].imageDescription);
 
+            // Setze die Eingabefelder für die Koordinaten zurück
             latitudeIn.setText("");
             longitudeIn.setText("");
         });
 
+        // Endgültige Referenzen für Texteingabefelder sichern
         EditText finalLatitudeIn = latitudeIn;
         EditText finalLongitudeIn = longitudeIn;
         Bundle finalGet = get;
+
+        // Klick-Listener für die Bestätigungs-Schaltfläche
         confirm.setOnClickListener(v -> {
             String latitudeStr = finalLatitudeIn.getText().toString();
             String longitudeStr = finalLongitudeIn.getText().toString();
+
+            // Überprüfen Sie, ob die eingegebenen Koordinaten gültig sind
             if (Double.parseDouble(latitudeStr) < 90
                     && Double.parseDouble(latitudeStr) > -90
                     && Double.parseDouble(longitudeStr) < 180
                     && Double.parseDouble(longitudeStr) > -180) {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
+
+                // Erstellen Sie einen Link zu OpenStreetMap mit den eingegebenen und den
+                // Bildkoordinaten
                 assert finalGet != null;
                 String posLink;
                 try {
@@ -294,39 +277,46 @@ public class GameView extends AppCompatActivity {
                 } catch (CorruptedDataException e) {
                     throw new RuntimeException(e);
                 }
+
+                // Berechnen Sie die Entfernung und erstellen Sie einen Intent für das Ergebnis
                 Intent intent = new Intent(this, ResultView.class);
                 double distance = 0;
                 try {
                     distance = Haversine.distance(Double.parseDouble(latitudeStr),
-                            Double.parseDouble(longitudeStr),(convertToDecimal(pic[0].longitude)),
+                            Double.parseDouble(longitudeStr), (convertToDecimal(pic[0].longitude)),
                             convertToDecimal((String) Objects.requireNonNull(
                                     pic[0].latitude)));
                 } catch (CorruptedDataException e) {
                     throw new RuntimeException(e);
                 }
+
+                // Fügen Sie die Daten dem Intent hinzu und starten Sie die Ergebnis-Ansicht
                 intent.putExtra("posLink", posLink);
-                int score = getScore(distance*1000);
+                int score = getScore(distance * 1000);
                 intent.putExtra("score", score);
                 intent.putExtra("distance", distance);
                 startActivity(intent);
             } else {
+                // Ungültige Eingabe, zeige eine Benachrichtigung
                 Log.d("SetTip", "Invalid input");
                 AlertDialog.Builder invalidInput = new AlertDialog.Builder(this);
                 invalidInput.setTitle("The input has the wrong format!");
                 invalidInput.setPositiveButton("OK", (dialog, id) -> dialog.dismiss());
                 invalidInput.show();
             }
-
         });
 
-        cancel.setOnClickListener(v->{
+        // Klick-Listener für die Abbruch-Schaltfläche
+        cancel.setOnClickListener(v -> {
+            // Zeige eine Bestätigungsnachricht und beende die Aktivität, wenn der Benutzer
+            // bestätigt
             AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
             shutdown.setTitle("Do you really want to shutdown the game?");
-            shutdown.setNegativeButton("YES",(dialog,id) -> {
+            shutdown.setNegativeButton("YES", (dialog, id) -> {
                 dialog.dismiss();
                 finish();
             });
-            shutdown.setPositiveButton("NO", (dialog,id) -> dialog.dismiss());
+            shutdown.setPositiveButton("NO", (dialog, id) -> dialog.dismiss());
             shutdown.show();
         });
     }
