@@ -10,27 +10,33 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Der ExifReader enthält nur eine methode, die Dazu dient, Informationen aus einer Bilddatei zu
- * gewinnen. Um welche Informationen es sich handelt ist festgelegt und an entsprechender Stelle
- * näher erklärt.
+ * Der ExifReader enthält nur eine Methode, die dazu dient, Informationen aus einer Bilddatei zu
+ * gewinnen. Die Art der Informationen, die extrahiert werden, ist festgelegt und an entsprechender
+ * Stelle näher erklärt.
  */
 class ExifReader {
 
     /**
-     * Der Konstruktor existiert nur Formal. Da nie ein ExifReader-Objekt erzeugt, sondern nur auf
-     * eine Methode zugegriffen wird hat er keine wirkliche Funktion.
+     * Der Konstruktor existiert nur formal. Da nie ein ExifReader-Objekt erzeugt wird, sondern
+     * nur auf eine Methode zugegriffen wird, hat er keine wirkliche Funktion.
      */
     protected ExifReader() {
     }
 
     /**
-     * readExif() gibt ausgewählte Metadaten aus Exif-Datei aus. Dazu bekommt er einen relativen
-     * Pfad bezüglich dem assets-Ordner übergeben. Es werden die Koordinaten und die
-     * Bildunterscgrift ausgegeben.
+     * Liest ausgewählte Metadaten aus einer Exif-Datei aus. Dazu wird ein relativer Pfad bezüglich
+     * des assets-Ordners übergeben. Die extrahierten Informationen umfassen Koordinaten und die
+     * Bildunterschrift.
+     *
+     * @param albname   Der Name des Albums, zu dem das Bild gehört.
+     * @param picname   Der Name des Bildes.
+     * @param imagePath Der relative Pfad zum Bild im assets-Ordner.
+     * @param context   Der Kontext der Anwendung.
+     * @return Eine Instanz von Images.ImageInfo, die die extrahierten Informationen enthält.
+     * @throws CorruptedDataException Wenn die Daten in der Exif-Datei korrupt oder ungültig sind.
      */
     public static Images.ImageInfo readExif(String albname, String picname, String imagePath,
                                             Context context) throws CorruptedDataException {
-
 
         Images.ImageInfo pic = null;
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
@@ -40,11 +46,10 @@ class ExifReader {
                     || exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE) != null) {
 
                 String latitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-
                 String longitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
-
                 String imageDescr = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_DESCRIPTION);
 
+                // Wenn keine Bildunterschrift vorhanden ist, wird ein Standardtext verwendet
                 if (imageDescr == null) {
                     imageDescr = "No description available";
                 }
@@ -52,16 +57,15 @@ class ExifReader {
                 Log.i("Image Path", imagePath);
 
                 String lat = "Latitude";
-
                 String lon = "Longitude";
 
                 if (latitude != null && longitude != null) {
 
                     Log.i(lat, latitude);
-
                     Log.i(lon, longitude);
 
                 } else {
+                    // Wenn keine Koordinaten vorhanden sind, wird eine Ausnahme ausgelöst
                     throw new CorruptedDataException();
                 }
 
@@ -75,14 +79,11 @@ class ExifReader {
             }
 
         } catch (IOException e) {
-
-                Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen "
-                        + "der EXIF-Daten: " + e.getMessage());
-
-            }
-
-            return pic;
-
+            // Fehlerbehandlung bei IOException beim Lesen der EXIF-Daten
+            Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen der EXIF-Daten: "
+                    + e.getMessage());
         }
 
+        return pic;
+    }
 }

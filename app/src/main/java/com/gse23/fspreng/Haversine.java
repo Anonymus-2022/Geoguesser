@@ -1,26 +1,33 @@
 package com.gse23.fspreng;
-
 /**
  * Übernommen aus GitHub:
  * https://github.com/jasonwinn/haversine/blob/master/Haversine.java
  *
  * Jason Winn
  * http://jasonwinn.org
- * Created July 10, 2013
+ * Erstellt am 10. Juli 2013
  *
- * Description: Small class that provides approximate distance between
- * two points using the Haversine formula.
+ * Beschreibung: Kleine Klasse, die die ungefähre Entfernung zwischen
+ * zwei Punkten unter Verwendung der Haversine-Formel bereitstellt.
  *
- * Call in a static context:
+ * Aufruf im statischen Kontext:
  * Haversine.distance(47.6788206, -122.3271205,
  *                    47.6788206, -122.5271205)
  * --> 14.973190481586224 [km]
- *
- *
  */
 public class Haversine {
-    private static final int EARTH_RADIUS = 6371; // Approx Earth radius in KM
+    private static final int EARTH_RADIUS = 6371; // Ungefährer Erdradius in KM
 
+    /**
+     * Berechnet die Entfernung zwischen zwei geografischen Punkten unter Verwendung
+     * der Haversine-Formel.
+     *
+     * @param startLat Die Breitengrad des Startpunkts.
+     * @param startLong Die Längengrad des Startpunkts.
+     * @param endLat Die Breitengrad des Endpunkts.
+     * @param endLong Die Längengrad des Endpunkts.
+     * @return Die Entfernung zwischen den beiden Punkten in Kilometern.
+     */
     public static double distance(double startLat, double startLong,
                                   double endLat, double endLong) {
 
@@ -36,6 +43,12 @@ public class Haversine {
         return EARTH_RADIUS * c; // <-- d
     }
 
+    /**
+     * Berechnet den Haversin-Wert eines gegebenen Winkels.
+     *
+     * @param val Der Winkel, für den der Haversin-Wert berechnet wird.
+     * @return Der Haversin-Wert des gegebenen Winkels.
+     */
     public static double haversin(double val) {
         return Math.pow(Math.sin(val / 2), 2);
     }

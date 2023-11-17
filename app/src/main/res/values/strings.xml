@@ -9,24 +9,29 @@
     <string name="choose_nalbum">Choose\nAlbum</string>
     <string name="you_choose">You choose...</string>
     <string name="back">Back</string>
-    <string name="anleitung">GSEoguessr zeigt dem Spieler nacheinander in fünf Runden jeweils ein
-        zufällig ausgewähltes Bild von Orten irgendwo auf der Erde. Der Spieler muss diese Orte
-        erraten. Diese Bilder stehen dem Spieler in Form von Alben zur Verfügung, aus denen dieser
-        vor Spielbeginn eines auswählen muss.Der Spieler muss anhand des Bildes herausfinden, wo er
-        sich befindet. Hierzu dienen landes- bzw. ortstypische Elemente (z.B. Verkehrszeichen,
-        Vegetation, Klima, Straßenpfosten,…). Es ist möglich, in das Bild hineinzuzoomen, um eine
-        detailliertere Untersuchung der Umgebung zu ermöglichen. Auf einer vergrößerbaren
-        OpenStreetMap-Karte platziert der Spieler dann einen Marker an dem Ort, wo seiner Meinung
-        nach das Bild aufgenommen wurde. Sollte der Spieler Probleme dabei haben, den realen Ort zu
-        erraten, kann er gegen Punktabzug auf Tipps zurückgreifen. Die Anzahl an Tipps ist pro Spiel
-        begrenzt. Nach Platzieren des Markers zeigt GSEoguessr den realen Aufnahmeort an und vergibt
-        zwischen 0 und 5000 Punkten, je nachdem wie weit die Schätzung des Spielers vom realen
-        Aufnahmeort des Bildes abweicht und ob Tipps verwendet wurden oder nicht. Danach wird der
-        nächste von insgesamt je fünf Orten angezeigt. Schließlich gibt es eine Gesamtauswertung, in
-        der alle Punkte addiert werden.Um die Schwierigkeit zu steigern, hat der Spieler für das
-        Erraten der Position eines Bildes nur begrenzt Zeit.</string>
-    <string name="beschreibung_f_r_barrierefreiheit">Beschreibung für Barrierefreiheit</string>
+    <string name="anleitung">
+        <b>GSEoguessr-Spielanleitung\n\n</b>
+
+        <b>Spielablauf\n</b>
+
+        GSEoguesser zeigt dem Spieler nacheinander in fünf Runden jeweils ein zufällig ausgewähltes Bild von Orten irgendwo auf der Erde. Der Spieler muss diese Orte erraten.
+
+        Diese Bilder stehen dem Spieler in Form von Alben zur Verfügung, aus denen dieser vor Spielbeginn eines auswählen muss.
+
+        Der Spieler muss anhand des Bildes herausfinden, wo er sich befindet. Hierzu dienen landes- bzw. ortstypische Elemente (z.B. Verkehrszeichen, Vegetation, Klima, Straßenpfosten,...). Es ist möglich, in das Bild hineinzuzoomen, um eine detailliertere Untersuchung der Umgebung zu ermöglichen. Auf einer vergrößerbaren OpenStreetMap-Karte platziert der Spieler dann einen Marker an dem Ort, wo seiner Meinung nach das Bild aufgenommen wurde. Sollte der Spieler Probleme dabei haben, den realen Ort zu erraten, kann er gegen Punktabzug auf Tipps zurückgreifen. Die Anzahl an Tipps ist pro Spiel begrenzt. Nach Platzieren des Markers zeigt GSEoguessr den realen Aufnahmeort an und vergibt zwischen 0 und 5000 Punkten, je nachdem wie weit die Schätzung des Spielers vom realen Aufnahmeort des Bildes abweicht und ob Tipps verwendet wurden oder nicht. Danach wird der nächste von insgesamt je fünf Orten angezeigt. Schließlich gibt es eine Gesamtauswertung, in der alle Punkte addiert werden.
+
+        Um die Schwierigkeit zu steigern, hat der Spieler für das Erraten der Position eines Bildes nur begrenzt Zeit.\n\n
+
+        <b>Multiplayer\n</b>
+
+        Der Spieler hat die Möglichkeit ein Spiel gegen andere Spieler zu spielen. Hierbei bekommen alle am Spiel beteiligten Spieler das jeweils selbe Bild angezeigt und müssen dessen Aufnahmeort erraten. Nachdem alle Spieler ihre Schätzung abgegeben haben oder die Zeit abgelaufen ist, werden die geratenen Positionen, der reale Aufnahmeort des Bildes, sowie die erreichten Punkte allen Spielern angezeigt. Am Spielende werden die Gesamtscores aller Spieler angezeigt.\n\n
+
+        <b>Allgemeines\n</b>
+
+        In den Einstellungen kann der Spieler die verwendete Scoremetrik auswählen. Außerdem kann dort die zeitliche Länge der Runden sowie die Anzahl der zur Verfügung stehenden Tipps angepasst werden. Auf der Highscoreliste können die bisher erreichten Gesamtpunktzahlen eingesehen werden.
+    </string>
     <string name="spielanleitung">Spielanleitung</string>
+    <string name="beschreibung_f_r_barrierefreiheit">Beschreibung für Barrierefreiheit</string>
     <string name="todo">TODO</string>
     <string name="make_a_guess">Make a Guess!</string>
     <string name="guess_where_the_scene_could_be">Guess, where the scene could be!</string>

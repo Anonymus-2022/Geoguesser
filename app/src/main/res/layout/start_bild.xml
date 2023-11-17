@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#020202"
+    android:background="#E0FFC0"
     android:backgroundTintMode="src_atop"
     tools:context=".StartBild">
 
@@ -13,6 +13,9 @@
         android:layout_width="150dp"
         android:layout_height="45dp"
         android:layout_marginStart="100dp"
+        android:backgroundTint="#006666"
+        android:textColor="@color/black"
+        android:fontFamily="cursive"
         android:layout_marginBottom="100dp"
         android:text="@string/spielanleitung"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,10 +29,10 @@
         android:id="@+id/album_choice"
         android:layout_width="410dp"
         android:layout_height="61dp"
-        android:backgroundTint="#52169C"
-        android:dropDownSelector="@android:drawable/arrow_down_float"
+        android:fontFamily="cursive"
+        android:textColorHint="@color/black"
         android:hint="@string/select_an_album"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,8 +42,9 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:id="@+id/albumUsage"
+        android:fontFamily="cursive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rotationX="0"
@@ -59,6 +63,9 @@
         android:id="@+id/StartGame"
         android:layout_width="163dp"
         android:layout_height="154dp"
+        android:fontFamily="cursive"
+        android:backgroundTint="#006666"
+        android:textColor="@color/black"
         android:background="@android:drawable/ic_menu_compass"
         android:text="@string/start_ngame"
         app:layout_constraintBottom_toBottomOf="parent"

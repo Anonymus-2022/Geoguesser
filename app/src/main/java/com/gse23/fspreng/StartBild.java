@@ -1,7 +1,5 @@
 package com.gse23.fspreng;
 
-//import android.content.Intent;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
