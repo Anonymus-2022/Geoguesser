@@ -17,6 +17,10 @@ package com.gse23.fspreng;
  */
 public class Haversine {
 
+    /**
+     * der konstruktor existiert nur der vollständigkeit halber, da nie ein haversine Objekt erzeugt
+     * wird.
+     */
     protected Haversine() {}
     // Ungefährer Erdradius in KM
     private static final int EARTH_RADIUS = 6371;

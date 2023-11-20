@@ -11,6 +11,9 @@ import com.gse23.fspreng.exception.CorruptedDataException;
  */
 public class CalcStuff {
 
+    /**
+     * Ein konstruktor,der nur der vollständigkeit halber existiert.
+     */
     protected CalcStuff(){}
 
     /**

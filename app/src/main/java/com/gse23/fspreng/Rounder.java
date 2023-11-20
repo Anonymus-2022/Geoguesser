@@ -5,6 +5,10 @@ package com.gse23.fspreng;
  */
 public class Rounder{
 
+    /**
+     * der konstruktor existiert nur der vollständigkeit halber, da nie ein rounder Objekt erzeugt
+     *       wird.
+     */
     protected Rounder() {}
 
     /**
@@ -13,6 +17,7 @@ public class Rounder{
      * @param number Die Zahl, welche gerundet werden soll
      * @param placeValue exemplarische zahl, die als referenzwert für die menge an Nachkommastellen
      *                   zu stehen scheint
+     * @return zurückgegeben wird die gerundete Zahl
      */
     public static double round(double number, double placeValue) {
         String temporaryNumber = "00" + number + "00";
