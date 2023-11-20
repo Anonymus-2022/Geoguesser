@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         View intro = findViewById(R.id.toAlbumChoice);
         Button spielAnleitung = findViewById(R.id.game_rules);
 
+
         try {
             GetAssetContents.get(getApplicationContext());
         } catch (EmpyAlbumException ignored) {

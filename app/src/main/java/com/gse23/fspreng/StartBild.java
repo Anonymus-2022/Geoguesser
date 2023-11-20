@@ -23,6 +23,9 @@ import java.util.List;
  * zu starten. Ist kein Album ausgewählt kann das Spiel nicht gestartet werden.
  */
 public class StartBild extends AppCompatActivity {
+    /**
+     * Tag für die Ausgabe über das logging system.
+     */
     public static final String ERROR = "Error";
     /**
      * Hier wird gespeichert, ob ein Album ausgewählt wurde.

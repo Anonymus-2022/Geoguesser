@@ -56,6 +56,7 @@ public class Images {
             this.filepath = filpa;
         }
 
+
         /**
          * Diese Methode gibt die in der Datenstruktur ImageInfo enthaltenen Daten über das
          * Logsystem aus.

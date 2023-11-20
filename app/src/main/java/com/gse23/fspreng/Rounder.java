@@ -5,6 +5,10 @@ package com.gse23.fspreng;
  */
 public class Rounder {
 
+    public static final int one = 10;
+    public static final int four = 4;
+    public static final double zeroPointFIfe = 0.5;
+
     /**
      * der konstruktor existiert nur der vollständigkeit halber, da nie ein rounder Objekt erzeugt
      * wird.
@@ -26,7 +30,7 @@ public class Rounder {
         if (placeValue == 1) {
             int truncated = (int) number;
             double decimalValue = number - truncated;
-            if (decimalValue < 0.5) {
+            if (decimalValue < zeroPointFIfe) {
                 return truncated;
             } else {
                 return truncated + 1;
@@ -35,7 +39,7 @@ public class Rounder {
         if (placeValue > 1) {
             int power = 0;
             while (placeValue > 1) {
-                placeValue = placeValue / 10;
+                placeValue = placeValue / one;
                 power++;
             }
             temporaryNumber = temporaryNumber.substring(0, (temporaryNumber.indexOf(".") - power
@@ -44,11 +48,11 @@ public class Rounder {
                     temporaryNumber.length() - 1));
             temporaryNumber = temporaryNumber.substring(0, temporaryNumber.length() - 1);
             int significantFigures = Integer.parseInt(temporaryNumber);
-            if (decidingNumber > 4) {
+            if (decidingNumber > four) {
                 significantFigures = Integer.parseInt(temporaryNumber) + 1;
             }
             for (int i = 0; i < power; i++) {
-                significantFigures = significantFigures * 10;
+                significantFigures = significantFigures * one;
             }
             return significantFigures;
         }
@@ -56,7 +60,7 @@ public class Rounder {
         if (placeValue < 1) {
             int power = 1;
             while (placeValue < 1) {
-                placeValue = placeValue * 10;
+                placeValue = placeValue * one;
                 power++;
             }
             temporaryNumber = temporaryNumber.substring(0, (temporaryNumber.indexOf(".")
@@ -65,10 +69,10 @@ public class Rounder {
                     temporaryNumber.length() - 1));
             temporaryNumber = temporaryNumber.substring(0, temporaryNumber.length() - 1);
             double significantFigures = Double.parseDouble(temporaryNumber);
-            if (decidingNumber > 4) {
+            if (decidingNumber > four) {
                 double roundingAddition = 1;
                 for (int i = 1; i < power; i++) {
-                    roundingAddition = roundingAddition / 10;
+                    roundingAddition = roundingAddition / one;
                 }
                 significantFigures += roundingAddition;
             }

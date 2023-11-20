@@ -12,13 +12,37 @@ import com.gse23.fspreng.exception.CorruptedDataException;
 public class CalcStuff {
 
     /**
+     * Menge der Punkte, die man maximal erreichen kann
+     */
+    final static int MAX_POINTS = 5000;
+    /**
+     * maximale Distanz, die bewertet wird, Ist sie größer, werden null Punkte gegeben.
+     */
+    final static double MAX_DISTANC = 10000;
+    /**
+     * Mindestdistanz; wenn man einen noch besseren Guess abgibt erhöht das die erhaltene Punktzahl
+     * nicht.
+     */
+    final static double MIN_DISTANZ = 10;
+    /**
+     * größe der Koordinaten. Indentifizierung des Formats als DMS
+     */
+    public static final int COORDINATE_SIZE = 3;
+    /**
+     * Konstante zum bBerechnen der DD aus DMS
+     */
+    public static final int MIN = 60;
+    /**
+     * Konstante zum Berechnen der DD aus DMS
+     */
+    public static final int SECS = 3600;
+
+    /**
      * Ein konstruktor,der nur der vollständigkeit halber existiert.
      */
     protected CalcStuff() {
     }
-    final static int maxPoints = 5000;
-    final static double maxDistance = 10000;
-    final static double minDistance = 10;
+
     /**
      * Berechnet den Punktestand basierend auf der Entfernung zum Ziel.
      *
@@ -29,22 +53,22 @@ public class CalcStuff {
         int result;
 
         // Überprüfen, ob die Entfernung im gültigen Bereich liegt
-        if (distance < maxDistance && distance > minDistance) {
+        if (distance < MAX_DISTANC && distance > MIN_DISTANZ) {
 
             // Berechnung der Teile für die Punkteformel
-            double partOne = log(maxDistance / minDistance);
-            double partTwo = log(maxDistance / distance);
-            double partThree = maxPoints / partOne;
+            double partOne = log(MAX_DISTANC / MIN_DISTANZ);
+            double partTwo = log(MAX_DISTANC / distance);
+            double partThree = MAX_POINTS / partOne;
 
             // Berechnung des Ergebnisses unter Berücksichtigung des Aufrundens
             result = (int) ceil(partTwo * partThree);
         } else {
             // Punktzahl ist 0, wenn die Entfernung außerhalb des gültigen Bereichs liegt
-            if (distance > maxDistance) {
+            if (distance > MAX_DISTANC) {
                 result = 0;
             } else {
                 // Maximalpunktzahl, wenn die Entfernung kleiner als 10 Meter ist
-                result = maxPoints;
+                result = MAX_POINTS;
             }
         }
 
@@ -62,13 +86,13 @@ public class CalcStuff {
         String[] parts = coordinate.split(",");
 
         // Überprüfen, ob die Koordinatenzeichenfolge ausreichend Teile hat
-        if (parts.length >= 3) {
+        if (parts.length >= COORDINATE_SIZE) {
             double degrees = Double.parseDouble(parts[0].split("/")[0]);
             double minutes = Double.parseDouble(parts[1].split("/")[0]);
             double seconds = Double.parseDouble(parts[2].split("/")[0]);
 
             // Berechnung der Koordinate im Dezimalformat
-            return degrees + (minutes / 60) + (seconds / 3600);
+            return degrees + (minutes / MIN) + (seconds / SECS);
         } else {
             // Fehler, wenn die Koordinatenzeichenfolge nicht den erwarteten Aufbau hat
             throw new CorruptedDataException();
