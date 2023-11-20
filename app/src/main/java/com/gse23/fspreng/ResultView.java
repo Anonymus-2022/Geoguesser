@@ -8,12 +8,26 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Diese Klasse dient der Darstellung der Ergebnisse des Spiels.
  */
 public class ResultView extends AppCompatActivity {
+
+
+
+    public void onBackPressed() {
+        AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
+        shutdown.setTitle("Do you really want to shutdown the game?");
+        shutdown.setNegativeButton("YES", (dialog, id) -> {
+            dialog.dismiss();
+            finish();
+        });
+        shutdown.setPositiveButton("NO", (dialog, id) -> dialog.dismiss());
+        shutdown.show();
+    }
 
 
     @SuppressLint("SetTextI18n")

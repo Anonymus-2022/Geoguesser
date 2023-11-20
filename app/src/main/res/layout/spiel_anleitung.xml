@@ -12,7 +12,7 @@
         android:id="@+id/go_back"
         android:layout_width="157dp"
         android:layout_height="42dp"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-condensed"
         android:backgroundTint="#006666"
         android:text="@string/back"
         android:textColor="@color/black"
