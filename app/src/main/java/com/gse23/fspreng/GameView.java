@@ -43,6 +43,17 @@ public class GameView extends AppCompatActivity {
     private Images pics;
     private String albumChoice;
 
+    public void onBackPressed() {
+        AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
+        shutdown.setTitle("Do you really want to shutdown the game?");
+        shutdown.setNegativeButton("YES", (dialog, id) -> {
+            dialog.dismiss();
+            finish();
+        });
+        shutdown.setPositiveButton("NO", (dialog, id) -> dialog.dismiss());
+        shutdown.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -258,11 +269,9 @@ public class GameView extends AppCompatActivity {
             String longitudeStr = finalLongitudeIn.getText().toString();
 
             // Überprüfen Sie, ob die eingegebenen Koordinaten gültig sind
-            if (Double.parseDouble(latitudeStr) < 90
-                    && Double.parseDouble(latitudeStr) > -90
-                    && Double.parseDouble(longitudeStr) < 180
-                    && Double.parseDouble(longitudeStr) > -180
-                    && latitudeIn != null && longitudeIn != null) {
+            if (latitudeStr.matches("^-?(\\d{1,2}(\\.\\d+)?|90)$")
+                    && longitudeStr.matches("^-?(\\d{1,2}(\\.\\d+)?|1[0-7]\\d(\\.\\d+)?|1"
+                    + "80)$")) {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
 
