@@ -1,7 +1,7 @@
 package com.gse23.fspreng;
 
 /**
- * Diese Klasse enthält eine aus GtHub entnommene Methode zum Runden
+ * Diese Klasse enthält eine aus GtHub entnommene Methode zum Runden.
  */
 public class Rounder {
 

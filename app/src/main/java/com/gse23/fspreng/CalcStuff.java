@@ -16,7 +16,9 @@ public class CalcStuff {
      */
     protected CalcStuff() {
     }
-
+    final static int maxPoints = 5000;
+    final static double maxDistance = 10000;
+    final static double minDistance = 10;
     /**
      * Berechnet den Punktestand basierend auf der Entfernung zum Ziel.
      *
@@ -27,10 +29,7 @@ public class CalcStuff {
         int result;
 
         // Überprüfen, ob die Entfernung im gültigen Bereich liegt
-        if (distance < 10000 && distance > 10) {
-            final int maxPoints = 5000;
-            final double maxDistance = 10000;
-            final double minDistance = 10;
+        if (distance < maxDistance && distance > minDistance) {
 
             // Berechnung der Teile für die Punkteformel
             double partOne = log(maxDistance / minDistance);
@@ -41,11 +40,11 @@ public class CalcStuff {
             result = (int) ceil(partTwo * partThree);
         } else {
             // Punktzahl ist 0, wenn die Entfernung außerhalb des gültigen Bereichs liegt
-            if (distance > 10000) {
+            if (distance > maxDistance) {
                 result = 0;
             } else {
                 // Maximalpunktzahl, wenn die Entfernung kleiner als 10 Meter ist
-                result = 5000;
+                result = maxPoints;
             }
         }
 

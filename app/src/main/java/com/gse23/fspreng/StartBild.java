@@ -23,6 +23,7 @@ import java.util.List;
  * zu starten. Ist kein Album ausgewählt kann das Spiel nicht gestartet werden.
  */
 public class StartBild extends AppCompatActivity {
+    public static final String ERROR = "Error";
     /**
      * Hier wird gespeichert, ob ein Album ausgewählt wurde.
      */
@@ -42,7 +43,7 @@ public class StartBild extends AppCompatActivity {
         try {
             inAssets = getAssets().list("albums");
         } catch (IOException e) {
-            Log.e("Error", "Error listing albums: " + e.getMessage());
+            Log.e(ERROR, "Error listing albums: " + e.getMessage());
         }
 
         assert inAssets != null;
@@ -53,7 +54,8 @@ public class StartBild extends AppCompatActivity {
         transfer[0] = "Choose an Album!";
         System.arraycopy(albumsWithImages, 0, transfer, 1, albumsWithImages.length);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, transfer);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, transfer);
         albumChoice.setAdapter(adapter);
 
         albumChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -117,7 +119,7 @@ public class StartBild extends AppCompatActivity {
             Images images = GetAssetContents.get(getApplicationContext(), albumName);
             return !images.emptyAlbum(albumName);
         } catch (EmpyAlbumException | IOException e) {
-            Log.e("Error", "Error checking album: " + albumName);
+            Log.e(ERROR, "Error checking album: " + albumName);
             // Im Fehlerfall nehmen wir an, dass das Album leer ist
             return false;
         }

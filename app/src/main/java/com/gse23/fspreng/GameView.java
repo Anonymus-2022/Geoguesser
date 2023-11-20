@@ -45,6 +45,10 @@ public class GameView extends AppCompatActivity {
     private Images pics;
     private String albumChoice;
 
+
+    /**
+     * Legt fest was passieren soll, wenn der zurück-Button gedrückt wird.
+     */
     public void onBackPressed() {
         AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
         shutdown.setTitle("Do you really want to shutdown the game?");

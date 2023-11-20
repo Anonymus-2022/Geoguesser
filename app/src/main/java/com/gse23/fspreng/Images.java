@@ -47,9 +47,18 @@ public class Images {
         String filepath;
 
 
+        ImageInfo(String album, String picname, double lon, double lat, String imd, String filpa) {
+            this.album = album;
+            this.picname = picname;
+            this.longitude = lon;
+            this.latitude = lat;
+            this.imageDescription = imd;
+            this.filepath = filpa;
+        }
+
         /**
          * Diese Methode gibt die in der Datenstruktur ImageInfo enthaltenen Daten über das
-         * Logsystem aus
+         * Logsystem aus.
          *
          * @param pic Übergeben wird der Methode ein ImageInfo-Objekt
          */
@@ -60,15 +69,6 @@ public class Images {
             Log.i("Filepath", pic.filepath);
             Log.i("Breitengrad", String.valueOf(pic.latitude));
             Log.i("Längengrad", String.valueOf(pic.longitude));
-        }
-
-        ImageInfo(String album, String picname, double lon, double lat, String imd, String filpa) {
-            this.album = album;
-            this.picname = picname;
-            this.longitude = lon;
-            this.latitude = lat;
-            this.imageDescription = imd;
-            this.filepath = filpa;
         }
     }
 
