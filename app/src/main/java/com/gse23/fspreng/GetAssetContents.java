@@ -123,6 +123,11 @@ public class GetAssetContents {
         return pictures;
     }
 
+    /**
+     * Die se Methode prüft, ob ein Album, welches nicht leer ist, Bilder beinhält.
+     * @param files der input ist ein array von strings. die die Dateinamen darstellen.
+     * @return falls dass Album Bilder enthält wird true zurückgegeben, ansonsten false.
+     */
     public static boolean containsImages(String[] files) {
         for (String file : files) {
             if (file != null && (file.matches(JPG) || file.matches(JPEG) || file.matches(PNG))) {

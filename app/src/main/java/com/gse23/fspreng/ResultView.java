@@ -9,14 +9,13 @@ import android.util.Log;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-
+/**
+ * Diese Klasse dient der Darstellung der Ergebnisse des Spiels.
+ */
 public class ResultView extends AppCompatActivity {
 
 
-    /**
-     * Übernommen aus GitHub:
-     * <a href="https://github.com/MichaelFarid/Rounding/blob/master/Rounding.java">...</a>
-     */
+
 
     @SuppressLint("SetTextI18n")
     protected void onCreate(Bundle savedInstanceState) {

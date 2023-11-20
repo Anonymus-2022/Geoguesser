@@ -1,7 +1,17 @@
 package com.gse23.fspreng;
 
+/**
+ * Diese Klasse enthält eine aus GtHub entnommene Methode zum Runden
+ */
 public class Rounder {
 
+    /**
+     * Übernommen aus GitHub:
+     * <a href="https://github.com/MichaelFarid/Rounding/blob/master/Rounding.java">...</a>
+     * @param number Die Zahl, welche gerundet werden soll
+     * @param placeValue exemplarische zahl, die als referenzwert für die menge an Nachkommastellen
+     *                   zu stehen scheint
+     */
     public static double round(double number, double placeValue)
     {
         String temporaryNumber = "00" + number + "00";
