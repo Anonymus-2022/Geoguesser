@@ -16,11 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gse23.fspreng.exception.CorruptedDataException;
 import com.gse23.fspreng.exception.EmpyAlbumException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 import java.util.Random;
 
 /**

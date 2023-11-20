@@ -16,7 +16,10 @@ package com.gse23.fspreng;
  * --> 14.973190481586224 [km]
  */
 public class Haversine {
-    private static final int EARTH_RADIUS = 6371; // Ungefährer Erdradius in KM
+
+    protected Haversine() {}
+    // Ungefährer Erdradius in KM
+    private static final int EARTH_RADIUS = 6371;
 
     /**
      * Berechnet die Entfernung zwischen zwei geografischen Punkten unter Verwendung
@@ -40,7 +43,8 @@ public class Haversine {
         double a = haversin(dLat) + Math.cos(startLat) * Math.cos(endLat) * haversin(dLong);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return EARTH_RADIUS * c; // <-- d
+        // <-- d
+        return EARTH_RADIUS * c;
     }
 
     /**

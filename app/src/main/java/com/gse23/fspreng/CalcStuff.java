@@ -11,6 +11,8 @@ import com.gse23.fspreng.exception.CorruptedDataException;
  */
 public class CalcStuff {
 
+    protected CalcStuff(){}
+
     /**
      * Berechnet den Punktestand basierend auf der Entfernung zum Ziel.
      *
@@ -27,12 +29,12 @@ public class CalcStuff {
             final double minDistance = 10;
 
             // Berechnung der Teile für die Punkteformel
-            double part1 = log(maxDistance / minDistance);
-            double part2 = log(maxDistance / distance);
-            double part3 = maxPoints / part1;
+            double partOne = log(maxDistance / minDistance);
+            double partTwo = log(maxDistance / distance);
+            double partThree = maxPoints / partOne;
 
             // Berechnung des Ergebnisses unter Berücksichtigung des Aufrundens
-            result = (int) ceil(part2 + part1);
+            result = (int) ceil(partTwo * partThree);
         } else {
             // Punktzahl ist 0, wenn die Entfernung außerhalb des gültigen Bereichs liegt
             if (distance > 10000) {

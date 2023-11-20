@@ -141,14 +141,14 @@ public class GetAssetContents {
 
     /**
      * Die Funktion erzeugt ein Images-Objekt, indem es iterativ die existierenden Bilder findet
-     * und mit dem ExifReader ein ImagesInfo-Objekt erzeugt, welches dann zu Images geaddet werden
-     * kann.
+     *      und mit dem ExifReader ein ImagesInfo-Objekt erzeugt, welches dann zu Images geaddet werden
+     *      kann.
      *
      * @param context   es handelt sich hier um den Context der aufrufenden Activity, meist übergeben
      *                  in der Form getApplicationContext()
      * @param albumWish gibt an, aus welchem Ordner die Bilder ausgelesen werden sollen
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
-     * (sofern vorhanden) des angegebenen Ordners speichert
+     *      (sofern vorhanden) des angegebenen Ordners speichert
      * @throws IOException        das sollte wohl etwas bedeuten
      * @throws EmpyAlbumException das sollte wohl was bedeuten
      */

@@ -122,7 +122,8 @@ public class StartBild extends AppCompatActivity {
             return !images.emptyAlbum(albumName);
         } catch (EmpyAlbumException | IOException e) {
             Log.e("Error", "Error checking album: " + albumName);
-            return false; // Im Fehlerfall nehmen wir an, dass das Album leer ist
+            // Im Fehlerfall nehmen wir an, dass das Album leer ist
+            return false;
         }
     }
 }
