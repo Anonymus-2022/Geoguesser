@@ -132,6 +132,8 @@ public class GetAssetContents {
         return false;
     }
 
+
+
     /**
      * Die Funktion erzeugt ein Images-Objekt, indem es iterativ die existierenden Bilder findet
      * und mit dem ExifReader ein ImagesInfo-Objekt erzeugt, welches dann zu Images geaddet werden
@@ -178,7 +180,8 @@ public class GetAssetContents {
                                     context));
                             Log.i(bilder, ADDED_TO_IMAGES);
                         } catch (CorruptedDataException e) {
-                            Log.e("CorruptedDataException", "GetAssetContent, line 106: " + e.getMessage());
+                            Log.e("CorruptedDataException", "GetAssetContent, line 106: "
+                                    + e.getMessage());
                         }
                     } else {
                         Log.i(bilder, DIE_DATEI_IST_KEINE_JPG_DATEI);
@@ -186,7 +189,8 @@ public class GetAssetContents {
                 }
             } else {
                 if (unterordner == null && unterordner.equals(albumWish)) {
-                    Log.e("EmpyAlbumException", "Unterordner ist null und entspricht dem angegebenen Album");
+                    Log.e("EmpyAlbumException", "Unterordner ist null und entspricht dem"
+                            + " angegebenen Album");
                     throw new EmpyAlbumException();
                 }
             }

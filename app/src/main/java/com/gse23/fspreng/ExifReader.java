@@ -16,6 +16,14 @@ import java.io.InputStream;
  */
 class ExifReader {
 
+
+    public static boolean isValidKoordinate(String coordinate) {
+        String coordinateRegex = "^(\\d+)/(\\d+),(\\d+)/(\\d+),(\\d+)/(\\d+)$";
+        // Die Koordinate entspricht dem erwarteten Format
+        // Die Koordinate entspricht nicht dem erwarteten Format
+        return coordinate != null && coordinate.matches(coordinateRegex);
+    }
+
     /**
      * Der Konstruktor existiert nur formal. Da nie ein ExifReader-Objekt erzeugt wird, sondern
      * nur auf eine Methode zugegriffen wird, hat er keine wirkliche Funktion.
@@ -42,8 +50,8 @@ class ExifReader {
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
-            if (exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE) != null
-                    || exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE) != null) {
+            if (isValidKoordinate((String) exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE))
+                    || isValidKoordinate((String) exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE))) {
 
                 String latitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
                 String longitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
@@ -68,7 +76,7 @@ class ExifReader {
 
             }
 
-        } catch (IOException e) {
+        } catch (CorruptedDataException  |IOException e) {
             // Fehlerbehandlung bei IOException beim Lesen der EXIF-Daten
             Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen der EXIF-Daten: "
                     + e.getMessage());

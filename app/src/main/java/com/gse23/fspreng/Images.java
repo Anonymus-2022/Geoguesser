@@ -109,8 +109,9 @@ public class Images {
      */
     public boolean emptyAlbum(String alb) {
         boolean isEmpty = true;
-        for (ImageInfo x: infos) {
-            if (x.album.equals(alb)) {
+        for (ImageInfo x : infos) {
+            // Überprüfe, ob das ImageInfo-Objekt nicht null ist und das Album übereinstimmt
+            if (x != null && x.album.equals(alb)) {
                 isEmpty = false;
                 break;
             }
