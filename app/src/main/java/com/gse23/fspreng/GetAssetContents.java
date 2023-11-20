@@ -86,25 +86,31 @@ public class GetAssetContents {
                             + unterordner);
 
                     assert ordnerMitBildern != null;
-                    for (String bilder : ordnerMitBildern) {
-                        if (bilder != null) {
-                            Log.i(alb + "/" + unterordner, msg + bilder);
-                        } else {
-                            Log.i(alb + "/" + unterordner, IST_LEER);
-                        }
-                        String imagePath = alb + "/" + unterordner + "/" + bilder;
+                    if (containsImages(ordnerMitBildern)) {
+                        // Prüfe, ob der Ordner Bilder enthält
+                        for (String bilder : ordnerMitBildern) {
+                            if (bilder != null) {
+                                Log.i(alb + "/" + unterordner, msg + bilder);
+                            } else {
+                                Log.i(alb + "/" + unterordner, IST_LEER);
+                            }
+                            String imagePath = alb + "/" + unterordner + "/" + bilder;
 
-                        assert bilder != null;
-                        if (bilder.matches(JPG)
-                                || bilder.matches(JPEG)
-                                || bilder.matches(PNG)) {
-                            Log.i(bilder, DIE_DATEI_IST_EINE_JPG_PNG_JPEG_DATEI);
-                            Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
-                                    context));
-                            Log.i(bilder, ADDED_TO_IMAGES);
-                        } else {
-                            Log.i(bilder, DIE_DATEI_IST_KEINE_JPG_DATEI);
+                            assert bilder != null;
+                            if (bilder.matches(JPG)
+                                    || bilder.matches(JPEG)
+                                    || bilder.matches(PNG)) {
+                                Log.i(bilder, DIE_DATEI_IST_EINE_JPG_PNG_JPEG_DATEI);
+                                Images.addImage(ExifReader.readExif(unterordner, bilder, imagePath,
+                                        context));
+                                Log.i(bilder, ADDED_TO_IMAGES);
+                            } else {
+                                Log.i(bilder, DIE_DATEI_IST_KEINE_JPG_DATEI);
+                            }
                         }
+                    } else {
+                        // Ignoriere Alben ohne Bilder
+                        Log.i(alb + "/" + unterordner, "Das Album enthält keine Bilder.");
                     }
                 } else {
                     throw new EmpyAlbumException();
@@ -115,6 +121,15 @@ public class GetAssetContents {
                     + "Dateien/Verzeichnissen in /albums: " + e.getMessage());
         }
         return pictures;
+    }
+
+    public static boolean containsImages(String[] files) {
+        for (String file : files) {
+            if (file != null && (file.matches(JPG) || file.matches(JPEG) || file.matches(PNG))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

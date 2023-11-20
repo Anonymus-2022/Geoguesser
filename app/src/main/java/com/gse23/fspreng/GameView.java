@@ -1,6 +1,5 @@
 package com.gse23.fspreng;
 
-import static com.gse23.fspreng.CalcStuff.convertToDecimal;
 import static com.gse23.fspreng.CalcStuff.getScore;
 
 import android.content.Intent;
@@ -66,6 +65,7 @@ public class GameView extends AppCompatActivity {
         String choosenAlbum = "AlbumChoice";
         albumChoice = getIntent().getStringExtra(choosenAlbum);
         albChoice.setText(albumChoice);
+        Log.i("Choosen Album: ", albumChoice);
 
         try {
             // Lade die Bilder aus dem ausgewählten Album
@@ -138,6 +138,7 @@ public class GameView extends AppCompatActivity {
         latitudeIn = findViewById(R.id.latitude);
         longitudeIn = findViewById(R.id.longitude);
 
+
         latitudeIn.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count,
@@ -155,6 +156,7 @@ public class GameView extends AppCompatActivity {
                 Log.i("Input Coordinate", "Latitude: " + latitudeStr);
             }
         });
+
 
         longitudeIn.addTextChangedListener(new TextWatcher() {
             @Override
@@ -243,8 +245,8 @@ public class GameView extends AppCompatActivity {
             image.setContentDescription(pic[0].imageDescription);
 
             // Setze die Eingabefelder für die Koordinaten zurück
-            latitudeIn.setText("");
-            longitudeIn.setText("");
+            latitudeIn.setText(null);
+            longitudeIn.setText(null);
         });
 
         // Endgültige Referenzen für Texteingabefelder sichern
@@ -261,7 +263,8 @@ public class GameView extends AppCompatActivity {
             if (Double.parseDouble(latitudeStr) < 90
                     && Double.parseDouble(latitudeStr) > -90
                     && Double.parseDouble(longitudeStr) < 180
-                    && Double.parseDouble(longitudeStr) > -180) {
+                    && Double.parseDouble(longitudeStr) > -180
+                    && latitudeIn != null && longitudeIn != null) {
                 Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
                         + longitudeStr);
 
@@ -269,26 +272,18 @@ public class GameView extends AppCompatActivity {
                 // Bildkoordinaten
                 assert finalGet != null;
                 String posLink;
-                try {
-                    posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
-                            + "foot&route=" + longitudeStr + "," + latitudeStr + ";"
-                            + convertToDecimal(pic[0].longitude) + ","
-                            + convertToDecimal(pic[0].latitude);
-                } catch (CorruptedDataException e) {
-                    throw new RuntimeException(e);
-                }
+                Images.ImageInfo.logChoosenPic(pic[0]);
+                posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
+                        + "foot&route=" + latitudeStr + "," + longitudeStr + ";"
+                        + pic[0].latitude + ","
+                        + pic[0].longitude;
 
                 // Berechnen Sie die Entfernung und erstellen Sie einen Intent für das Ergebnis
                 Intent intent = new Intent(this, ResultView.class);
                 double distance = 0;
-                try {
-                    distance = Haversine.distance(Double.parseDouble(latitudeStr),
-                            Double.parseDouble(longitudeStr), (convertToDecimal(pic[0].longitude)),
-                            convertToDecimal((String) Objects.requireNonNull(
-                                    pic[0].latitude)));
-                } catch (CorruptedDataException e) {
-                    throw new RuntimeException(e);
-                }
+                distance = Haversine.distance(Double.parseDouble(latitudeStr),
+                        Double.parseDouble(longitudeStr), (pic[0].longitude),
+                        (pic[0].latitude));
 
                 // Fügen Sie die Daten dem Intent hinzu und starten Sie die Ergebnis-Ansicht
                 intent.putExtra("posLink", posLink);

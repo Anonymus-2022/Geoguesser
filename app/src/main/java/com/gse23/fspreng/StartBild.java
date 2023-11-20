@@ -12,7 +12,11 @@ import android.widget.Spinner;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gse23.fspreng.exception.EmpyAlbumException;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Hier bekommt der Nutzer die Möglichkeit, ein Album von Bildern auszuwählen und danach das Spiel
@@ -22,7 +26,7 @@ public class StartBild extends AppCompatActivity {
     /**
      * Hier wird gespeichert, ob ein Album ausgewählt wurde.
      */
-    boolean albumChoosen = false;
+    boolean albumChosen = false;
     private String selectedAlbum = null;
 
     @Override
@@ -38,17 +42,16 @@ public class StartBild extends AppCompatActivity {
         try {
             inAssets = getAssets().list("albums");
         } catch (IOException e) {
-            Log.i("error", "ijdoösh");
+            Log.e("Error", "Error listing albums: " + e.getMessage());
         }
 
         assert inAssets != null;
-        String[] transfer = new String[inAssets.length + 1];
+        // Filtere Alben ohne Bilder heraus
+        String[] albumsWithImages = filterAlbumsWithImages(inAssets);
+
+        String[] transfer = new String[albumsWithImages.length + 1];
         transfer[0] = "Choose an Album!";
-        int index = 0;
-        for (String x: inAssets) {
-            index++;
-            transfer[index] = x;
-        }
+        System.arraycopy(albumsWithImages, 0, transfer, 1, albumsWithImages.length);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
@@ -60,14 +63,18 @@ public class StartBild extends AppCompatActivity {
         albumChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                albumChoosen = true;
+                albumChosen = true;
                 selectedAlbum = albumChoice.getSelectedItem().toString();
                 Log.i("Ausgewähltes Album", selectedAlbum);
+                // Aktiviere die Schaltfläche "Start Game" wenn ein Album ausgewählt wurde
+                startGame.setEnabled(true);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Log.i("Kein Element gewählt", "Kein Element wurde ausgewählt");
+                // Deaktiviere die Schaltfläche "Start Game", wenn kein Album ausgewählt wurde
+                startGame.setEnabled(false);
             }
         });
 
@@ -77,13 +84,45 @@ public class StartBild extends AppCompatActivity {
         });
 
         startGame.setOnClickListener(v -> {
-            if (albumChoosen && !selectedAlbum.equals(transfer[0])) {
+            if (albumChosen && !selectedAlbum.equals(transfer[0])) {
                 Intent intent = new Intent(this, GameView.class);
                 intent.putExtra("AlbumChoice", selectedAlbum);
                 startActivity(intent);
             }
         });
+    }
 
+    /**
+     * Filtert Alben ohne Bilder heraus.
+     *
+     * @param albums Die Liste der Alben.
+     * @return Eine Liste der Alben, die Bilder enthalten.
+     */
+    private String[] filterAlbumsWithImages(String[] albums) {
+        List<String> albumsWithImages = new ArrayList<>();
 
+        for (String album : albums) {
+            if (containsImages(album)) {
+                albumsWithImages.add(album);
+            }
+        }
+
+        return albumsWithImages.toArray(new String[0]);
+    }
+
+    /**
+     * Überprüft, ob ein Album Bilder enthält.
+     *
+     * @param albumName Der Name des Albums.
+     * @return True, wenn das Album Bilder enthält, sonst False.
+     */
+    private boolean containsImages(String albumName) {
+        try {
+            Images images = GetAssetContents.get(getApplicationContext(), albumName);
+            return !images.emptyAlbum(albumName);
+        } catch (EmpyAlbumException | IOException e) {
+            Log.e("Error", "Error checking album: " + albumName);
+            return false; // Im Fehlerfall nehmen wir an, dass das Album leer ist
+        }
     }
 }

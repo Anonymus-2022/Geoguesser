@@ -54,27 +54,17 @@ class ExifReader {
                     imageDescr = "No description available";
                 }
 
-                Log.i("Image Path", imagePath);
+                if (latitude == null || longitude == null) {
 
-                String lat = "Latitude";
-                String lon = "Longitude";
-
-                if (latitude != null && longitude != null) {
-
-                    Log.i(lat, latitude);
-                    Log.i(lon, longitude);
-
-                } else {
                     // Wenn keine Koordinaten vorhanden sind, wird eine Ausnahme ausgelöst
                     throw new CorruptedDataException();
                 }
 
-                String imD = "Image Description";
-                Log.i(imD, imageDescr);
-
                 Log.i("Album", albname);
-                pic = new Images.ImageInfo(albname, picname, longitude, latitude, imageDescr,
+                pic = new Images.ImageInfo(albname, picname, CalcStuff.convertToDecimal(longitude),
+                        CalcStuff.convertToDecimal(latitude), imageDescr,
                         imagePath);
+                Images.ImageInfo.logChoosenPic(pic);
 
             }
 

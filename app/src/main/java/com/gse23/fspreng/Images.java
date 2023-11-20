@@ -32,11 +32,11 @@ public class Images {
         /**
          * Speichert den längengrad des Aufnameortes.
          */
-        String longitude;
+        double longitude;
         /**
          * Speichert den längengrad des Aufnameortes.
          */
-        String latitude;
+        double latitude;
         /**
          * Speichert die Bildunterschrift.
          */
@@ -46,8 +46,16 @@ public class Images {
          */
         String filepath;
 
+        public static void logChoosenPic(ImageInfo pic){
+            Log.i("Filename", pic.picname);
+            Log.i("Is in Album", pic.album);
+            Log.i("Image Description", pic.imageDescription);
+            Log.i("Filepath", pic.filepath);
+            Log.i("Breitengrad", String.valueOf(pic.latitude));
+            Log.i("Längengrad", String.valueOf(pic.longitude));
+        }
 
-        ImageInfo(String album, String picname, String lon, String lat, String imd, String filpa) {
+        ImageInfo(String album, String picname, double lon, double lat, String imd, String filpa) {
             this.album = album;
             this.picname = picname;
             this.longitude = lon;
