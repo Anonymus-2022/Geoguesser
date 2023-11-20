@@ -5,7 +5,9 @@ import android.content.Context;
 import androidx.exifinterface.media.ExifInterface;
 
 import android.util.Log;
+
 import com.gse23.fspreng.exception.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -50,8 +52,8 @@ class ExifReader {
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
-            if (isValidKoordinate((String) exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE))
-                    || isValidKoordinate((String) exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE))) {
+            if (isValidKoordinate(exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE))
+                    || isValidKoordinate(exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE))) {
 
                 String latitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
                 String longitude = exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
@@ -76,7 +78,7 @@ class ExifReader {
 
             }
 
-        } catch (CorruptedDataException  |IOException e) {
+        } catch (CorruptedDataException | IOException e) {
             // Fehlerbehandlung bei IOException beim Lesen der EXIF-Daten
             Log.e(imagePath + "/" + "ExifReader", "Fehler beim Lesen der EXIF-Daten: "
                     + e.getMessage());

@@ -5,6 +5,7 @@ import static com.gse23.fspreng.CalcStuff.getScore;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gse23.fspreng.exception.EmpyAlbumException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;

@@ -53,11 +53,7 @@ public class StartBild extends AppCompatActivity {
         transfer[0] = "Choose an Album!";
         System.arraycopy(albumsWithImages, 0, transfer, 1, albumsWithImages.length);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-                transfer
-        );
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, transfer);
         albumChoice.setAdapter(adapter);
 
         albumChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

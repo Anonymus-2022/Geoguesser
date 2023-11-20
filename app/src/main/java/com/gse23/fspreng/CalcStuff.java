@@ -14,7 +14,8 @@ public class CalcStuff {
     /**
      * Ein konstruktor,der nur der vollständigkeit halber existiert.
      */
-    protected CalcStuff(){}
+    protected CalcStuff() {
+    }
 
     /**
      * Berechnet den Punktestand basierend auf der Entfernung zum Ziel.

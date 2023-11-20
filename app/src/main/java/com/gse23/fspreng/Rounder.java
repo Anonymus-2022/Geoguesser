@@ -3,18 +3,20 @@ package com.gse23.fspreng;
 /**
  * Diese Klasse enthält eine aus GtHub entnommene Methode zum Runden
  */
-public class Rounder{
+public class Rounder {
 
     /**
      * der konstruktor existiert nur der vollständigkeit halber, da nie ein rounder Objekt erzeugt
-     *       wird.
+     * wird.
      */
-    protected Rounder() {}
+    protected Rounder() {
+    }
 
     /**
      * Übernommen aus GitHub:
      * <a href="https://github.com/MichaelFarid/Rounding/blob/master/Rounding.java">...</a>
-     * @param number Die Zahl, welche gerundet werden soll
+     *
+     * @param number     Die Zahl, welche gerundet werden soll
      * @param placeValue exemplarische zahl, die als referenzwert für die menge an Nachkommastellen
      *                   zu stehen scheint
      * @return zurückgegeben wird die gerundete Zahl

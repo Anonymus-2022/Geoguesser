@@ -50,9 +50,10 @@ public class Images {
         /**
          * Diese Methode gibt die in der Datenstruktur ImageInfo enthaltenen Daten über das
          * Logsystem aus
+         *
          * @param pic Übergeben wird der Methode ein ImageInfo-Objekt
          */
-        public static void logChoosenPic(ImageInfo pic){
+        public static void logChoosenPic(ImageInfo pic) {
             Log.i("Filename", pic.picname);
             Log.i("Is in Album", pic.album);
             Log.i("Image Description", pic.imageDescription);
@@ -79,6 +80,7 @@ public class Images {
 
     /**
      * Die methode addImage() fügt ein Bild zu der ArrayList infos hinzu.
+     *
      * @param pic übergeben bekommt diese Methode ein ImageInfo-Objekt.
      */
     public static void addImage(ImageInfo pic) {
@@ -87,6 +89,7 @@ public class Images {
 
     /**
      * Diese Metode gibt die Größe bzgl. der Menge an Einträgen des Images-Objektes zurück.
+     *
      * @return die Ausgabe ist ein Integerwert der die Menge an Elementen in der ArryList darstellt.
      */
     public int length() {
@@ -96,8 +99,9 @@ public class Images {
 
     /**
      * löscht ein ImageInfo-Objekt element aus dem referenzierten Images-Objekt.
+     *
      * @param picname ist der name des Bildes, das gelöscht werden soll. Da durch werden auch
-     *               doppelte b.z.w. mehrfach forkommende Bilder entfernt
+     *                doppelte b.z.w. mehrfach forkommende Bilder entfernt
      */
     public void deleteImage(String picname) {
         int index;
@@ -110,6 +114,7 @@ public class Images {
 
     /**
      * Die Methode prüft, ob das angegebene Album Bilder enthölt.
+     *
      * @param alb ist der Name des Albums, welches auf Leerheit geprüft werden soll
      * @return falls das Album leer ist wird true zurückgegeben, ansonsten false
      */
@@ -128,13 +133,13 @@ public class Images {
     /**
      * Diese Methode erlaubt es, sich ein ImageInfo-Objekt an einer ganz bestimmten Stelle in Images
      * ausgeben  zu lassen.
+     *
      * @param pos Übergeben wird dazu ein Index zwischen 0 und infos.length()-1
      * @return zurückgegeben wird hier ein ImageInfo-Objekt.
      */
     public ImageInfo pos(int pos) {
         return infos.get(pos);
     }
-
 
 
 }
