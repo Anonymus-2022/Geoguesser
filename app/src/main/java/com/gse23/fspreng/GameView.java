@@ -46,7 +46,7 @@ public class GameView extends AppCompatActivity {
     /**
      * Doppelpunkt.
      */
-    public static final String DIES_IST_EIN_DOPPELPUNKT = ": ";
+     static final String DIES_IST_EIN_DOPPELPUNKT = ": ";
     /**
      * Die Konstante für die Ausgabe der Breiten-Koordinate.
      */
