@@ -33,15 +33,41 @@ public class GameView extends AppCompatActivity {
     /**
      * Der Tag für Log-Nachrichten, der anzeigt, aus welcher Klasse die Nachricht kommt.
      */
-    public static final String GAME_VIEW = "GameView";
+    static final String GAME_VIEW = "GameView";
     /**
      * Die Konstante für die Ausgabe der Längen-Koordinate.
      */
-    public static final String PRINT_LONGITUDE = "Print Longitude: ";
+    static final String PRINT_LONGITUDE = "Print Longitude: ";
+    /**
+     * Message zum loggen.
+     */
+    static final String LATITUDE = "Latitude";
+
     /**
      * Die Konstante für die Ausgabe der Breiten-Koordinate.
      */
-    public static final String PRINT_LATITUDE = "Print Latitude: ";
+    static final String PRINT_LATITUDE = "Print " + LATITUDE + ": ";
+
+    /**
+     * Konstante, welche zur Berechnung gebraucht wird.
+     */
+    static final int TAUSEND = 1000;
+    /**
+     * Die aufschrift eines Buttens im AlertDialog.
+     */
+    static final String YES = "YES";
+    /**
+     * Die aufschrift eines Buttens im AlertDialog.
+     */
+    static final String NO = "NO";
+    /**
+     * Zum loggen.
+     */
+    static final String INPUT_COORDINATE = "Input Coordinate";
+    /**
+     * Komma.
+     */
+    static final String AN_DIESER_STELLE_STEHT_EIN_KOMMA = ",";
     private Images pics;
     private String albumChoice;
 
@@ -52,11 +78,11 @@ public class GameView extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
         shutdown.setTitle("Do you really want to shutdown the game?");
-        shutdown.setNegativeButton("YES", (dialog, id) -> {
+        shutdown.setNegativeButton(YES, (dialog, id) -> {
             dialog.dismiss();
             finish();
         });
-        shutdown.setPositiveButton("NO", (dialog, id) -> dialog.dismiss());
+        shutdown.setPositiveButton(NO, (dialog, id) -> dialog.dismiss());
         shutdown.show();
     }
 
@@ -168,7 +194,7 @@ public class GameView extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 String latitudeStr = editable.toString();
-                Log.i("Input Coordinate", "Latitude: " + latitudeStr);
+                Log.i(INPUT_COORDINATE, LATITUDE + ": " + latitudeStr);
             }
         });
 
@@ -187,7 +213,7 @@ public class GameView extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 String longitudeStr = editable.toString();
-                Log.i("Input Coordinate", "Longitude: " + longitudeStr);
+                Log.i(INPUT_COORDINATE, "Longitude: " + longitudeStr);
             }
         });
 
@@ -278,7 +304,7 @@ public class GameView extends AppCompatActivity {
             if (latitudeStr.matches("^-?(\\d{1,2}(\\.\\d+)?|90)$")
                     && longitudeStr.matches("^-?(\\d{1,2}(\\.\\d+)?|1[0-7]\\d(\\.\\d+)?|1"
                     + "80)$")) {
-                Log.d("Entered Coordinates", "Latitude: " + latitudeStr + ", Longitude: "
+                Log.d("Entered Coordinates", LATITUDE + ": " + latitudeStr + ", Longitude: "
                         + longitudeStr);
 
                 // Erstellen Sie einen Link zu OpenStreetMap mit den eingegebenen und den
@@ -287,8 +313,9 @@ public class GameView extends AppCompatActivity {
                 String posLink;
                 ImageInfo.logChoosenPic(pic[0]);
                 posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
-                        + "foot&route=" + latitudeStr + "," + longitudeStr + ";"
-                        + pic[0].latitude + ","
+                        + "foot&route=" + latitudeStr + AN_DIESER_STELLE_STEHT_EIN_KOMMA
+                        + longitudeStr + ";"
+                        + pic[0].latitude + AN_DIESER_STELLE_STEHT_EIN_KOMMA
                         + pic[0].longitude;
 
                 // Berechnen Sie die Entfernung und erstellen Sie einen Intent für das Ergebnis
@@ -300,7 +327,7 @@ public class GameView extends AppCompatActivity {
 
                 // Fügen Sie die Daten dem Intent hinzu und starten Sie die Ergebnis-Ansicht
                 intent.putExtra("posLink", posLink);
-                int score = getScore(distance * 1000);
+                int score = getScore(distance * TAUSEND);
                 intent.putExtra("score", score);
                 intent.putExtra("distance", distance);
                 startActivity(intent);
@@ -315,17 +342,17 @@ public class GameView extends AppCompatActivity {
         });
 
         // Klick-Listener für die Abbruch-Schaltfläche
-        cancel.setOnClickListener(v -> {
-            // Zeige eine Bestätigungsnachricht und beende die Aktivität, wenn der Benutzer
-            // bestätigt
-            AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
-            shutdown.setTitle("Do you really want to shutdown the game?");
-            shutdown.setNegativeButton("YES", (dialog, id) -> {
-                dialog.dismiss();
-                finish();
-            });
-            shutdown.setPositiveButton("NO", (dialog, id) -> dialog.dismiss());
-            shutdown.show();
-        });
+        //cancel.setOnClickListener(v -> {
+        //    // Zeige eine Bestätigungsnachricht und beende die Aktivität, wenn der Benutzer
+        //    // bestätigt
+        //    AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
+        //    shutdown.setTitle("Do you really want to shutdown the game?");
+        //    shutdown.setNegativeButton("YES", (dialog, id) -> {
+        //        dialog.dismiss();
+        //        finish();
+        //    });
+        //    shutdown.setPositiveButton("NO", (dialog, id) -> dialog.dismiss());
+        //    shutdown.show();
+        //});
     }
 }

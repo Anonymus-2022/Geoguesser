@@ -20,7 +20,7 @@ public class Rounder {
     /**
      * Konstante, welche zur Berechnung gebraucht wird.
      */
-    public static final String NULL_NULL = "00";
+    static final String NULL_NULL = "00";
 
     /**
      * der konstruktor existiert nur der vollständigkeit halber, da nie ein rounder Objekt erzeugt
