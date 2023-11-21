@@ -8,15 +8,19 @@ public class Rounder {
     /**
      * Konstante, welche zur Berechnung gebraucht wird.
      */
-    static final int ten = 10;
+    static final int TEN = 10;
     /**
      * Konstante, welche zur Berechnung gebraucht wird.
      */
-    static final int four = 4;
+    static final int FOUR = 4;
     /**
      * Konstante, welche zur Berechnung gebraucht wird.
      */
-    static final double zeroPointFIfe = 0.5;
+    static final double ZERO_POINT_FIFE = 0.5;
+    /**
+     * Konstante, welche zur Berechnung gebraucht wird.
+     */
+    public static final String NULL_NULL = "00";
 
     /**
      * der konstruktor existiert nur der vollständigkeit halber, da nie ein rounder Objekt erzeugt
@@ -35,11 +39,11 @@ public class Rounder {
      * @return zurückgegeben wird die gerundete Zahl
      */
     public static double round(double number, double placeValue) {
-        String temporaryNumber = "00" + number + "00";
+        String temporaryNumber = NULL_NULL + number + NULL_NULL;
         if (placeValue == 1) {
             int truncated = (int) number;
             double decimalValue = number - truncated;
-            if (decimalValue < zeroPointFIfe) {
+            if (decimalValue < ZERO_POINT_FIFE) {
                 return truncated;
             } else {
                 return truncated + 1;
@@ -48,7 +52,7 @@ public class Rounder {
         if (placeValue > 1) {
             int power = 0;
             while (placeValue > 1) {
-                placeValue = placeValue / ten;
+                placeValue = placeValue / TEN;
                 power++;
             }
             temporaryNumber = temporaryNumber.substring(0, (temporaryNumber.indexOf(".") - power
@@ -57,11 +61,11 @@ public class Rounder {
                     temporaryNumber.length() - 1));
             temporaryNumber = temporaryNumber.substring(0, temporaryNumber.length() - 1);
             int significantFigures = Integer.parseInt(temporaryNumber);
-            if (decidingNumber > four) {
+            if (decidingNumber > FOUR) {
                 significantFigures = Integer.parseInt(temporaryNumber) + 1;
             }
             for (int i = 0; i < power; i++) {
-                significantFigures = significantFigures * ten;
+                significantFigures = significantFigures * TEN;
             }
             return significantFigures;
         }
@@ -69,7 +73,7 @@ public class Rounder {
         if (placeValue < 1) {
             int power = 1;
             while (placeValue < 1) {
-                placeValue = placeValue * ten;
+                placeValue = placeValue * TEN;
                 power++;
             }
             temporaryNumber = temporaryNumber.substring(0, (temporaryNumber.indexOf(".")
@@ -78,10 +82,10 @@ public class Rounder {
                     temporaryNumber.length() - 1));
             temporaryNumber = temporaryNumber.substring(0, temporaryNumber.length() - 1);
             double significantFigures = Double.parseDouble(temporaryNumber);
-            if (decidingNumber > four) {
+            if (decidingNumber > FOUR) {
                 double roundingAddition = 1;
                 for (int i = 1; i < power; i++) {
-                    roundingAddition = roundingAddition / ten;
+                    roundingAddition = roundingAddition / TEN;
                 }
                 significantFigures += roundingAddition;
             }

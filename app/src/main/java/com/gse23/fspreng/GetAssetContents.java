@@ -68,7 +68,7 @@ public class GetAssetContents {
      * @param context es handelt sich hier um den Context der aufrufenden Activity, meist übergeben
      *                in der Form getApplicationContext()
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
-     * (sofern vorhanden) unterhalb des Asset-Ordners speichert
+     *      (sofern vorhanden) unterhalb des Asset-Ordners speichert
      * @throws EmpyAlbumException Das bedeutet wohl etwas.
      */
     public static Images get(Context context) throws EmpyAlbumException {
@@ -148,7 +148,7 @@ public class GetAssetContents {
      *                  in der Form getApplicationContext()
      * @param albumWish gibt an, aus welchem Ordner die Bilder ausgelesen werden sollen
      * @return Zurück gibt die Methode ein Images-Objekt, welches sämtliche Bilder
-     * (sofern vorhanden) des angegebenen Ordners speichert
+     *      (sofern vorhanden) des angegebenen Ordners speichert
      * @throws IOException        das sollte wohl etwas bedeuten
      * @throws EmpyAlbumException das sollte wohl was bedeuten
      */

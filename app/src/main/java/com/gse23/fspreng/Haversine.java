@@ -26,7 +26,7 @@ public class Haversine {
     }
 
     // Ungefährer Erdradius in KM
-    private static final int EARTH_RADIUS = 6371;
+    static final int EARTH_RADIUS = 6371;
 
     /**
      * Berechnet die Entfernung zwischen zwei geografischen Punkten unter Verwendung
@@ -47,11 +47,12 @@ public class Haversine {
         startLat = Math.toRadians(startLat);
         endLat = Math.toRadians(endLat);
 
-        double a = haversin(dLat) + Math.cos(startLat) * Math.cos(endLat) * haversin(dLong);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double haversineA = haversin(dLat) + Math.cos(startLat) * Math.cos(endLat)
+                * haversin(dLong);
+        double haversineC = 2 * Math.atan2(Math.sqrt(haversineA), Math.sqrt(1 - haversineA));
 
         // <-- d
-        return EARTH_RADIUS * c;
+        return EARTH_RADIUS * haversineC;
     }
 
     /**

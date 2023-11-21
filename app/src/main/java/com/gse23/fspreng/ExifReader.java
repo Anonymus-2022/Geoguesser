@@ -19,6 +19,14 @@ import java.io.InputStream;
 class ExifReader {
 
 
+    /**
+     * Der Konstruktor existiert nur formal. Da nie ein ExifReader-Objekt erzeugt wird, sondern
+     * nur auf eine Methode zugegriffen wird, hat er keine wirkliche Funktion.
+     */
+    protected ExifReader() {
+    }
+
+
     public static boolean isValidKoordinate(String coordinate) {
         String coordinateRegex = "^(\\d+)/(\\d+),(\\d+)/(\\d+),(\\d+)/(\\d+)$";
         // Die Koordinate entspricht dem erwarteten Format
@@ -26,12 +34,7 @@ class ExifReader {
         return coordinate != null && coordinate.matches(coordinateRegex);
     }
 
-    /**
-     * Der Konstruktor existiert nur formal. Da nie ein ExifReader-Objekt erzeugt wird, sondern
-     * nur auf eine Methode zugegriffen wird, hat er keine wirkliche Funktion.
-     */
-    protected ExifReader() {
-    }
+
 
     /**
      * Liest ausgewählte Metadaten aus einer Exif-Datei aus. Dazu wird ein relativer Pfad bezüglich

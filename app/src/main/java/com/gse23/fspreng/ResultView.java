@@ -16,8 +16,25 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class ResultView extends AppCompatActivity {
 
+    /**
+     * Konstante, welche zur Berechnung gebraucht wird.
+     * Dient zur umrechnung von km zu m
+     */
+    public static final int THOUSAND = 1000;
+
+    /**
+     * Konstante, welche zur Berechnung gebraucht wird.
+     */
+    public static final double PLACE_VALUE = 0.01;
+    /**
+     * Konstante, welche zum Loggen gebraucht wird.
+     */
+    public static final String DISTANZ = "Distanz";
 
 
+    /**
+     * Beschreibt, was passiert, wenn die Zurücktaste gedrückt wird.
+     */
     public void onBackPressed() {
         AlertDialog.Builder shutdown = new AlertDialog.Builder(this);
         shutdown.setTitle("Do you really want to shutdown the game?");
@@ -39,17 +56,17 @@ public class ResultView extends AppCompatActivity {
         TextView showDistacne = findViewById(R.id.distanz);
         assert get != null;
         double distance = (double) get.get("distance");
-        Log.i("Distanz", distance + " km");
-        Log.i("Distanz", distance * 1000 + " m");
-        distance = Rounder.round(distance, 0.01);
+        Log.i(DISTANZ, distance + " km");
+        Log.i(DISTANZ, distance * THOUSAND + " m");
+        distance = Rounder.round(distance, PLACE_VALUE);
         showDistacne.setText("Distance between your guess an reallity:\n\n"
                 + distance + " km\n\nYour score:\n" + get.get("score") + "/5000");
 
-        TextView show_Link = findViewById(R.id.showLink);
+        TextView showLINK = findViewById(R.id.showLink);
         String showLink = (String) get.get("posLink");
-        show_Link.setText(showLink);
+        showLINK.setText(showLink);
         Log.i("positionlink", showLink);
-        show_Link.setOnClickListener(v -> {
+        showLINK.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(showLink));
             startActivity(intent);
         });
