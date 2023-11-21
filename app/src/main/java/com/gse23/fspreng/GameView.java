@@ -94,7 +94,7 @@ public class GameView extends AppCompatActivity {
         Drawable bild;
         int index = 0;
 
-        final Images.ImageInfo[] pic = new Images.ImageInfo[1];
+        final ImageInfo[] pic = new ImageInfo[1];
         while (true) {
             try {
                 // Holen Sie sich das Bild an der aktuellen Indexposition
@@ -285,7 +285,7 @@ public class GameView extends AppCompatActivity {
                 // Bildkoordinaten
                 assert finalGet != null;
                 String posLink;
-                Images.ImageInfo.logChoosenPic(pic[0]);
+                ImageInfo.logChoosenPic(pic[0]);
                 posLink = "https://www.openstreetmap.org/directions?engine=fossgis_valhalla_"
                         + "foot&route=" + latitudeStr + "," + longitudeStr + ";"
                         + pic[0].latitude + ","

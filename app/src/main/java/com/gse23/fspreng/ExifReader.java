@@ -45,10 +45,10 @@ class ExifReader {
      * @return Eine Instanz von Images.ImageInfo, die die extrahierten Informationen enthält.
      * @throws CorruptedDataException Wenn die Daten in der Exif-Datei korrupt oder ungültig sind.
      */
-    public static Images.ImageInfo readExif(String albname, String picname, String imagePath,
+    public static ImageInfo readExif(String albname, String picname, String imagePath,
                                             Context context) throws CorruptedDataException {
 
-        Images.ImageInfo pic = null;
+        ImageInfo pic = null;
         try (InputStream inputStream = context.getAssets().open(imagePath)) {
 
             ExifInterface exifInterface = new ExifInterface(inputStream);
@@ -71,10 +71,10 @@ class ExifReader {
                 }
 
                 Log.i("Album", albname);
-                pic = new Images.ImageInfo(albname, picname, CalcStuff.convertToDecimal(longitude),
+                pic = new ImageInfo(albname, picname, CalcStuff.convertToDecimal(longitude),
                         CalcStuff.convertToDecimal(latitude), imageDescr,
                         imagePath);
-                Images.ImageInfo.logChoosenPic(pic);
+                ImageInfo.logChoosenPic(pic);
 
             }
 
