@@ -12,30 +12,30 @@ import com.gse23.fspreng.exception.CorruptedDataException;
 public class CalcStuff {
 
     /**
-     * Menge der Punkte, die man maximal erreichen kann
+     * Menge der Punkte, die man maximal erreichen kann.
      */
-    final static int MAX_POINTS = 5000;
+    static final int MAX_POINTS = 5000;
     /**
      * maximale Distanz, die bewertet wird, Ist sie größer, werden null Punkte gegeben.
      */
-    final static double MAX_DISTANC = 10000;
+    static final double MAX_DISTANC = 10000;
     /**
      * Mindestdistanz; wenn man einen noch besseren Guess abgibt erhöht das die erhaltene Punktzahl
      * nicht.
      */
-    final static double MIN_DISTANZ = 10;
+    static final double MIN_DISTANZ = 10;
     /**
-     * größe der Koordinaten. Indentifizierung des Formats als DMS
+     * größe der Koordinaten. Indentifizierung des Formats als DMS.
      */
-    public static final int COORDINATE_SIZE = 3;
+     static final int COORDINATE_SIZE = 3;
     /**
-     * Konstante zum bBerechnen der DD aus DMS
+     * Konstante zum bBerechnen der DD aus DMS.
      */
-    public static final int MIN = 60;
+     static final int MIN = 60;
     /**
-     * Konstante zum Berechnen der DD aus DMS
+     * Konstante zum Berechnen der DD aus DMS.
      */
-    public static final int SECS = 3600;
+     static final int SECS = 3600;
 
     /**
      * Ein konstruktor,der nur der vollständigkeit halber existiert.

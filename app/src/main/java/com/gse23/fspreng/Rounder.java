@@ -5,9 +5,18 @@ package com.gse23.fspreng;
  */
 public class Rounder {
 
-    public static final int one = 10;
-    public static final int four = 4;
-    public static final double zeroPointFIfe = 0.5;
+    /**
+     * Konstante, welche zur Berechnung gebraucht wird.
+     */
+    static final int ten = 10;
+    /**
+     * Konstante, welche zur Berechnung gebraucht wird.
+     */
+    static final int four = 4;
+    /**
+     * Konstante, welche zur Berechnung gebraucht wird.
+     */
+    static final double zeroPointFIfe = 0.5;
 
     /**
      * der konstruktor existiert nur der vollständigkeit halber, da nie ein rounder Objekt erzeugt
@@ -39,7 +48,7 @@ public class Rounder {
         if (placeValue > 1) {
             int power = 0;
             while (placeValue > 1) {
-                placeValue = placeValue / one;
+                placeValue = placeValue / ten;
                 power++;
             }
             temporaryNumber = temporaryNumber.substring(0, (temporaryNumber.indexOf(".") - power
@@ -52,7 +61,7 @@ public class Rounder {
                 significantFigures = Integer.parseInt(temporaryNumber) + 1;
             }
             for (int i = 0; i < power; i++) {
-                significantFigures = significantFigures * one;
+                significantFigures = significantFigures * ten;
             }
             return significantFigures;
         }
@@ -60,7 +69,7 @@ public class Rounder {
         if (placeValue < 1) {
             int power = 1;
             while (placeValue < 1) {
-                placeValue = placeValue * one;
+                placeValue = placeValue * ten;
                 power++;
             }
             temporaryNumber = temporaryNumber.substring(0, (temporaryNumber.indexOf(".")
@@ -72,7 +81,7 @@ public class Rounder {
             if (decidingNumber > four) {
                 double roundingAddition = 1;
                 for (int i = 1; i < power; i++) {
-                    roundingAddition = roundingAddition / one;
+                    roundingAddition = roundingAddition / ten;
                 }
                 significantFigures += roundingAddition;
             }
