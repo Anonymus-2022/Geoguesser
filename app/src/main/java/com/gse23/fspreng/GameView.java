@@ -44,9 +44,13 @@ public class GameView extends AppCompatActivity {
     static final String LATITUDE = "Latitude";
 
     /**
+     * Doppelpunkt.
+     */
+    public static final String DIES_IST_EIN_DOPPELPUNKT = ": ";
+    /**
      * Die Konstante für die Ausgabe der Breiten-Koordinate.
      */
-    static final String PRINT_LATITUDE = "Print " + LATITUDE + ": ";
+    static final String PRINT_LATITUDE = "Print " + LATITUDE + DIES_IST_EIN_DOPPELPUNKT;
 
     /**
      * Konstante, welche zur Berechnung gebraucht wird.
@@ -64,10 +68,15 @@ public class GameView extends AppCompatActivity {
      * Zum loggen.
      */
     static final String INPUT_COORDINATE = "Input Coordinate";
+
     /**
      * Komma.
      */
     static final String AN_DIESER_STELLE_STEHT_EIN_KOMMA = ",";
+    /**
+     * Buttonaufschrift für einen AlertDialog.
+     */
+    static final String OK = "OK";
     private Images pics;
     private String albumChoice;
 
@@ -194,7 +203,7 @@ public class GameView extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 String latitudeStr = editable.toString();
-                Log.i(INPUT_COORDINATE, LATITUDE + ": " + latitudeStr);
+                Log.i(INPUT_COORDINATE, LATITUDE + DIES_IST_EIN_DOPPELPUNKT + latitudeStr);
             }
         });
 
@@ -272,7 +281,7 @@ public class GameView extends AppCompatActivity {
                     Log.i(GAME_VIEW, "No images left to show.");
                     AlertDialog.Builder allImagesSeen = new AlertDialog.Builder(this);
                     allImagesSeen.setTitle("There are no images left to show!");
-                    allImagesSeen.setPositiveButton("OK", (dialog, id) -> {
+                    allImagesSeen.setPositiveButton(OK, (dialog, id) -> {
                         dialog.dismiss();
                         finish();
                     });
@@ -304,7 +313,7 @@ public class GameView extends AppCompatActivity {
             if (latitudeStr.matches("^-?(\\d{1,2}(\\.\\d+)?|90)$")
                     && longitudeStr.matches("^-?(\\d{1,2}(\\.\\d+)?|1[0-7]\\d(\\.\\d+)?|1"
                     + "80)$")) {
-                Log.d("Entered Coordinates", LATITUDE + ": " + latitudeStr + ", Longitude: "
+                Log.d("Entered Coordinates", LATITUDE + DIES_IST_EIN_DOPPELPUNKT + latitudeStr + ", Longitude: "
                         + longitudeStr);
 
                 // Erstellen Sie einen Link zu OpenStreetMap mit den eingegebenen und den
@@ -336,7 +345,7 @@ public class GameView extends AppCompatActivity {
                 Log.d("SetTip", "Invalid input");
                 AlertDialog.Builder invalidInput = new AlertDialog.Builder(this);
                 invalidInput.setTitle("The input has the wrong format!");
-                invalidInput.setPositiveButton("OK", (dialog, id) -> dialog.dismiss());
+                invalidInput.setPositiveButton(OK, (dialog, id) -> dialog.dismiss());
                 invalidInput.show();
             }
         });

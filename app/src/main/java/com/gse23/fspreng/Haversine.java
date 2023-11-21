@@ -19,7 +19,7 @@ package com.gse23.fspreng;
 public class Haversine {
 
     /**
-     * Ungefährer Erdradius in KM
+     * Ungefährer Erdradius in KM.
      */
     static final int EARTH_RADIUS = 6371;
 
