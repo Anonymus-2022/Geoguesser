@@ -105,6 +105,7 @@ public class GameView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_view);
         MapView mapView = findViewById(R.id.mapView);
+        mapView.setMultiTouchControls(true);
 
         Context ctx = getApplicationContext();
         IConfigurationProvider provider = Configuration.getInstance();
