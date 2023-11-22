@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.preference.PreferenceManager;
 
 import org.osmdroid.api.IMapController;
@@ -18,8 +17,6 @@ import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,6 +35,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 /**
  * Die Klasse GameView repräsentiert die Ansicht des Spiels, in dem dem Spieler
@@ -198,41 +196,20 @@ public class GameView extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        Drawable bild;
+        Drawable bild = null;
         int index = 0;
 
         final ImageInfo[] pic = new ImageInfo[1];
-        while (true) {
-            try {
-                pic[0] = pics.pos(index);
+        ImageInfo shownPic = GetRandonPic.get(pics);
 
-                if (!pics.emptyAlbum(albumChoice)) {
-                    Random random = new Random();
-                    int randomNum = random.nextInt(pics.length());
-
-                    if (randomNum == index) {
-                        pics.deleteImage(pic[0].picname);
-
-                        try (InputStream bildstream = getAssets().open(pic[0].filepath)) {
-                            bild = Drawable.createFromStream(bildstream, pic[0].picname);
-                            Log.i("PrintedAlbum", pic[0].picname);
-                            Log.i("PrintFilepath", pic[0].filepath);
-                            Log.i(GAME_VIEW, PRINT_LONGITUDE + pic[0].longitude);
-                            Log.i(GAME_VIEW, PRINT_LATITUDE + pic[0].latitude);
-                        }
-
-                        break;
-                    }
-                }
-                // Aktualisiere den Index für das nächste Bild
-                if (index == pics.length() - 1) {
-                    index = 0;
-                } else {
-                    index++;
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        try {
+            assert shownPic != null;
+            try (InputStream bildstream = getAssets().open(shownPic.filepath)) {
+                bild = Drawable.createFromStream(bildstream, shownPic.picname);
+                ImageInfo.logChoosenPic(shownPic);
             }
+        } catch(IOException ignored) {
+
         }
 
         // Setze das geladene Bild in die ImageView
@@ -257,63 +234,24 @@ public class GameView extends AppCompatActivity {
         // Klick-Listener für die Schaltfläche, um ein neues Bild anzuzeigen
         newPic.setOnClickListener(v -> {
             Drawable bildOne = null;
-            int indexOne = 0;
-            int randomNumOne;
+            ImageInfo shownIm = GetRandonPic.get(pics);
 
-            while (true) {
-                String alb = null;
-
-                if (pics.length() != 0) {
-                    // Hole das Bild an der aktuellen Indexposition
-                    pic[0] = pics.pos(indexOne);
-                    alb = pic[0].album;
-                }
-
-                if (pics.length() != 0) {
-                    assert alb != null;
-                    // Vergleiche das Album des Bildes mit dem ausgewählten Album
-                    if (alb.equals(albumChoice)) {
-                        // Generiere eine zufällige Zahl und vergleiche sie
-                        // Generiere eine zufällige Zahl und vergleiche sie mit dem Index
-                        Random random = new Random();
-                        randomNumOne = random.nextInt(pics.length());
-                        if (randomNumOne == indexOne) {
-                            try {
-                                // Lade das neue Bild
-                                try (InputStream bildstream = getAssets().open(pic[0].filepath)) {
-                                    bildOne = Drawable.createFromStream(bildstream, pic[0].picname);
-                                    Log.i(GAME_VIEW, "Printed Album: " + pic[0].picname);
-                                    Log.i(GAME_VIEW, "Print Filepath: " + pic[0].filepath);
-                                    Log.i(GAME_VIEW, PRINT_LONGITUDE + pic[0].longitude);
-                                    Log.i(GAME_VIEW, PRINT_LATITUDE + pic[0].latitude);
-                                }
-
-                                pics.deleteImage(pic[0].picname);
-                                Log.i(GAME_VIEW, "Already shown images count: " + pics.length());
-                                break;
-                            } catch (IOException e) {
-                                Log.e(GAME_VIEW, "Error loading image: " + e.getMessage());
-                                throw new RuntimeException(e);
-                            }
-                        }
+            if (shownIm != null) {
+                try {
+                    try (InputStream bildstream = getAssets().open(shownPic.filepath)) {
+                        bildOne = Drawable.createFromStream(bildstream, shownPic.picname);
+                        ImageInfo.logChoosenPic(shownPic);
                     }
+                } catch(IOException ignored) {
 
-                    if (indexOne == pics.length() - 1) {
-                        indexOne = 0;
-                    } else {
-                        indexOne++;
-                    }
-                } else {
-                    Log.i(GAME_VIEW, "No images left to show.");
-                    AlertDialog.Builder allImagesSeen = new AlertDialog.Builder(this);
-                    allImagesSeen.setTitle("There are no images left to show!");
-                    allImagesSeen.setPositiveButton(OK, (dialog, id) -> {
-                        dialog.dismiss();
-                        finish();
-                    });
-                    allImagesSeen.show();
-                    break;
                 }
+            } else {
+                AlertDialog.Builder allPicsShown = new AlertDialog.Builder(this);
+                allPicsShown.setMessage("You've seen all images!");
+                allPicsShown.setPositiveButton(OK,(dialog,id) -> {
+                   dialog.dismiss();
+                });
+                allPicsShown.show();
             }
 
             // Setze das neue Bild in die ImageView
