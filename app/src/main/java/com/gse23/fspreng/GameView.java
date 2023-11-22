@@ -1,13 +1,16 @@
 package com.gse23.fspreng;
 
 import static com.gse23.fspreng.CalcStuff.getScore;
-
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.views.MapView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,8 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.gse23.fspreng.exception.EmpyAlbumException;
+
+import org.osmdroid.config.Configuration;
+import org.osmdroid.config.IConfigurationProvider;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,6 +104,14 @@ public class GameView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_view);
+        MapView mapView = findViewById(R.id.mapView);
+
+        Context ctx = getApplicationContext();
+        IConfigurationProvider provider = Configuration.getInstance();
+        provider.setUserAgentValue("com.gse23.fspreng");
+        provider.load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
+
 
         Bundle get;
         EditText latitudeIn;
@@ -185,6 +198,7 @@ public class GameView extends AppCompatActivity {
 
         // Initialisierung von UI-Elementen und Text Watchern für die Koordinateneingabe
         get = getIntent().getExtras();
+        /*
         latitudeIn = findViewById(R.id.latitude);
         longitudeIn = findViewById(R.id.longitude);
 
@@ -225,6 +239,7 @@ public class GameView extends AppCompatActivity {
                 Log.i(INPUT_COORDINATE, "Longitude: " + longitudeStr);
             }
         });
+         */
 
         // Klick-Listener für die Schaltfläche, um ein neues Bild anzuzeigen
         newPic.setOnClickListener(v -> {
@@ -295,15 +310,15 @@ public class GameView extends AppCompatActivity {
             image.setContentDescription(pic[0].imageDescription);
 
             // Setze die Eingabefelder für die Koordinaten zurück
-            latitudeIn.setText(null);
-            longitudeIn.setText(null);
+            //latitudeIn.setText(null);
+            //longitudeIn.setText(null);
         });
 
         // Endgültige Referenzen für Texteingabefelder sichern
-        EditText finalLatitudeIn = latitudeIn;
-        EditText finalLongitudeIn = longitudeIn;
+        //EditText finalLatitudeIn = latitudeIn;
+        //EditText finalLongitudeIn = longitudeIn;
         Bundle finalGet = get;
-
+/*
         // Klick-Listener für die Bestätigungs-Schaltfläche
         confirm.setOnClickListener(v -> {
             String latitudeStr = finalLatitudeIn.getText().toString();
@@ -363,5 +378,10 @@ public class GameView extends AppCompatActivity {
         //    shutdown.setPositiveButton("NO", (dialog, id) -> dialog.dismiss());
         //    shutdown.show();
         //});
+
+ */
+
     }
+
+
 }
