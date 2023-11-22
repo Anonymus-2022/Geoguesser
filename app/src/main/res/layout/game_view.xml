@@ -143,39 +143,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
-<!--
-        <EditText
-            android:id="@+id/latitude"
-            android:layout_width="212dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="4dp"
-            android:backgroundTint="#006666"
-            android:ems="10"
-            android:fontFamily="sans-serif-condensed"
-            android:hint="@string/breitengrad"
-            android:inputType="numberDecimal"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.787"
-            tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/longitude"
-            android:layout_width="193dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="4dp"
-            android:backgroundTint="#006666"
-            android:ems="10"
-            android:fontFamily="sans-serif-condensed"
-            android:hint="@string/l_ngengrad"
-            android:inputType="numberDecimal"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.786"
-            tools:ignore="MissingConstraints" />
-    -->
 </androidx.constraintlayout.widget.ConstraintLayout>
